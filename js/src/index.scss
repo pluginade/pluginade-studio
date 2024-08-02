@@ -1,0 +1,9 @@
+#pluginade, .pluginade-studio{
+	display:grid;
+	width: 100dvw;
+	height: 100dvh;
+	overflow:hidden;
+}
+.plugin-tabs [role="tablist"]{
+	height: 100%;
+}
