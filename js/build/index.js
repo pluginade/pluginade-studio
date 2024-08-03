@@ -27831,6 +27831,919 @@ function sprintf(format, ...args) {
 
 /***/ }),
 
+/***/ "./js/src/index.js":
+/*!*************************!*\
+  !*** ./js/src/index.js ***!
+  \*************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
+/* harmony import */ var https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js */ "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index.scss */ "./js/src/index.scss");
+/* harmony import */ var _fontsource_roboto_300_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fontsource/roboto/300.css */ "./node_modules/@fontsource/roboto/300.css");
+/* harmony import */ var _fontsource_roboto_400_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fontsource/roboto/400.css */ "./node_modules/@fontsource/roboto/400.css");
+/* harmony import */ var _fontsource_roboto_500_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fontsource/roboto/500.css */ "./node_modules/@fontsource/roboto/500.css");
+/* harmony import */ var _fontsource_roboto_700_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fontsource/roboto/700.css */ "./node_modules/@fontsource/roboto/700.css");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/useMediaQuery */ "./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js");
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/createTheme.js");
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/ThemeProvider.js");
+/* harmony import */ var _mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @mui/material/Divider */ "./node_modules/@mui/material/Divider/Divider.js");
+/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
+/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
+/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
+/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
+/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
+/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
+/* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
+/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
+/* harmony import */ var _menuFile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./menuFile */ "./js/src/menuFile.js");
+/* harmony import */ var _menuEdit__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./menuEdit */ "./js/src/menuEdit.js");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__]);
+https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_11__["default"])({
+  palette: {
+    mode: 'light',
+    primary: {
+      light: '#ffef62',
+      main: '#ffeb3b',
+      dark: '#b2a429',
+      contrastText: '#fff'
+    },
+    background: {
+      paper: '#fff',
+      default: '#fff'
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000'
+    }
+  }
+});
+const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_11__["default"])({
+  palette: {
+    mode: 'dark',
+    primary: {
+      light: '#ffef62',
+      main: '#ffeb3b',
+      dark: '#b2a429'
+    },
+    divider: 'rgba(255, 255, 255, 0.12)',
+    background: {
+      paper: '#424242',
+      default: 'rgb(16, 20, 24)'
+    },
+    background10: {
+      default: 'rgb(15, 25, 36)'
+    },
+    background20: {
+      default: 'rgba(59, 74, 89, 0.2)'
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d'
+    }
+  }
+});
+const domNode = document.getElementById('pluginade');
+const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
+function a11yProps(index) {
+  return {
+    id: `plugin-tab-${index}`,
+    'aria-controls': `plugin-tabpanel-${index}`
+  };
+}
+const thePluginDirHandles = {};
+const pluginadePluginsLocalStorage = window.localStorage.getItem('pluginadePlugins') ? JSON.parse(window.localStorage.getItem('pluginadePlugins')) : [];
+const actuallyOpenPlugins = pluginadePluginsLocalStorage;
+const entriesInIndexDb = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.entries)();
+entriesInIndexDb.forEach(async entry => {
+  if (pluginadePluginsLocalStorage.includes(entry[0])) {
+    thePluginDirHandles[entry[0]] = entry[1];
+  } else {
+    // Remove the entry from actuallyOpenPlugins
+    let actuallyOpenPlugins = actuallyOpenPlugins.filter(item => item != entry[1]);
+  }
+});
+function PluginadeApp() {
+  const prefersDarkMode = (0,_mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_12__["default"])('(prefers-color-scheme: dark)');
+  const [showCreatePlugin, setShowCreatePluginState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [pluginDirHandles, setPluginDirHandles] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(thePluginDirHandles);
+  const [plugins, setPlugins] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
+  const [currentPluginTab, setCurrentPluginTabState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    actuallyOpenPlugins.forEach(async plugin => {
+      const directoryHandleOrUndefined = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.get)(plugin);
+      if (directoryHandleOrUndefined) {
+        openPlugin(directoryHandleOrUndefined);
+      } else {
+        openPlugin(null);
+      }
+    });
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
+  }, [plugins]);
+  function setCurrentPluginTab(value) {
+    // Make sure we have permission to use the file system for each open plugin.
+    Object.keys(plugins).forEach(async plugin => {
+      const directoryHandleOrUndefined = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.get)(plugin);
+      if (directoryHandleOrUndefined) {
+        window.localStorage.setItem('currentPluginTab', value);
+        setCurrentPluginTabState(value);
+        setShowCreatePluginState(false);
+      } else {
+        const directoryHandle = await window.showDirectoryPicker({
+          mode: 'readwrite'
+        });
+        await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.set)(plugin, directoryHandle);
+        window.localStorage.setItem('currentPluginTab', value);
+        setCurrentPluginTabState(value);
+        setShowCreatePluginState(false);
+      }
+    });
+  }
+  function setShowCreatePlugin(value) {
+    if (value) {
+      setCurrentPluginTabState(null);
+    }
+    setShowCreatePluginState(value);
+  }
+  async function openPlugin(dirHandle) {
+    console.log('opening', dirHandle);
+    if (!dirHandle) {
+      dirHandle = await window.showDirectoryPicker({
+        mode: 'readwrite'
+      });
+    }
+    let isWpPlugin = false;
+    // Extract plugin data from the main plugin file.
+    for await (const entry of dirHandle.values()) {
+      // Check if the entry is a php file by checking if it ends with .php
+      const fileExtensionRegex = /(?:\.([^.]+))?$/;
+      const fileExtension = fileExtensionRegex.exec(entry.name)[1];
+      if (fileExtension === 'php') {
+        const file = await entry.getFile();
+        const fileContents = await file.text();
+        const pluginData = parsePluginHeader(fileContents);
+
+        // This PHP file did not have a plugin header.
+        if (Object.keys(pluginData).length === 0) {
+          continue;
+        }
+        pluginData.plugin_path = dirHandle.name;
+        pluginData.plugin_dirname = dirHandle.name;
+        isWpPlugin = true;
+        let hasWpModules = false;
+        for await (const possibleWpModulesEntry of dirHandle.values()) {
+          if (possibleWpModulesEntry.name === 'wp-modules') {
+            hasWpModules = true;
+            // Get all of the names of each directory inside the wp-modules directory.
+            const modules = [];
+            const modulesDir = await dirHandle.getDirectoryHandle('wp-modules');
+            // console.log( modulesDir );
+            for await (const module of modulesDir.values()) {
+              modules.push(module.name);
+            }
+            pluginData.plugin_modules = modules;
+          }
+        }
+        if (!hasWpModules) {
+          pluginData.plugin_modules = {};
+        }
+        await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.set)(pluginData.plugin_dirname, dirHandle);
+        setPlugins(nonStalePlugins => {
+          return {
+            ...nonStalePlugins,
+            [pluginData.plugin_dirname]: {
+              ...pluginData
+            }
+          };
+        });
+      }
+    }
+    // if ( ! isWpPlugin ) {
+    // 	alert('Make sure the main plugin file is named the same as the directory and is a .php file.');
+    // }
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    theme: prefersDarkMode ? DarkTheme : DarkTheme
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    className: "pluginade-studio",
+    sx: {
+      display: 'grid',
+      gridTemplateRows: 'min-content min-content 1fr'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      backgroundColor: 'background20.default',
+      display: 'flex'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    sx: {
+      padding: 2,
+      fontSize: '1em'
+    },
+    component: "h1"
+  }, "Pluginade Studio"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    orientation: "vertical"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuFile__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    onNewPlugin: () => {
+      setShowCreatePlugin(true);
+    },
+    onOpenPlugin: () => {
+      openPlugin();
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    orientation: "vertical"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuEdit__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    orientation: "vertical"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    className: "pluginade-studio-body",
+    sx: {
+      display: 'grid',
+      gridTemplateColumns: '200px min-content 1fr'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      backgroundColor: 'background20.default'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_18__["default"], null, Object.keys(plugins).map((plugin, index) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      disablePadding: true
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      selected: currentPluginTab === plugin,
+      onClick: () => setCurrentPluginTab(plugin)
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      primary: plugins[plugin].plugin_name
+    })));
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    orientation: "vertical"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      display: showCreatePlugin ? 'none' : 'grid',
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, Object.keys(plugins).map((plugin, index) => {
+    const currentPluginSlug = plugin;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Plugin, {
+      plugins: plugins,
+      setPlugins: setPlugins,
+      currentPluginSlug: currentPluginSlug,
+      hidden: currentPluginSlug !== currentPluginTab
+    });
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TerminalWindow, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    className: "create-plugin",
+    sx: {
+      display: showCreatePlugin ? 'grid' : 'none',
+      height: '100%',
+      width: '100%',
+      overflow: 'auto',
+      alignItems: 'center',
+      justifyItems: 'center'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreatePlugin, {
+    uponSuccess: newPluginSlug => setCurrentPluginTab(newPluginSlug),
+    plugins: plugins,
+    setPlugins: setPlugins
+  })))));
+}
+root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginadeApp, null));
+function CreatePlugin({
+  plugins,
+  setPlugins,
+  uponSuccess
+}) {
+  const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('initial');
+  const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [pluginDataState, setPluginDataState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    plugin_name: '',
+    plugin_dirname: '',
+    plugin_textdomain: '',
+    plugin_namespace: '',
+    plugin_description: '',
+    plugin_uri: '',
+    plugin_min_wp_version: '',
+    plugin_min_php_version: '7.2',
+    plugin_license: 'GPL-2.0-or-later',
+    plugin_update_uri: ''
+  });
+  async function createPlugin(setLoading) {
+    try {
+      setCreationState('creating');
+      setCreationMessage('');
+      const result = await fetch(pluginadeApiEndpoints.generatePlugin, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pluginDataState)
+      });
+      if (!result.ok) {
+        const data = await result.json();
+        throw new Error(data?.message ? data.message : 'Error creating plugin');
+      }
+      const data = await result.json();
+      setLoading(false);
+      setCreationState('success');
+      setCreationMessage(data.message);
+      setPlugins(data.plugins);
+      setTimeout(() => {
+        uponSuccess(data.newPluginSlug);
+      }, 1000);
+    } catch (error) {
+      setLoading(false);
+      setCreationState('error');
+      setCreationMessage(error.message);
+    }
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_22__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    severity: "error"
+  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    severity: "success"
+  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      display: 'grid',
+      width: '100%',
+      height: '100%',
+      overflow: 'auto',
+      alignItems: 'center',
+      justifyItems: 'center'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginDataForm, {
+    pluginDataState: pluginDataState,
+    setPluginDataState: setPluginDataState,
+    onSubmit: (event, setLoading) => {
+      event.preventDefault();
+      createPlugin(setLoading);
+    }
+  })));
+}
+function Plugin({
+  plugins,
+  setPlugins,
+  currentPluginSlug,
+  hidden
+}) {
+  const pluginDataState = plugins[currentPluginSlug];
+  const [currentTab, setCurrentTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('modules');
+  const pluginTabs = {
+    'modules': 'Modules',
+    'webpack': 'Webpack',
+    'phpunit': 'PHPUnit',
+    'scans': 'Scans',
+    'fixers': 'Fixers'
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    id: `plugin-tabpanel-${pluginDataState.plugin_dirname}`,
+    sx: {
+      display: hidden ? 'none' : 'grid',
+      gridTemplateRows: 'min-content min-content 1fr',
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    className: "plugin-header",
+    sx: {
+      display: 'grid',
+      gridTemplateRows: 'min-content min-content'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      padding: 2
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    variant: "h5",
+    component: "h2"
+  }, pluginDataState.plugin_name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], null, pluginDataState.plugin_path)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    className: "plugin-control-tabs",
+    value: currentTab,
+    onChange: (event, newValue) => {
+      setCurrentTab(newValue);
+    },
+    "aria-label": "Plugins Tools",
+    variant: "scrollable"
+  }, Object.keys(pluginTabs).map((tool, index) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_25__["default"], {
+      value: tool,
+      label: pluginTabs[tool],
+      ...a11yProps(tool)
+    });
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    className: "plugin-content",
+    sx: {
+      display: 'block',
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    id: `plugin-tabpanel-webpack`,
+    sx: {
+      display: 'webpack' === currentTab ? 'flex' : 'none',
+      gap: 2,
+      padding: 2
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      display: 'grid',
+      gap: 2
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    component: "p"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To enable webpack and watch for file changes, run the following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
+    language: "shell",
+    code: `
+						sh pluginade.sh dev;
+						`
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    id: `plugin-tabpanel-phpunit`,
+    sx: {
+      display: 'phpunit' === currentTab ? 'flex' : 'none',
+      gap: 2,
+      padding: 2
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      display: 'grid',
+      gap: 2
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    component: "p"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To run PHPUnit tests run the following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
+    language: "bash",
+    code: `sh pluginade.sh test:phpunit;`
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    id: `plugin-tabpanel-scans`,
+    sx: {
+      display: 'scans' === currentTab ? 'grid' : 'none',
+      gap: 2,
+      padding: 2
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      display: 'grid',
+      gap: 2
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    component: "p"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To scan your code using WPCS, run following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
+    language: "bash",
+    code: `cd ${pluginDataState.plugin_path}; \n
+						sh pluginade.sh lint:php;
+						`
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    id: `plugin-tabpanel-modules`,
+    sx: {
+      display: 'modules' === currentTab ? 'block' : 'none',
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Modules, {
+    plugins: plugins,
+    setPlugins: setPlugins,
+    currentPluginSlug: currentPluginSlug
+  }))));
+}
+function Modules({
+  plugins,
+  setPlugins,
+  currentPluginSlug
+}) {
+  const thisPlugin = plugins[currentPluginSlug];
+  const thisPluginsModules = thisPlugin.plugin_modules;
+  const [currentModule, setCurrentModule] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(Object.keys(thisPluginsModules)[0]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      padding: 2,
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      display: 'grid',
+      gridTemplateColumns: '200px 1fr',
+      height: '100%',
+      overflow: 'hidden',
+      border: '1px solid',
+      borderColor: 'background20.default',
+      borderRadius: 2
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    sx: {
+      overflow: 'auto',
+      borderRight: '1px solid',
+      borderRightColor: 'background20.default',
+      backgroundColor: 'background20.default'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_19__["default"], {
+    disablePadding: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      display: 'grid',
+      alignItems: 'center',
+      padding: 2,
+      width: '100%'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    variant: "contained",
+    color: "secondary",
+    "aria-label": "Create New Plugin",
+    onClick: () => {
+      setCurrentModule('pluginadeCreateNewModule');
+    },
+    sx: {
+      width: '100%'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Module +', 'pluginade')))), Object.keys(thisPluginsModules).map((module, index) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      disablePadding: true
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      selected: currentModule === module,
+      onClick: () => setCurrentModule(module)
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      primary: thisPluginsModules[module].name
+    })));
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    className: 'tab-panel-create-module',
+    sx: {
+      height: '100%',
+      overflow: 'hidden',
+      display: currentModule === 'pluginadeCreateNewModule' ? 'block' : 'none'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateModule, {
+    pluginSlug: currentPluginSlug,
+    plugins: plugins,
+    setPlugins: setPlugins
+  }))));
+}
+function parsePluginHeader(pluginHeader) {
+  const result = {};
+  const regex = /(\*|\/)\s*(\w[\w\s-]+):\s*([\w\s:\/\.\-\@]+)/g;
+  let match;
+  while ((match = regex.exec(pluginHeader)) !== null) {
+    const key = match[2].trim().replace(/\s+/g, '_').toLowerCase();
+    const value = match[3].trim();
+    result[key] = value;
+  }
+  return result;
+}
+function CreateModule({
+  pluginSlug,
+  plugins,
+  setPlugins,
+  uponSuccess
+}) {
+  const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('initial');
+  const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [pluginDataState, setPluginDataState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    plugin_name: '',
+    plugin_dirname: '',
+    plugin_textdomain: '',
+    plugin_namespace: '',
+    plugin_description: '',
+    plugin_uri: '',
+    plugin_min_wp_version: '',
+    plugin_min_php_version: '7.2',
+    plugin_license: 'GPL-2.0-or-later',
+    plugin_update_uri: ''
+  });
+  async function createPlugin(setLoading) {
+    try {
+      setCreationState('creating');
+      setCreationMessage('');
+      const result = await fetch(pluginadeApiEndpoints.generatePlugin, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pluginDataState)
+      });
+      if (!result.ok) {
+        const data = await result.json();
+        throw new Error(data?.message ? data.message : 'Error creating plugin');
+      }
+      const data = await result.json();
+      setLoading(false);
+      setCreationState('success');
+      setCreationMessage(data.message);
+      setPlugins(data.plugins);
+      setTimeout(() => {
+        uponSuccess(data.newPluginSlug);
+      }, 1000);
+    } catch (error) {
+      setLoading(false);
+      setCreationState('error');
+      setCreationMessage(error.message);
+    }
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_22__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    severity: "error"
+  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    severity: "success"
+  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      display: 'grid',
+      width: '100%',
+      height: '100%',
+      overflow: 'auto',
+      alignItems: 'start',
+      justifyItems: 'start'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    component: "form",
+    sx: {
+      padding: 2,
+      display: 'grid',
+      gap: 3,
+      width: '100%',
+      maxWidth: '400px'
+    },
+    onSubmit: event => {
+      event.preventDefault();
+      setLoading(true);
+      onSubmit(event, setLoading);
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Name",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_name,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_name: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Namespace",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_namespace,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_namespace: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Description",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_description,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_description: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Version",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_version,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_version: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Author",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_author,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_author: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Author URI",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_author_uri,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_author_uri: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    type: "submit",
+    variant: "contained",
+    color: "secondary"
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_28__["default"], {
+    size: 24
+  }) : 'Update plugin files'))));
+}
+function CopyCode({
+  language,
+  code
+}) {
+  const [copied, setCopied] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  function copyCode() {
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      display: 'grid',
+      gridTemplateRows: 'min-content 1fr min-content',
+      gap: 0,
+      border: '1px solid',
+      borderColor: 'background20.default',
+      borderRadius: 1
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    className: "language",
+    sx: {
+      padding: 1,
+      borderRadius: '4px',
+      borderBottom: '1px solid',
+      borderBottomColor: 'background20.default'
+    }
+  }, language), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    className: "code",
+    sx: {
+      padding: 1,
+      backgroundColor: 'background10.default',
+      borderRadius: '4px',
+      whiteSpaceCollapse: 'preserve-breaks',
+      lineHeight: 1,
+      marginBottom: 1
+    }
+  }, code), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    variant: "contained",
+    color: "secondary",
+    onClick: copyCode
+  }, copied ? 'Copied!' : 'Copy'));
+}
+function PluginDataForm({
+  pluginDataState,
+  setPluginDataState,
+  onSubmit
+}) {
+  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    component: "form",
+    sx: {
+      padding: 2,
+      display: 'grid',
+      gap: 3,
+      width: '100%',
+      maxWidth: '400px'
+    },
+    onSubmit: event => {
+      event.preventDefault();
+      setLoading(true);
+      onSubmit(event, setLoading);
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Name",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_name,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_name: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Namespace",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_namespace,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_namespace: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Description",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_description,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_description: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Version",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_version,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_version: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Author",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_author,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_author: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    label: "Plugin Author URI",
+    variant: "outlined",
+    fullWidth: true,
+    required: true,
+    value: pluginDataState.plugin_author_uri,
+    onChange: event => setPluginDataState({
+      ...pluginDataState,
+      plugin_author_uri: event.target.value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    type: "submit",
+    variant: "contained",
+    color: "secondary"
+  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_28__["default"], {
+    size: 24
+  }) : 'Update plugin files'));
+}
+function TerminalWindow() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    sx: {
+      width: '100%',
+      height: '100%'
+    }
+  });
+}
+function PingGoogle() {
+  const [response, setResponse] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  function runShellCommand() {
+    fetch('/wp-json/pluginade/v1/ping-google').then(response => response.json()).then(data => {
+      setResponse(data);
+    });
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TerminalWindow, null);
+}
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
 /***/ "./js/src/menuEdit.js":
 /*!****************************!*\
   !*** ./js/src/menuEdit.js ***!
@@ -66048,6 +66961,17 @@ Tannin.prototype.dcnpgettext = function( domain, context, singular, plural, n ) 
 
 /***/ }),
 
+/***/ "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js":
+/*!***********************************************************************!*\
+  !*** external "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js" ***!
+  \***********************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = import("https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js");;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/extends.js":
 /*!********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/extends.js ***!
@@ -67489,6 +68413,75 @@ function combine (array, callback) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
+/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
+/******/ 		var resolveQueue = (queue) => {
+/******/ 			if(queue && queue.d < 1) {
+/******/ 				queue.d = 1;
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 				if(dep[webpackQueues]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					var queue = [];
+/******/ 					queue.d = 0;
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						resolveQueue(queue);
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						resolveQueue(queue);
+/******/ 					});
+/******/ 					var obj = {};
+/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			var ret = {};
+/******/ 			ret[webpackQueues] = x => {};
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
+/******/ 		}));
+/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
+/******/ 			var queue;
+/******/ 			hasAwait && ((queue = []).d = -1);
+/******/ 			var depQueues = new Set();
+/******/ 			var exports = module.exports;
+/******/ 			var currentDeps;
+/******/ 			var outerResolve;
+/******/ 			var reject;
+/******/ 			var promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = resolve;
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 			module.exports = promise;
+/******/ 			body((deps) => {
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				var fn;
+/******/ 				var getResult = () => (currentDeps.map((d) => {
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
+/******/ 				var promise = new Promise((resolve) => {
+/******/ 					fn = () => (resolve(getResult));
+/******/ 					fn.r = 0;
+/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 				});
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
+/******/ 			queue && queue.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -67551,866 +68544,12 @@ function combine (array, callback) {
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-/*!*************************!*\
-  !*** ./js/src/index.js ***!
-  \*************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index.scss */ "./js/src/index.scss");
-/* harmony import */ var _fontsource_roboto_300_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fontsource/roboto/300.css */ "./node_modules/@fontsource/roboto/300.css");
-/* harmony import */ var _fontsource_roboto_400_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fontsource/roboto/400.css */ "./node_modules/@fontsource/roboto/400.css");
-/* harmony import */ var _fontsource_roboto_500_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fontsource/roboto/500.css */ "./node_modules/@fontsource/roboto/500.css");
-/* harmony import */ var _fontsource_roboto_700_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fontsource/roboto/700.css */ "./node_modules/@fontsource/roboto/700.css");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
-/* harmony import */ var _mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/useMediaQuery */ "./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/createTheme.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/ThemeProvider.js");
-/* harmony import */ var _mui_material_Divider__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @mui/material/Divider */ "./node_modules/@mui/material/Divider/Divider.js");
-/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
-/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
-/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
-/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
-/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
-/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
-/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
-/* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
-/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
-/* harmony import */ var _menuFile__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./menuFile */ "./js/src/menuFile.js");
-/* harmony import */ var _menuEdit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./menuEdit */ "./js/src/menuEdit.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_10__["default"])({
-  palette: {
-    mode: 'light',
-    primary: {
-      light: '#ffef62',
-      main: '#ffeb3b',
-      dark: '#b2a429',
-      contrastText: '#fff'
-    },
-    background: {
-      paper: '#fff',
-      default: '#fff'
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000'
-    }
-  }
-});
-const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_10__["default"])({
-  palette: {
-    mode: 'dark',
-    primary: {
-      light: '#ffef62',
-      main: '#ffeb3b',
-      dark: '#b2a429'
-    },
-    divider: 'rgba(255, 255, 255, 0.12)',
-    background: {
-      paper: '#424242',
-      default: 'rgb(16, 20, 24)'
-    },
-    background10: {
-      default: 'rgb(15, 25, 36)'
-    },
-    background20: {
-      default: 'rgba(59, 74, 89, 0.2)'
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d'
-    }
-  }
-});
-const domNode = document.getElementById('pluginade');
-const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
-function a11yProps(index) {
-  return {
-    id: `plugin-tab-${index}`,
-    'aria-controls': `plugin-tabpanel-${index}`
-  };
-}
-const pluginadePlugins = {};
-function PluginadeApp() {
-  const prefersDarkMode = (0,_mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_11__["default"])('(prefers-color-scheme: dark)');
-  const [showCreatePlugin, setShowCreatePluginState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [plugins, setPlugins] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pluginadePlugins);
-  const [currentPluginTab, setCurrentPluginTabState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(window.localStorage.getItem('currentPluginTab') || Object.keys(plugins)[0]);
-  function setCurrentPluginTab(value) {
-    window.localStorage.setItem('currentPluginTab', value);
-    setCurrentPluginTabState(value);
-    setShowCreatePluginState(false);
-  }
-  function setShowCreatePlugin(value) {
-    if (value) {
-      setCurrentPluginTabState(null);
-    }
-    setShowCreatePluginState(value);
-  }
-  async function openPlugin() {
-    const dirHandle = await window.showDirectoryPicker();
-    let isWpPlugin = false;
-    // Extract plugin data from the main plugin file.
-    for await (const entry of dirHandle.values()) {
-      // Check if the entry is a php file by checking if it ends with .php
-      const fileExtensionRegex = /(?:\.([^.]+))?$/;
-      const fileExtension = fileExtensionRegex.exec(entry.name)[1];
-      if (fileExtension === 'php') {
-        const file = await entry.getFile();
-        const fileContents = await file.text();
-        const pluginData = parsePluginHeader(fileContents);
-
-        // This PHP file did not have a plugin header.
-        if (Object.keys(pluginData).length === 0) {
-          continue;
-        }
-        pluginData.plugin_path = dirHandle.name;
-        pluginData.plugin_dirname = dirHandle.name;
-        isWpPlugin = true;
-        let hasWpModules = false;
-        for await (const possibleWpModulesEntry of dirHandle.values()) {
-          if (possibleWpModulesEntry.name === 'wp-modules') {
-            hasWpModules = true;
-            // Get all of the names of each directory inside the wp-modules directory.
-            const modules = [];
-            const modulesDir = await dirHandle.getDirectoryHandle('wp-modules');
-            console.log(modulesDir);
-            for await (const module of modulesDir.values()) {
-              modules.push(module.name);
-            }
-            pluginData.plugin_modules = modules;
-          }
-        }
-        if (!hasWpModules) {
-          pluginData.plugin_modules = {};
-        }
-        setPlugins({
-          ...plugins,
-          [pluginData.plugin_dirname]: {
-            ...pluginData
-          }
-        });
-      }
-    }
-    // if ( ! isWpPlugin ) {
-    // 	alert('Make sure the main plugin file is named the same as the directory and is a .php file.');
-    // }
-  }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    theme: prefersDarkMode ? DarkTheme : DarkTheme
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_13__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    className: "pluginade-studio",
-    sx: {
-      display: 'grid',
-      gridTemplateRows: 'min-content min-content 1fr'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      backgroundColor: 'background20.default',
-      display: 'flex'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    sx: {
-      padding: 2,
-      fontSize: '1em'
-    },
-    component: "h1"
-  }, "Pluginade Studio"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_16__["default"], {
-    orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuFile__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    onNewPlugin: () => {
-      setShowCreatePlugin(true);
-    },
-    onOpenPlugin: () => {
-      openPlugin();
-    }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_16__["default"], {
-    orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuEdit__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_16__["default"], {
-    orientation: "vertical"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_16__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    className: "pluginade-studio-body",
-    sx: {
-      display: 'grid',
-      gridTemplateColumns: '200px min-content 1fr'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_13__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      backgroundColor: 'background20.default'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_17__["default"], null, Object.keys(plugins).map((plugin, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_18__["default"], {
-      disablePadding: true
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_19__["default"], {
-      selected: currentPluginTab === plugin,
-      onClick: () => setCurrentPluginTab(plugin)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_20__["default"], {
-      primary: plugins[plugin].plugin_name
-    })));
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_16__["default"], {
-    orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      display: showCreatePlugin ? 'none' : 'grid',
-      height: '100%',
-      overflow: 'hidden'
-    }
-  }, Object.keys(plugins).map((plugin, index) => {
-    const currentPluginSlug = plugin;
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Plugin, {
-      plugins: plugins,
-      setPlugins: setPlugins,
-      currentPluginSlug: currentPluginSlug,
-      hidden: currentPluginSlug !== currentPluginTab
-    });
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TerminalWindow, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    className: "create-plugin",
-    sx: {
-      display: showCreatePlugin ? 'grid' : 'none',
-      height: '100%',
-      width: '100%',
-      overflow: 'auto',
-      alignItems: 'center',
-      justifyItems: 'center'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreatePlugin, {
-    uponSuccess: newPluginSlug => setCurrentPluginTab(newPluginSlug),
-    plugins: plugins,
-    setPlugins: setPlugins
-  })))));
-}
-root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginadeApp, null));
-function CreatePlugin({
-  plugins,
-  setPlugins,
-  uponSuccess
-}) {
-  const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('initial');
-  const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [pluginDataState, setPluginDataState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    plugin_name: '',
-    plugin_dirname: '',
-    plugin_textdomain: '',
-    plugin_namespace: '',
-    plugin_description: '',
-    plugin_uri: '',
-    plugin_min_wp_version: '',
-    plugin_min_php_version: '7.2',
-    plugin_license: 'GPL-2.0-or-later',
-    plugin_update_uri: ''
-  });
-  async function createPlugin(setLoading) {
-    try {
-      setCreationState('creating');
-      setCreationMessage('');
-      const result = await fetch(pluginadeApiEndpoints.generatePlugin, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(pluginDataState)
-      });
-      if (!result.ok) {
-        const data = await result.json();
-        throw new Error(data?.message ? data.message : 'Error creating plugin');
-      }
-      const data = await result.json();
-      setLoading(false);
-      setCreationState('success');
-      setCreationMessage(data.message);
-      setPlugins(data.plugins);
-      setTimeout(() => {
-        uponSuccess(data.newPluginSlug);
-      }, 1000);
-    } catch (error) {
-      setLoading(false);
-      setCreationState('error');
-      setCreationMessage(error.message);
-    }
-  }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      width: '100%',
-      height: '100%',
-      overflow: 'hidden'
-    }
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_21__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_22__["default"], {
-    severity: "error"
-  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_22__["default"], {
-    severity: "success"
-  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      display: 'grid',
-      width: '100%',
-      height: '100%',
-      overflow: 'auto',
-      alignItems: 'center',
-      justifyItems: 'center'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginDataForm, {
-    pluginDataState: pluginDataState,
-    setPluginDataState: setPluginDataState,
-    onSubmit: (event, setLoading) => {
-      event.preventDefault();
-      createPlugin(setLoading);
-    }
-  })));
-}
-function Plugin({
-  plugins,
-  setPlugins,
-  currentPluginSlug,
-  hidden
-}) {
-  const pluginDataState = plugins[currentPluginSlug];
-  const [currentTab, setCurrentTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('modules');
-  const pluginTabs = {
-    'modules': 'Modules',
-    'webpack': 'Webpack',
-    'phpunit': 'PHPUnit',
-    'scans': 'Scans',
-    'fixers': 'Fixers'
-  };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    id: `plugin-tabpanel-${pluginDataState.plugin_dirname}`,
-    sx: {
-      display: hidden ? 'none' : 'grid',
-      gridTemplateRows: 'min-content min-content 1fr',
-      height: '100%',
-      overflow: 'hidden'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    className: "plugin-header",
-    sx: {
-      display: 'grid',
-      gridTemplateRows: 'min-content min-content'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      padding: 2
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    variant: "h5",
-    component: "h2"
-  }, pluginDataState.plugin_name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], null, pluginDataState.plugin_path)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_23__["default"], {
-    className: "plugin-control-tabs",
-    value: currentTab,
-    onChange: (event, newValue) => {
-      setCurrentTab(newValue);
-    },
-    "aria-label": "Plugins Tools",
-    variant: "scrollable"
-  }, Object.keys(pluginTabs).map((tool, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_24__["default"], {
-      value: tool,
-      label: pluginTabs[tool],
-      ...a11yProps(tool)
-    });
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_16__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    className: "plugin-content",
-    sx: {
-      display: 'block',
-      height: '100%',
-      overflow: 'hidden'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    id: `plugin-tabpanel-webpack`,
-    sx: {
-      display: 'webpack' === currentTab ? 'flex' : 'none',
-      gap: 2,
-      padding: 2
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      display: 'grid',
-      gap: 2
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    component: "p"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To enable webpack and watch for file changes, run the following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
-    language: "shell",
-    code: `
-						sh pluginade.sh dev;
-						`
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    id: `plugin-tabpanel-phpunit`,
-    sx: {
-      display: 'phpunit' === currentTab ? 'flex' : 'none',
-      gap: 2,
-      padding: 2
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      display: 'grid',
-      gap: 2
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    component: "p"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To run PHPUnit tests run the following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
-    language: "bash",
-    code: `cd ${pluginDataState.plugin_path}; \n
-						sh pluginade.sh test:phpunit;
-						`
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    id: `plugin-tabpanel-scans`,
-    sx: {
-      display: 'scans' === currentTab ? 'grid' : 'none',
-      gap: 2,
-      padding: 2
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      display: 'grid',
-      gap: 2
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    component: "p"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To scan your code using WPCS, run following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
-    language: "bash",
-    code: `cd ${pluginDataState.plugin_path}; \n
-						sh pluginade.sh lint:php;
-						`
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    id: `plugin-tabpanel-modules`,
-    sx: {
-      display: 'modules' === currentTab ? 'block' : 'none',
-      height: '100%',
-      overflow: 'hidden'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Modules, {
-    plugins: plugins,
-    setPlugins: setPlugins,
-    currentPluginSlug: currentPluginSlug
-  }))));
-}
-function Modules({
-  plugins,
-  setPlugins,
-  currentPluginSlug
-}) {
-  const thisPlugin = plugins[currentPluginSlug];
-  const thisPluginsModules = thisPlugin.plugin_modules;
-  const [currentModule, setCurrentModule] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(Object.keys(thisPluginsModules)[0]);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      padding: 2,
-      height: '100%',
-      overflow: 'hidden'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      display: 'grid',
-      gridTemplateColumns: '200px 1fr',
-      height: '100%',
-      overflow: 'hidden',
-      border: '1px solid',
-      borderColor: 'background20.default',
-      borderRadius: 2
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_17__["default"], {
-    sx: {
-      overflow: 'auto',
-      borderRight: '1px solid',
-      borderRightColor: 'background20.default',
-      backgroundColor: 'background20.default'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_18__["default"], {
-    disablePadding: true
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      display: 'grid',
-      alignItems: 'center',
-      padding: 2,
-      width: '100%'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_25__["default"], {
-    variant: "contained",
-    color: "secondary",
-    "aria-label": "Create New Plugin",
-    onClick: () => {
-      setCurrentModule('pluginadeCreateNewModule');
-    },
-    sx: {
-      width: '100%'
-    }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Module +', 'pluginade')))), Object.keys(thisPluginsModules).map((module, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_18__["default"], {
-      disablePadding: true
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_19__["default"], {
-      selected: currentModule === module,
-      onClick: () => setCurrentModule(module)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_20__["default"], {
-      primary: thisPluginsModules[module].name
-    })));
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    className: 'tab-panel-create-module',
-    sx: {
-      height: '100%',
-      overflow: 'hidden',
-      display: currentModule === 'pluginadeCreateNewModule' ? 'block' : 'none'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateModule, {
-    pluginSlug: currentPluginSlug,
-    plugins: plugins,
-    setPlugins: setPlugins
-  }))));
-}
-function parsePluginHeader(pluginHeader) {
-  const result = {};
-  const regex = /(\*|\/)\s*(\w[\w\s-]+):\s*([\w\s:\/\.\-\@]+)/g;
-  let match;
-  while ((match = regex.exec(pluginHeader)) !== null) {
-    const key = match[2].trim().replace(/\s+/g, '_').toLowerCase();
-    const value = match[3].trim();
-    result[key] = value;
-  }
-  return result;
-}
-function CreateModule({
-  pluginSlug,
-  plugins,
-  setPlugins,
-  uponSuccess
-}) {
-  const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('initial');
-  const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [pluginDataState, setPluginDataState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    plugin_name: '',
-    plugin_dirname: '',
-    plugin_textdomain: '',
-    plugin_namespace: '',
-    plugin_description: '',
-    plugin_uri: '',
-    plugin_min_wp_version: '',
-    plugin_min_php_version: '7.2',
-    plugin_license: 'GPL-2.0-or-later',
-    plugin_update_uri: ''
-  });
-  async function createPlugin(setLoading) {
-    try {
-      setCreationState('creating');
-      setCreationMessage('');
-      const result = await fetch(pluginadeApiEndpoints.generatePlugin, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(pluginDataState)
-      });
-      if (!result.ok) {
-        const data = await result.json();
-        throw new Error(data?.message ? data.message : 'Error creating plugin');
-      }
-      const data = await result.json();
-      setLoading(false);
-      setCreationState('success');
-      setCreationMessage(data.message);
-      setPlugins(data.plugins);
-      setTimeout(() => {
-        uponSuccess(data.newPluginSlug);
-      }, 1000);
-    } catch (error) {
-      setLoading(false);
-      setCreationState('error');
-      setCreationMessage(error.message);
-    }
-  }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      width: '100%',
-      height: '100%',
-      overflow: 'hidden'
-    }
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_21__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_22__["default"], {
-    severity: "error"
-  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_22__["default"], {
-    severity: "success"
-  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      display: 'grid',
-      width: '100%',
-      height: '100%',
-      overflow: 'auto',
-      alignItems: 'start',
-      justifyItems: 'start'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    component: "form",
-    sx: {
-      padding: 2,
-      display: 'grid',
-      gap: 3,
-      width: '100%',
-      maxWidth: '400px'
-    },
-    onSubmit: event => {
-      event.preventDefault();
-      setLoading(true);
-      onSubmit(event, setLoading);
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Name",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_name,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_name: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Namespace",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_namespace,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_namespace: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Description",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_description,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_description: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Version",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_version,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_version: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Author",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_author,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_author: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Author URI",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_author_uri,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_author_uri: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_25__["default"], {
-    type: "submit",
-    variant: "contained",
-    color: "secondary"
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_27__["default"], {
-    size: 24
-  }) : 'Update plugin files'))));
-}
-function CopyCode({
-  language,
-  code
-}) {
-  const [copied, setCopied] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  function copyCode() {
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
-  }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      display: 'grid',
-      gridTemplateRows: 'min-content 1fr min-content',
-      gap: 0,
-      border: '1px solid',
-      borderColor: 'background20.default',
-      borderRadius: 1
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    className: "language",
-    sx: {
-      padding: 1,
-      borderRadius: '4px',
-      borderBottom: '1px solid',
-      borderBottomColor: 'background20.default'
-    }
-  }, language), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    className: "code",
-    sx: {
-      padding: 1,
-      backgroundColor: 'background10.default',
-      borderRadius: '4px',
-      whiteSpaceCollapse: 'preserve-breaks',
-      lineHeight: 1,
-      marginBottom: 1
-    }
-  }, code), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_25__["default"], {
-    variant: "contained",
-    color: "secondary",
-    onClick: copyCode
-  }, copied ? 'Copied!' : 'Copy'));
-}
-function PluginDataForm({
-  pluginDataState,
-  setPluginDataState,
-  onSubmit
-}) {
-  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    component: "form",
-    sx: {
-      padding: 2,
-      display: 'grid',
-      gap: 3,
-      width: '100%',
-      maxWidth: '400px'
-    },
-    onSubmit: event => {
-      event.preventDefault();
-      setLoading(true);
-      onSubmit(event, setLoading);
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Name",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_name,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_name: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Namespace",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_namespace,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_namespace: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Description",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_description,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_description: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Version",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_version,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_version: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Author",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_author,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_author: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_26__["default"], {
-    label: "Plugin Author URI",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_author_uri,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_author_uri: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_25__["default"], {
-    type: "submit",
-    variant: "contained",
-    color: "secondary"
-  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_27__["default"], {
-    size: 24
-  }) : 'Update plugin files'));
-}
-function TerminalWindow() {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    sx: {
-      width: '100%',
-      height: '100%'
-    }
-  });
-}
-function PingGoogle() {
-  const [response, setResponse] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  function runShellCommand() {
-    fetch('/wp-json/pluginade/v1/ping-google').then(response => response.json()).then(data => {
-      setResponse(data);
-    });
-  }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TerminalWindow, null);
-}
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module used 'module' so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./js/src/index.js");
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import { createRoot } from 'react-dom/client';
 import {__} from '@wordpress/i18n';
+import { get, entries, set } from 'https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js';
 
 import './index.scss';
 import '@fontsource/roboto/300.css';
@@ -89,18 +90,58 @@ function a11yProps(index) {
 	};
 }
 
-const pluginadePlugins = {}
+const thePluginDirHandles = {};
+const pluginadePluginsLocalStorage = window.localStorage.getItem('pluginadePlugins') ? JSON.parse(window.localStorage.getItem('pluginadePlugins')) : [];
+const actuallyOpenPlugins = pluginadePluginsLocalStorage;
+const entriesInIndexDb = await entries();
+entriesInIndexDb.forEach( async (entry) => {
+	if ( pluginadePluginsLocalStorage.includes( entry[0] ) ) {
+		thePluginDirHandles[entry[0]] = entry[1];
+	} else {
+		// Remove the entry from actuallyOpenPlugins
+		let actuallyOpenPlugins = actuallyOpenPlugins.filter( item => item != entry[1]);
+	}
+} );
 
 function PluginadeApp() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 	const [showCreatePlugin, setShowCreatePluginState] = useState(false);
-	const [plugins, setPlugins] = useState(pluginadePlugins);
-	const [currentPluginTab, setCurrentPluginTabState] = useState(window.localStorage.getItem('currentPluginTab') || Object.keys( plugins )[0]);
+	const [pluginDirHandles, setPluginDirHandles] = useState(thePluginDirHandles);
+	const [plugins, setPlugins] = useState({});
+	const [currentPluginTab, setCurrentPluginTabState] = useState( null );
+
+	useEffect( () => {
+		actuallyOpenPlugins.forEach( async (plugin) => {
+			const directoryHandleOrUndefined = await get(plugin);
+			if ( directoryHandleOrUndefined ) {
+				openPlugin( directoryHandleOrUndefined );
+			} else {
+				openPlugin( null );
+			}
+		} );
+	}, []);
+
+	useEffect(() => {
+		window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
+	}, [plugins]);
 
 	function setCurrentPluginTab(value) {
-		window.localStorage.setItem('currentPluginTab', value);
-		setCurrentPluginTabState(value);
-		setShowCreatePluginState(false);
+		// Make sure we have permission to use the file system for each open plugin.
+		Object.keys( plugins ).forEach( async (plugin) => {
+			const directoryHandleOrUndefined = await get(plugin);
+			if (directoryHandleOrUndefined) {
+				window.localStorage.setItem('currentPluginTab', value);
+				setCurrentPluginTabState(value);
+				setShowCreatePluginState(false);
+			} else {
+				const directoryHandle = await window.showDirectoryPicker( { mode: 'readwrite' });
+				await set(plugin, directoryHandle);
+
+				window.localStorage.setItem('currentPluginTab', value);
+				setCurrentPluginTabState(value);
+				setShowCreatePluginState(false);
+			}
+		});
 	}
 
 	function setShowCreatePlugin(value) {
@@ -110,8 +151,12 @@ function PluginadeApp() {
 		setShowCreatePluginState(value);
 	}
 
-	async function openPlugin() {
-		const dirHandle = await window.showDirectoryPicker();
+	async function openPlugin( dirHandle ) {
+		console.log( 'opening', dirHandle );
+		if ( ! dirHandle ) {
+			dirHandle = await window.showDirectoryPicker( { mode: 'readwrite' });
+		}
+
 		let isWpPlugin = false;
 		// Extract plugin data from the main plugin file.
 		for await (const entry of dirHandle.values()) {
@@ -140,7 +185,7 @@ function PluginadeApp() {
 						// Get all of the names of each directory inside the wp-modules directory.
 						const modules = [];
 						const modulesDir = await dirHandle.getDirectoryHandle('wp-modules');
-						console.log( modulesDir );
+						// console.log( modulesDir );
 						for await (const module of modulesDir.values()) {
 							modules.push(module.name);
 						}
@@ -151,11 +196,15 @@ function PluginadeApp() {
 					pluginData.plugin_modules = {};
 				}
 
-				setPlugins({
-					...plugins,
-					[pluginData.plugin_dirname]: {
-						...pluginData,
-					}
+				await set(pluginData.plugin_dirname, dirHandle);
+
+				setPlugins((nonStalePlugins) => {
+					return {
+						...nonStalePlugins,
+						[pluginData.plugin_dirname]: {
+							...pluginData,
+						}
+					};
 				});
 			}
 		}
@@ -335,9 +384,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 						<Box>
 							<Typography component="p">{__( 'To run PHPUnit tests run the following in a terminal window:')}</Typography>
 						</Box>
-						<CopyCode language="bash" code={`cd ${pluginDataState.plugin_path}; \n
-						sh pluginade.sh test:phpunit;
-						`} />
+						<CopyCode language="bash" code={`sh pluginade.sh test:phpunit;`} />
 					</Box>
 				</Box>
 				<Box id={`plugin-tabpanel-scans`} sx={{display: 'scans' === currentTab ? 'grid' : 'none', gap: 2, padding: 2}}>
