@@ -69,7 +69,7 @@ const DarkTheme = createTheme({
 			default: 'rgb(15, 25, 36)',
 		},
 		background20: {
-			default: 'rgba(59, 74, 89, 0.2)',
+			default: 'rgb(15, 23, 31)',
 		},
 		secondary: {
 			light: '#ff7961',
@@ -196,6 +196,8 @@ function PluginadeApp() {
 					pluginData.plugin_modules = {};
 				}
 
+				pluginData.dirHandle = dirHandle;
+
 				await set(pluginData.plugin_dirname, dirHandle);
 
 				setPlugins((nonStalePlugins) => {
@@ -266,7 +268,7 @@ function PluginadeApp() {
 						<TerminalWindow />
 					</Box>
 					<Box className="create-plugin" sx={{display: (showCreatePlugin ? 'grid' : 'none'), height: '100%', width: '100%', overflow: 'auto', alignItems: 'center', justifyItems: 'center' }}>
-						<CreatePlugin uponSuccess={(newPluginSlug) => setCurrentPluginTab(newPluginSlug)} plugins={plugins} setPlugins={setPlugins} />
+						<CreatePlugin uponSuccess={(newPluginSlug) => setCurrentPluginTab(newPluginSlug)} plugins={plugins} setPlugins={setPlugins} openPlugin={openPlugin} />
 					</Box>
 				</Box>
 			</Box>
@@ -275,7 +277,7 @@ function PluginadeApp() {
 }
 root.render(<PluginadeApp />);
 
-function CreatePlugin({plugins, setPlugins, uponSuccess}) {
+function CreatePlugin({openPlugin}) {
 	const [creationState, setCreationState] = useState('initial');
 	const [creationMessage, setCreationMessage] = useState('');
 
@@ -292,33 +294,72 @@ function CreatePlugin({plugins, setPlugins, uponSuccess}) {
 		plugin_update_uri: '',
 	});
 
-	async function createPlugin(setLoading) {
+	async function createPlugin(setLoading, pluginDataState) {
 		try {
 			setCreationState('creating');
 			setCreationMessage('');
-			const result = await fetch(pluginadeApiEndpoints.generatePlugin, {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(pluginDataState),
-			});
 			
-			if ( ! result.ok ) {
-				const data = await result.json();
-				throw new Error(data?.message ? data.message : 'Error creating plugin');
-			}
+			console.log( pluginDataState );
 
-			const data = await result.json();
+			async function promptForDirectoryCreation() {
+				try {
+					// Prompt user to select a directory
+					const dirHandle = await window.showDirectoryPicker();
 			
-			setLoading(false);
-			setCreationState('success');
-			setCreationMessage(data.message);
-			setPlugins(data.plugins);
-			setTimeout(() => {
-				uponSuccess(data.newPluginSlug);
-			}, 1000);
+					// Check if a subdirectory exists
+					const subdirName = pluginDataState.plugin_dirname;
+					let subdirHandle;
+			
+					try {
+						subdirHandle = await dirHandle.getDirectoryHandle(subdirName);
+						setLoading(false);
+						setCreationState('error');
+						setCreationMessage(`Directory '${subdirName}' already exists.`);
+					} catch (error) {
+						// If not, create the directory
+						subdirHandle = await dirHandle.getDirectoryHandle(subdirName, { create: true });
+						setLoading(false);
+						setCreationState('success');
+						setCreationMessage(`Directory '${subdirName}' created.`);
+
+						// Add the boiler plugin files.
+						const boilerFiles = {
+							[`${pluginDataState.plugin_dirname}.php`]: `<?php
+/**
+ * Plugin Name: ${pluginDataState.plugin_name}
+ * Plugin URI: ${pluginDataState.plugin_uri}
+ * Description: ${pluginDataState.plugin_description}
+ * Version: ${pluginDataState.plugin_version}
+ * Author: ${pluginDataState.plugin_author}
+ * Author URI: ${pluginDataState.plugin_author_uri}
+ * License: ${pluginDataState.plugin_license}
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: ${pluginDataState.plugin_textdomain}
+ * Domain Path: /languages
+ * Requires at least: ${pluginDataState.plugin_min_wp_version}
+ * Requires PHP: ${pluginDataState.plugin_min_php_version}
+ * Update URI: ${pluginDataState.plugin_update_uri}
+ */`,
+ }
+ 						for (const [filename, contents] of Object.entries(boilerFiles)) {
+							const fileHandle = await subdirHandle.getFileHandle(filename, { create: true });
+							const writable = await fileHandle.createWritable();
+							await writable.write(contents);
+							await writable.close();
+						}
+
+						// Now that the plugin has been created, open it inside Pluginade Studio.
+						openPlugin( subdirHandle );
+					}
+			
+				} catch (error) {
+					setLoading(false);
+					console.error('Directory selection canceled or failed:', error);
+				}
+			}
+			
+			promptForDirectoryCreation();
+
 		} catch (error) {
 			setLoading(false);
 			setCreationState('error');
@@ -334,7 +375,7 @@ function CreatePlugin({plugins, setPlugins, uponSuccess}) {
 		<Box sx={{display: 'grid', width: '100%', height: '100%', overflow: 'auto', alignItems: 'center', justifyItems: 'center'}}>
 			<PluginDataForm pluginDataState={pluginDataState} setPluginDataState={setPluginDataState} onSubmit={(event, setLoading)=>{
 				event.preventDefault();
-				createPlugin(setLoading);
+				createPlugin(setLoading, pluginDataState);
 			}} />
 		</Box>
 	</Box>
@@ -471,38 +512,8 @@ function CreateModule({pluginSlug, plugins, setPlugins, uponSuccess}) {
 		plugin_update_uri: '',
 	});
 
-	async function createPlugin(setLoading) {
-		try {
-			setCreationState('creating');
-			setCreationMessage('');
-			const result = await fetch(pluginadeApiEndpoints.generatePlugin, {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(pluginDataState),
-			});
-			
-			if ( ! result.ok ) {
-				const data = await result.json();
-				throw new Error(data?.message ? data.message : 'Error creating plugin');
-			}
-
-			const data = await result.json();
-			
-			setLoading(false);
-			setCreationState('success');
-			setCreationMessage(data.message);
-			setPlugins(data.plugins);
-			setTimeout(() => {
-				uponSuccess(data.newPluginSlug);
-			}, 1000);
-		} catch (error) {
-			setLoading(false);
-			setCreationState('error');
-			setCreationMessage(error.message);
-		}
+	async function createModule(setLoading) {
+		
 	}
 
 	return <Box sx={{width: '100%', height: '100%', overflow: 'hidden'}}>
@@ -522,7 +533,13 @@ function CreateModule({pluginSlug, plugins, setPlugins, uponSuccess}) {
 					fullWidth
 					required
 					value={pluginDataState.plugin_name}
-					onChange={(event) => setPluginDataState({...pluginDataState, plugin_name: event.target.value})}
+					onChange={(event) => setPluginDataState(
+						{
+							...pluginDataState,
+							plugin_name: event.target.value,
+							plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase(),
+						}
+					)}
 				/>
 
 				<TextField
@@ -622,7 +639,13 @@ function PluginDataForm({pluginDataState, setPluginDataState, onSubmit}) {
 				fullWidth
 				required
 				value={pluginDataState.plugin_name}
-				onChange={(event) => setPluginDataState({...pluginDataState, plugin_name: event.target.value})}
+				onChange={(event) => setPluginDataState(
+					{
+						...pluginDataState,
+						plugin_name: event.target.value,
+						plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase(),
+					}
+				)}
 			/>
 
 			<TextField

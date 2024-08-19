@@ -27939,7 +27939,7 @@ const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_11__["default
       default: 'rgb(15, 25, 36)'
     },
     background20: {
-      default: 'rgba(59, 74, 89, 0.2)'
+      default: 'rgb(15, 23, 31)'
     },
     secondary: {
       light: '#ff7961',
@@ -28054,6 +28054,7 @@ function PluginadeApp() {
         if (!hasWpModules) {
           pluginData.plugin_modules = {};
         }
+        pluginData.dirHandle = dirHandle;
         await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.set)(pluginData.plugin_dirname, dirHandle);
         setPlugins(nonStalePlugins => {
           return {
@@ -28149,14 +28150,13 @@ function PluginadeApp() {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreatePlugin, {
     uponSuccess: newPluginSlug => setCurrentPluginTab(newPluginSlug),
     plugins: plugins,
-    setPlugins: setPlugins
+    setPlugins: setPlugins,
+    openPlugin: openPlugin
   })))));
 }
 root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginadeApp, null));
 function CreatePlugin({
-  plugins,
-  setPlugins,
-  uponSuccess
+  openPlugin
 }) {
   const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('initial');
   const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
@@ -28172,30 +28172,70 @@ function CreatePlugin({
     plugin_license: 'GPL-2.0-or-later',
     plugin_update_uri: ''
   });
-  async function createPlugin(setLoading) {
+  async function createPlugin(setLoading, pluginDataState) {
     try {
       setCreationState('creating');
       setCreationMessage('');
-      const result = await fetch(pluginadeApiEndpoints.generatePlugin, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(pluginDataState)
-      });
-      if (!result.ok) {
-        const data = await result.json();
-        throw new Error(data?.message ? data.message : 'Error creating plugin');
+      console.log(pluginDataState);
+      async function promptForDirectoryCreation() {
+        try {
+          // Prompt user to select a directory
+          const dirHandle = await window.showDirectoryPicker();
+
+          // Check if a subdirectory exists
+          const subdirName = pluginDataState.plugin_dirname;
+          let subdirHandle;
+          try {
+            subdirHandle = await dirHandle.getDirectoryHandle(subdirName);
+            setLoading(false);
+            setCreationState('error');
+            setCreationMessage(`Directory '${subdirName}' already exists.`);
+          } catch (error) {
+            // If not, create the directory
+            subdirHandle = await dirHandle.getDirectoryHandle(subdirName, {
+              create: true
+            });
+            setLoading(false);
+            setCreationState('success');
+            setCreationMessage(`Directory '${subdirName}' created.`);
+
+            // Add the boiler plugin files.
+            const boilerFiles = {
+              [`${pluginDataState.plugin_dirname}.php`]: `<?php
+/**
+ * Plugin Name: ${pluginDataState.plugin_name}
+ * Plugin URI: ${pluginDataState.plugin_uri}
+ * Description: ${pluginDataState.plugin_description}
+ * Version: ${pluginDataState.plugin_version}
+ * Author: ${pluginDataState.plugin_author}
+ * Author URI: ${pluginDataState.plugin_author_uri}
+ * License: ${pluginDataState.plugin_license}
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: ${pluginDataState.plugin_textdomain}
+ * Domain Path: /languages
+ * Requires at least: ${pluginDataState.plugin_min_wp_version}
+ * Requires PHP: ${pluginDataState.plugin_min_php_version}
+ * Update URI: ${pluginDataState.plugin_update_uri}
+ */`
+            };
+            for (const [filename, contents] of Object.entries(boilerFiles)) {
+              const fileHandle = await subdirHandle.getFileHandle(filename, {
+                create: true
+              });
+              const writable = await fileHandle.createWritable();
+              await writable.write(contents);
+              await writable.close();
+            }
+
+            // Now that the plugin has been created, open it inside Pluginade Studio.
+            openPlugin(subdirHandle);
+          }
+        } catch (error) {
+          setLoading(false);
+          console.error('Directory selection canceled or failed:', error);
+        }
       }
-      const data = await result.json();
-      setLoading(false);
-      setCreationState('success');
-      setCreationMessage(data.message);
-      setPlugins(data.plugins);
-      setTimeout(() => {
-        uponSuccess(data.newPluginSlug);
-      }, 1000);
+      promptForDirectoryCreation();
     } catch (error) {
       setLoading(false);
       setCreationState('error');
@@ -28226,7 +28266,7 @@ function CreatePlugin({
     setPluginDataState: setPluginDataState,
     onSubmit: (event, setLoading) => {
       event.preventDefault();
-      createPlugin(setLoading);
+      createPlugin(setLoading, pluginDataState);
     }
   })));
 }
@@ -28458,36 +28498,7 @@ function CreateModule({
     plugin_license: 'GPL-2.0-or-later',
     plugin_update_uri: ''
   });
-  async function createPlugin(setLoading) {
-    try {
-      setCreationState('creating');
-      setCreationMessage('');
-      const result = await fetch(pluginadeApiEndpoints.generatePlugin, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(pluginDataState)
-      });
-      if (!result.ok) {
-        const data = await result.json();
-        throw new Error(data?.message ? data.message : 'Error creating plugin');
-      }
-      const data = await result.json();
-      setLoading(false);
-      setCreationState('success');
-      setCreationMessage(data.message);
-      setPlugins(data.plugins);
-      setTimeout(() => {
-        uponSuccess(data.newPluginSlug);
-      }, 1000);
-    } catch (error) {
-      setLoading(false);
-      setCreationState('error');
-      setCreationMessage(error.message);
-    }
-  }
+  async function createModule(setLoading) {}
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
     sx: {
       width: '100%',
@@ -28529,7 +28540,8 @@ function CreateModule({
     value: pluginDataState.plugin_name,
     onChange: event => setPluginDataState({
       ...pluginDataState,
-      plugin_name: event.target.value
+      plugin_name: event.target.value,
+      plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
     label: "Plugin Namespace",
@@ -28662,7 +28674,8 @@ function PluginDataForm({
     value: pluginDataState.plugin_name,
     onChange: event => setPluginDataState({
       ...pluginDataState,
-      plugin_name: event.target.value
+      plugin_name: event.target.value,
+      plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
     label: "Plugin Namespace",
