@@ -4,29 +4,15 @@
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<link href="./js/build/index.css" rel="stylesheet">
+			<link rel="manifest" href="/manifest.json">
+			<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png">
+			<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png">
+			<meta name="theme-color" content="#000000">
 		</head>
 		<body>
-		<div id="pluginade"></div>
-		<script src="./js/build/index.js"></script>
-		<script type="text/javascript">
-			// var wpContentDir =  '<?php echo esc_html( $wp_filesystem->wp_content_dir() ); ?>';
-			// var wpPluginsDir =  '<?php echo esc_html( $wp_filesystem->wp_plugins_dir() ); ?>';
-			// var pluginadeApiEndpoints = {
-			// 	generatePlugin: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/generateplugin',
-			// 	generateModule: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/generatemodule',
-			// 	runShellCommand: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/runshellcommand',
-			// 	stringfixer: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/stringfixer',
-			// 	whichChecker: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/whichchecker',
-			// 	phplint: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/phplint',
-			// 	phplintfix: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/phplintfix',
-			// 	phpUnit: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/phpunit',
-			// 	csslint: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/csslint',
-			// 	csslintfix: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/csslintfix',
-			// 	jslint: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/jslint',
-			// 	jslintfix: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/jslintfix',
-			// 	killShellCommand: '<?php echo esc_url( get_bloginfo( 'wpurl' ) ); ?>/wp-json/pluginade/v1/killmoduleshellcommand',
-			// };
-		</script>
+			<script src="/service-worker.js"></script>
+			<div id="pluginade"></div>
+			<script src="./js/build/index.js"></script>
 		</body>
 	</html>
 

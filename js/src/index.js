@@ -30,6 +30,18 @@ import Alert from '@mui/material/Alert';
 import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
 
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', () => {
+	  navigator.serviceWorker.register('/service-worker.js')
+		.then(registration => {
+		  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		})
+		.catch(error => {
+		  console.log('ServiceWorker registration failed: ', error);
+		});
+	});
+}
+
 const LightTheme = createTheme({
 	palette: {
 		mode: 'light',
