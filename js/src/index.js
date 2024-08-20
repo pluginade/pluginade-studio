@@ -27,6 +27,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress from '@mui/material/LinearProgress';
 import Alert from '@mui/material/Alert';
 
+import PwaInstallButton from './PwaInstallButton';
 import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
 
@@ -247,6 +248,8 @@ function PluginadeApp() {
 					/>
 					<Divider orientation="vertical" />
 					<EditMenu />
+					<Divider orientation="vertical" />
+					<PwaInstallButton />
 					<Divider orientation="vertical" />
 				</Box>
 				<Divider />

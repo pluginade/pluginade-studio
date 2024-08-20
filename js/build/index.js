@@ -27831,6 +27831,77 @@ function sprintf(format, ...args) {
 
 /***/ }),
 
+/***/ "./js/src/PwaInstallButton.js":
+/*!************************************!*\
+  !*** ./js/src/PwaInstallButton.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+
+
+
+const PwaInstallButton = () => {
+  const [deferredPrompt, setDeferredPrompt] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [isVisible, setIsVisible] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const handler = event => {
+      console.log('beforeinstallprompt event triggered');
+      // Prevent the mini-infobar from appearing on mobile
+      event.preventDefault();
+      // Save the event so it can be triggered later
+      setDeferredPrompt(event);
+      // Show the install button
+      setIsVisible(true);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+
+    // Optionally hide the button if the app is already installed
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA was installed');
+      setIsVisible(false);
+    });
+
+    // Clean up the event listeners on component unmount
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handler);
+      window.removeEventListener('appinstalled', () => setIsVisible(false));
+    };
+  }, []);
+  const handleInstallClick = () => {
+    if (deferredPrompt) {
+      // Show the install prompt
+      deferredPrompt.prompt();
+      // Wait for the user to respond to the prompt
+      deferredPrompt.userChoice.then(choiceResult => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        // Clear the deferred prompt variable, since it can only be used once
+        setDeferredPrompt(null);
+        // Hide the install button
+        setIsVisible(false);
+      });
+    }
+  };
+  return isVisible && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    id: "install-button",
+    onClick: handleInstallClick
+  }, "Install As App");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PwaInstallButton);
+
+/***/ }),
+
 /***/ "./js/src/index.js":
 /*!*************************!*\
   !*** ./js/src/index.js ***!
@@ -27850,28 +27921,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fontsource_roboto_400_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fontsource/roboto/400.css */ "./node_modules/@fontsource/roboto/400.css");
 /* harmony import */ var _fontsource_roboto_500_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fontsource/roboto/500.css */ "./node_modules/@fontsource/roboto/500.css");
 /* harmony import */ var _fontsource_roboto_700_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fontsource/roboto/700.css */ "./node_modules/@fontsource/roboto/700.css");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
-/* harmony import */ var _mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/useMediaQuery */ "./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/createTheme.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/ThemeProvider.js");
-/* harmony import */ var _mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @mui/material/Divider */ "./node_modules/@mui/material/Divider/Divider.js");
-/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
-/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
-/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
-/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
-/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
-/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
-/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
-/* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
-/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
-/* harmony import */ var _menuFile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./menuFile */ "./js/src/menuFile.js");
-/* harmony import */ var _menuEdit__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./menuEdit */ "./js/src/menuEdit.js");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/useMediaQuery */ "./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js");
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/createTheme.js");
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/ThemeProvider.js");
+/* harmony import */ var _mui_material_Divider__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @mui/material/Divider */ "./node_modules/@mui/material/Divider/Divider.js");
+/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
+/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
+/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
+/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
+/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
+/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
+/* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
+/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
+/* harmony import */ var _PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./PwaInstallButton */ "./js/src/PwaInstallButton.js");
+/* harmony import */ var _menuFile__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./menuFile */ "./js/src/menuFile.js");
+/* harmony import */ var _menuEdit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./menuEdit */ "./js/src/menuEdit.js");
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__]);
 https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -27910,7 +27983,7 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_11__["default"])({
+const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__["default"])({
   palette: {
     mode: 'light',
     primary: {
@@ -27931,7 +28004,7 @@ const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_11__["defaul
     }
   }
 });
-const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_11__["default"])({
+const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__["default"])({
   palette: {
     mode: 'dark',
     primary: {
@@ -27978,7 +28051,7 @@ entriesInIndexDb.forEach(async entry => {
   }
 });
 function PluginadeApp() {
-  const prefersDarkMode = (0,_mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_12__["default"])('(prefers-color-scheme: dark)');
+  const prefersDarkMode = (0,_mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_13__["default"])('(prefers-color-scheme: dark)');
   const [showCreatePlugin, setShowCreatePluginState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [pluginDirHandles, setPluginDirHandles] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(thePluginDirHandles);
   const [plugins, setPlugins] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
@@ -28079,60 +28152,62 @@ function PluginadeApp() {
     // 	alert('Make sure the main plugin file is named the same as the directory and is a .php file.');
     // }
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_14__["default"], {
     theme: prefersDarkMode ? DarkTheme : DarkTheme
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     className: "pluginade-studio",
     sx: {
       display: 'grid',
       gridTemplateRows: 'min-content min-content 1fr'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       backgroundColor: 'background20.default',
       display: 'flex'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_17__["default"], {
     sx: {
       padding: 2,
       fontSize: '1em'
     },
     component: "h1"
-  }, "Pluginade Studio"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], {
+  }, "Pluginade Studio"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_18__["default"], {
     orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuFile__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuFile__WEBPACK_IMPORTED_MODULE_10__["default"], {
     onNewPlugin: () => {
       setShowCreatePlugin(true);
     },
     onOpenPlugin: () => {
       openPlugin();
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_18__["default"], {
     orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuEdit__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuEdit__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_18__["default"], {
     orientation: "vertical"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    orientation: "vertical"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_18__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     className: "pluginade-studio-body",
     sx: {
       display: 'grid',
       gridTemplateColumns: '200px min-content 1fr'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       backgroundColor: 'background20.default'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_18__["default"], null, Object.keys(plugins).map((plugin, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_19__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_19__["default"], null, Object.keys(plugins).map((plugin, index) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_20__["default"], {
       disablePadding: true
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_21__["default"], {
       selected: currentPluginTab === plugin,
       onClick: () => setCurrentPluginTab(plugin)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_21__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_22__["default"], {
       primary: plugins[plugin].plugin_name
     })));
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_18__["default"], {
     orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       display: showCreatePlugin ? 'none' : 'grid',
       height: '100%',
@@ -28146,7 +28221,7 @@ function PluginadeApp() {
       currentPluginSlug: currentPluginSlug,
       hidden: currentPluginSlug !== currentPluginTab
     });
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TerminalWindow, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TerminalWindow, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     className: "create-plugin",
     sx: {
       display: showCreatePlugin ? 'grid' : 'none',
@@ -28251,17 +28326,17 @@ function CreatePlugin({
       setCreationMessage(error.message);
     }
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       width: '100%',
       height: '100%',
       overflow: 'hidden'
     }
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_22__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_23__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_24__["default"], {
     severity: "error"
-  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
+  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_24__["default"], {
     severity: "success"
-  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       display: 'grid',
       width: '100%',
@@ -28294,7 +28369,7 @@ function Plugin({
     'scans': 'Scans',
     'fixers': 'Fixers'
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     id: `plugin-tabpanel-${pluginDataState.plugin_dirname}`,
     sx: {
       display: hidden ? 'none' : 'grid',
@@ -28302,20 +28377,20 @@ function Plugin({
       height: '100%',
       overflow: 'hidden'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     className: "plugin-header",
     sx: {
       display: 'grid',
       gridTemplateRows: 'min-content min-content'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       padding: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_17__["default"], {
     variant: "h5",
     component: "h2"
-  }, pluginDataState.plugin_name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], null, pluginDataState.plugin_path)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  }, pluginDataState.plugin_name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], null, pluginDataState.plugin_path)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_25__["default"], {
     className: "plugin-control-tabs",
     value: currentTab,
     onChange: (event, newValue) => {
@@ -28324,74 +28399,74 @@ function Plugin({
     "aria-label": "Plugins Tools",
     variant: "scrollable"
   }, Object.keys(pluginTabs).map((tool, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_25__["default"], {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_26__["default"], {
       value: tool,
       label: pluginTabs[tool],
       ...a11yProps(tool)
     });
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_18__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     className: "plugin-content",
     sx: {
       display: 'block',
       height: '100%',
       overflow: 'hidden'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     id: `plugin-tabpanel-webpack`,
     sx: {
       display: 'webpack' === currentTab ? 'flex' : 'none',
       gap: 2,
       padding: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       display: 'grid',
       gap: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_17__["default"], {
     component: "p"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To enable webpack and watch for file changes, run the following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
     language: "shell",
     code: `
 						sh pluginade.sh dev;
 						`
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     id: `plugin-tabpanel-phpunit`,
     sx: {
       display: 'phpunit' === currentTab ? 'flex' : 'none',
       gap: 2,
       padding: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       display: 'grid',
       gap: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_17__["default"], {
     component: "p"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To run PHPUnit tests run the following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
     language: "bash",
     code: `sh pluginade.sh test:phpunit;`
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     id: `plugin-tabpanel-scans`,
     sx: {
       display: 'scans' === currentTab ? 'grid' : 'none',
       gap: 2,
       padding: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       display: 'grid',
       gap: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_17__["default"], {
     component: "p"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To scan your code using WPCS, run following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
     language: "bash",
     code: `cd ${pluginDataState.plugin_path}; \n
 						sh pluginade.sh lint:php;
 						`
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     id: `plugin-tabpanel-modules`,
     sx: {
       display: 'modules' === currentTab ? 'block' : 'none',
@@ -28412,13 +28487,13 @@ function Modules({
   const thisPlugin = plugins[currentPluginSlug];
   const thisPluginsModules = thisPlugin.plugin_modules;
   const [currentModule, setCurrentModule] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(Object.keys(thisPluginsModules)[0]);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       padding: 2,
       height: '100%',
       overflow: 'hidden'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       display: 'grid',
       gridTemplateColumns: '200px 1fr',
@@ -28428,23 +28503,23 @@ function Modules({
       borderColor: 'background20.default',
       borderRadius: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_19__["default"], {
     sx: {
       overflow: 'auto',
       borderRight: '1px solid',
       borderRightColor: 'background20.default',
       backgroundColor: 'background20.default'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_19__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_20__["default"], {
     disablePadding: true
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       display: 'grid',
       alignItems: 'center',
       padding: 2,
       width: '100%'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_26__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_27__["default"], {
     variant: "contained",
     color: "secondary",
     "aria-label": "Create New Plugin",
@@ -28455,15 +28530,15 @@ function Modules({
       width: '100%'
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Module +', 'pluginade')))), Object.keys(thisPluginsModules).map((module, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_19__["default"], {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_20__["default"], {
       disablePadding: true
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_21__["default"], {
       selected: currentModule === module,
       onClick: () => setCurrentModule(module)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_21__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_22__["default"], {
       primary: thisPluginsModules[module].name
     })));
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     className: 'tab-panel-create-module',
     sx: {
       height: '100%',
@@ -28508,17 +28583,17 @@ function CreateModule({
     plugin_update_uri: ''
   });
   async function createModule(setLoading) {}
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       width: '100%',
       height: '100%',
       overflow: 'hidden'
     }
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_22__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_23__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_24__["default"], {
     severity: "error"
-  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
+  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_24__["default"], {
     severity: "success"
-  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       display: 'grid',
       width: '100%',
@@ -28527,7 +28602,7 @@ function CreateModule({
       alignItems: 'start',
       justifyItems: 'start'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     component: "form",
     sx: {
       padding: 2,
@@ -28541,7 +28616,7 @@ function CreateModule({
       setLoading(true);
       onSubmit(event, setLoading);
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Name",
     variant: "outlined",
     fullWidth: true,
@@ -28552,7 +28627,7 @@ function CreateModule({
       plugin_name: event.target.value,
       plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Namespace",
     variant: "outlined",
     fullWidth: true,
@@ -28562,7 +28637,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_namespace: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Description",
     variant: "outlined",
     fullWidth: true,
@@ -28572,7 +28647,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_description: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Version",
     variant: "outlined",
     fullWidth: true,
@@ -28582,7 +28657,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_version: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Author",
     variant: "outlined",
     fullWidth: true,
@@ -28592,7 +28667,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_author: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Author URI",
     variant: "outlined",
     fullWidth: true,
@@ -28602,11 +28677,11 @@ function CreateModule({
       ...pluginDataState,
       plugin_author_uri: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_26__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_27__["default"], {
     type: "submit",
     variant: "contained",
     color: "secondary"
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_28__["default"], {
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_29__["default"], {
     size: 24
   }) : 'Update plugin files'))));
 }
@@ -28622,7 +28697,7 @@ function CopyCode({
       setCopied(false);
     }, 2000);
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       display: 'grid',
       gridTemplateRows: 'min-content 1fr min-content',
@@ -28631,7 +28706,7 @@ function CopyCode({
       borderColor: 'background20.default',
       borderRadius: 1
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     className: "language",
     sx: {
       padding: 1,
@@ -28639,7 +28714,7 @@ function CopyCode({
       borderBottom: '1px solid',
       borderBottomColor: 'background20.default'
     }
-  }, language), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, language), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     className: "code",
     sx: {
       padding: 1,
@@ -28649,7 +28724,7 @@ function CopyCode({
       lineHeight: 1,
       marginBottom: 1
     }
-  }, code), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_26__["default"], {
+  }, code), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_27__["default"], {
     variant: "contained",
     color: "secondary",
     onClick: copyCode
@@ -28661,7 +28736,7 @@ function PluginDataForm({
   onSubmit
 }) {
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     component: "form",
     sx: {
       padding: 2,
@@ -28675,7 +28750,7 @@ function PluginDataForm({
       setLoading(true);
       onSubmit(event, setLoading);
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Name",
     variant: "outlined",
     fullWidth: true,
@@ -28686,7 +28761,7 @@ function PluginDataForm({
       plugin_name: event.target.value,
       plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Namespace",
     variant: "outlined",
     fullWidth: true,
@@ -28696,7 +28771,7 @@ function PluginDataForm({
       ...pluginDataState,
       plugin_namespace: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Description",
     variant: "outlined",
     fullWidth: true,
@@ -28706,7 +28781,7 @@ function PluginDataForm({
       ...pluginDataState,
       plugin_description: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Version",
     variant: "outlined",
     fullWidth: true,
@@ -28716,7 +28791,7 @@ function PluginDataForm({
       ...pluginDataState,
       plugin_version: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Author",
     variant: "outlined",
     fullWidth: true,
@@ -28726,7 +28801,7 @@ function PluginDataForm({
       ...pluginDataState,
       plugin_author: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_28__["default"], {
     label: "Plugin Author URI",
     variant: "outlined",
     fullWidth: true,
@@ -28736,16 +28811,16 @@ function PluginDataForm({
       ...pluginDataState,
       plugin_author_uri: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_26__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_27__["default"], {
     type: "submit",
     variant: "contained",
     color: "secondary"
-  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_28__["default"], {
+  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_29__["default"], {
     size: 24
   }) : 'Update plugin files'));
 }
 function TerminalWindow() {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
     sx: {
       width: '100%',
       height: '100%'
