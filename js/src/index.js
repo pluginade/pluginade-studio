@@ -228,6 +228,25 @@ function PluginadeApp() {
 		// }
 	}
 
+	if ( ! ( 'showOpenFilePicker' in self ))  {
+		return <ThemeProvider theme={prefersDarkMode ? DarkTheme : DarkTheme}>
+			<CssBaseline />
+			<Box className="pluginade-studio" sx={{
+				display: 'grid',
+				gridTemplateRows: 'min-content min-content 1fr'
+			}}>
+				<Box sx={{backgroundColor: 'background20.default', display: 'flex'}}>
+					<Typography sx={{padding: 2, fontSize: '1em'}} component="h1">Pluginade Studio</Typography>
+					<Divider orientation="vertical" />
+				</Box>
+				<Divider />
+				<Box>
+					<Alert severity="error">{'Your browser does not support the File System Access API. Please use a browser that does. (Chrome 86+ or Edge 86+)'}</Alert>
+				</Box>
+			</Box>
+		</ThemeProvider>
+	}
+
 	return (
 		<ThemeProvider theme={prefersDarkMode ? DarkTheme : DarkTheme}>
 			<CssBaseline />
@@ -273,14 +292,14 @@ function PluginadeApp() {
 					</Box>
 					<Divider orientation="vertical" />
 					<Box sx={{display: (showCreatePlugin ? 'none' : 'grid'), height: '100%', overflow: 'hidden'}}>
-							{
-								Object.keys( plugins ).map((plugin, index) => {
-									const currentPluginSlug = plugin;
+						{
+							Object.keys( plugins ).map((plugin, index) => {
+								const currentPluginSlug = plugin;
 
-									return <Plugin plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} hidden={currentPluginSlug !== currentPluginTab } />
-								})
-							}
-						<TerminalWindow />
+								return <Plugin plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} hidden={currentPluginSlug !== currentPluginTab } />
+							})
+						}
+						{/* <TerminalWindow /> */}
 					</Box>
 					<Box className="create-plugin" sx={{display: (showCreatePlugin ? 'grid' : 'none'), height: '100%', width: '100%', overflow: 'auto', alignItems: 'center', justifyItems: 'center' }}>
 						<CreatePlugin uponSuccess={(newPluginSlug) => setCurrentPluginTab(newPluginSlug)} plugins={plugins} setPlugins={setPlugins} openPlugin={openPlugin} />
