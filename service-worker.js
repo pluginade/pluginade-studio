@@ -1,11 +1,11 @@
 const CACHE_NAME = 'pluginade-studio-app-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/js/build/index.css',
-  '/js/build/index.js',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+  './',
+  './index.html',
+  './js/build/index.css',
+  './js/build/index.js',
+  './icons/icon-192x192.png',
+  './icons/icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
