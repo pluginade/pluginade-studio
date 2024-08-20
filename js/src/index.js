@@ -31,6 +31,10 @@ import PwaInstallButton from './PwaInstallButton';
 import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
 
+import copyDirectory from './copyDirectory';
+
+copyDirectory();
+
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
 	  navigator.serviceWorker.register('/service-worker.js')
@@ -223,9 +227,6 @@ function PluginadeApp() {
 				});
 			}
 		}
-		// if ( ! isWpPlugin ) {
-		// 	alert('Make sure the main plugin file is named the same as the directory and is a .php file.');
-		// }
 	}
 
 	if ( ! ( 'showOpenFilePicker' in self ))  {
