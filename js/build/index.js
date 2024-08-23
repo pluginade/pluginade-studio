@@ -27926,7 +27926,7 @@ async function fetchRepoFiles(repoSlug, directoryPath = '') {
         content: blob
       });
     } else if (file.type === 'dir') {
-      const subDirFiles = await fetchGitHubRepoFiles(repoSlug, file.path);
+      const subDirFiles = await fetchRepoFiles(repoSlug, file.path);
       repoFiles.push({
         name: file.name,
         contents: subDirFiles
