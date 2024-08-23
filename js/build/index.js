@@ -27920,7 +27920,7 @@ async function fetchRepoFiles(repoSlug, directoryPath = '') {
   for (const file of files) {
     if (file.type === 'file') {
       const fileContent = await fetch(file.download_url);
-      const blob = await fileContent.blob();
+      const blob = await fileContent.text();
       repoFiles.push({
         name: file.name,
         content: blob
@@ -28012,15 +28012,8 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 
 
 
-
-// import PHP from './phpWasm/phpWasm';
-
-// PHP();
-
-// Example usage:
-(0,_copyDirectory__WEBPACK_IMPORTED_MODULE_12__["default"])('sample-plugin').then(repoFiles => {
-  console.log('repoFiles2', repoFiles);
-});
+const repoFiles = await (0,_copyDirectory__WEBPACK_IMPORTED_MODULE_12__["default"])('sample-plugin');
+console.log('a', repoFiles);
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js').then(registration => {
@@ -28376,6 +28369,8 @@ function CreatePlugin({
  * Update URI: ${pluginDataState.plugin_update_uri}
  */`
             };
+            const repoFiles = await (0,_copyDirectory__WEBPACK_IMPORTED_MODULE_12__["default"])('sample-plugin');
+            console.log('a', repoFiles);
             for (const [filename, contents] of Object.entries(boilerFiles)) {
               const fileHandle = await subdirHandle.getFileHandle(filename, {
                 create: true

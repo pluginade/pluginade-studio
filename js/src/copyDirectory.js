@@ -8,7 +8,7 @@ export default async function fetchRepoFiles(repoSlug, directoryPath = '' ) {
     for (const file of files) {
         if (file.type === 'file') {
             const fileContent = await fetch(file.download_url);
-            const blob = await fileContent.blob();
+            const blob = await fileContent.text();
 
             repoFiles.push({
                 name: file.name,

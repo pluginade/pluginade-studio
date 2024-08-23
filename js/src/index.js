@@ -32,16 +32,8 @@ import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
 
 import fetchRepoFiles from './copyDirectory';
-
-// import PHP from './phpWasm/phpWasm';
-
-// PHP();
-
-// Example usage:
-fetchRepoFiles('sample-plugin').then(repoFiles => {
-    console.log('repoFiles2', repoFiles);
-});
-
+const repoFiles = await fetchRepoFiles('sample-plugin');
+						console.log( 'a', repoFiles );
 
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
@@ -387,6 +379,8 @@ function CreatePlugin({openPlugin}) {
  * Update URI: ${pluginDataState.plugin_update_uri}
  */`,
  }
+						const repoFiles = await fetchRepoFiles('sample-plugin');
+						console.log( 'a', repoFiles );
  						for (const [filename, contents] of Object.entries(boilerFiles)) {
 							const fileHandle = await subdirHandle.getFileHandle(filename, { create: true });
 							const writable = await fileHandle.createWritable();
