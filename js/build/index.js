@@ -27911,37 +27911,39 @@ const PwaInstallButton = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getServerFiles)
+/* harmony export */   "default": () => (/* binding */ fetchRepoFiles)
 /* harmony export */ });
-async function getServerFiles(url) {
-  const response = await fetch(url);
-  const text = await response.text();
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(text, 'text/html');
-  const links = Array.from(doc.querySelectorAll('a'));
-  const serverFiles = [];
-  for (const link of links) {
-    const href = link.getAttribute('href');
-    if (href !== '../') {
-      // Skip the parent directory link
-      const isDirectory = href.endsWith('/');
-      const fileName = isDirectory ? href.slice(0, -1) : href;
-      serverFiles.push({
-        name: fileName,
-        url: new URL(href, url).href,
-        isDirectory,
-        contents: isDirectory ? await getServerFiles(new URL(href, url).href) : null
-      });
+async function fetchRepoFiles(repoSlug, directoryPath = '') {
+  const response = await fetch('https://pluginade.com/?repo=' + repoSlug + '&path=' + directoryPath, {
+    headers: {
+      'Access-Control-Allow-Origin': '*'
     }
-  }
-  return serverFiles;
-}
+  });
+  const files = await response.text();
+  console.log(files);
 
-// Example usage:
-const url = './boiler-plugin/';
-getServerFiles(url).then(serverFiles => {
-  console.log(serverFiles);
-});
+  // const repoFiles = [];
+
+  // for (const file of files) {
+  //     if (file.type === 'file') {
+  //         const fileContent = await fetch(file.download_url);
+  //         const blob = await fileContent.blob();
+
+  //         repoFiles.push({
+  //             name: file.name,
+  //             content: blob,
+  //         });
+  //     } else if (file.type === 'dir') {
+  //         const subDirFiles = await fetchGitHubRepoFiles(repoSlug, file.path);
+  //         repoFiles.push({
+  //             name: file.name,
+  //             contents: subDirFiles,
+  //         });
+  //     }
+  // }
+
+  // return repoFiles;
+}
 
 /***/ }),
 
@@ -28019,7 +28021,15 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 
 
 
-(0,_copyDirectory__WEBPACK_IMPORTED_MODULE_12__["default"])();
+
+// import PHP from './phpWasm/phpWasm';
+
+// PHP();
+
+// Example usage:
+(0,_copyDirectory__WEBPACK_IMPORTED_MODULE_12__["default"])('sample-plugin').then(repoFiles => {
+  console.log(repoFiles);
+});
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js').then(registration => {
@@ -28093,7 +28103,7 @@ entriesInIndexDb.forEach(async entry => {
     thePluginDirHandles[entry[0]] = entry[1];
   } else {
     // Remove the entry from actuallyOpenPlugins
-    let actuallyOpenPlugins = actuallyOpenPlugins.filter(item => item != entry[1]);
+    // let actuallyOpenPlugins = actuallyOpenPlugins.filter( item => item != entry[1]);
   }
 });
 function PluginadeApp() {
@@ -28259,7 +28269,7 @@ function PluginadeApp() {
     className: "pluginade-studio-body",
     sx: {
       display: 'grid',
-      gridTemplateColumns: '200px min-content 1fr'
+      gridTemplateColumns: '200px min-content 1fr 1fr'
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_16__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_17__["default"], {
     sx: {
@@ -28267,6 +28277,7 @@ function PluginadeApp() {
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_21__["default"], null, Object.keys(plugins).map((plugin, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      key: index,
       disablePadding: true
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_23__["default"], {
       selected: currentPluginTab === plugin,
@@ -28285,6 +28296,7 @@ function PluginadeApp() {
   }, Object.keys(plugins).map((plugin, index) => {
     const currentPluginSlug = plugin;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Plugin, {
+      key: index,
       plugins: plugins,
       setPlugins: setPlugins,
       currentPluginSlug: currentPluginSlug,
@@ -28305,6 +28317,8 @@ function PluginadeApp() {
     plugins: plugins,
     setPlugins: setPlugins,
     openPlugin: openPlugin
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_17__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: "output"
   })))));
 }
 root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginadeApp, null));
@@ -28469,6 +28483,7 @@ function Plugin({
     variant: "scrollable"
   }, Object.keys(pluginTabs).map((tool, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_27__["default"], {
+      key: index,
       value: tool,
       label: pluginTabs[tool],
       ...a11yProps(tool)
@@ -28600,6 +28615,7 @@ function Modules({
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Module +', 'pluginade')))), Object.keys(thisPluginsModules).map((module, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      key: index,
       disablePadding: true
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_23__["default"], {
       selected: currentModule === module,

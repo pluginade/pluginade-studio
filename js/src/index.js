@@ -31,9 +31,17 @@ import PwaInstallButton from './PwaInstallButton';
 import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
 
-import copyDirectory from './copyDirectory';
+import fetchGitHubRepoFiles from './copyDirectory';
 
-copyDirectory();
+// import PHP from './phpWasm/phpWasm';
+
+// PHP();
+
+// Example usage:
+fetchGitHubRepoFiles('sample-plugin').then(repoFiles => {
+    console.log(repoFiles);
+});
+
 
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
@@ -116,7 +124,7 @@ entriesInIndexDb.forEach( async (entry) => {
 		thePluginDirHandles[entry[0]] = entry[1];
 	} else {
 		// Remove the entry from actuallyOpenPlugins
-		let actuallyOpenPlugins = actuallyOpenPlugins.filter( item => item != entry[1]);
+		// let actuallyOpenPlugins = actuallyOpenPlugins.filter( item => item != entry[1]);
 	}
 } );
 
@@ -275,14 +283,14 @@ function PluginadeApp() {
 				<Divider />
 				<Box className="pluginade-studio-body" sx={{
 					display: 'grid',
-					gridTemplateColumns: '200px min-content 1fr'
+					gridTemplateColumns: '200px min-content 1fr 1fr'
 				}}>
 					<CssBaseline />
 					<Box sx={{backgroundColor: 'background20.default'}}>
 						<List>
 							{
 								Object.keys( plugins ).map((plugin, index) => {
-									return <ListItem disablePadding>
+									return <ListItem key={index} disablePadding>
 										<ListItemButton selected={currentPluginTab === plugin} onClick={() => setCurrentPluginTab(plugin)}>
 											<ListItemText primary={plugins[plugin].plugin_name} />
 										</ListItemButton>
@@ -297,13 +305,16 @@ function PluginadeApp() {
 							Object.keys( plugins ).map((plugin, index) => {
 								const currentPluginSlug = plugin;
 
-								return <Plugin plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} hidden={currentPluginSlug !== currentPluginTab } />
+								return <Plugin key={index} plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} hidden={currentPluginSlug !== currentPluginTab } />
 							})
 						}
 						{/* <TerminalWindow /> */}
 					</Box>
 					<Box className="create-plugin" sx={{display: (showCreatePlugin ? 'grid' : 'none'), height: '100%', width: '100%', overflow: 'auto', alignItems: 'center', justifyItems: 'center' }}>
 						<CreatePlugin uponSuccess={(newPluginSlug) => setCurrentPluginTab(newPluginSlug)} plugins={plugins} setPlugins={setPlugins} openPlugin={openPlugin} />
+					</Box>
+					<Box>
+					<div id="output"></div>
 					</Box>
 				</Box>
 			</Box>
@@ -438,7 +449,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 				<Tabs className="plugin-control-tabs" value={currentTab} onChange={(event, newValue) => {setCurrentTab(newValue)}} aria-label="Plugins Tools" variant="scrollable">
 					{
 						Object.keys( pluginTabs ).map((tool, index) => {
-							return <Tab value={tool} label={pluginTabs[tool]} {...a11yProps(tool)} />
+							return <Tab key={index} value={tool} label={pluginTabs[tool]} {...a11yProps(tool)} />
 						})
 					}
 				</Tabs>
@@ -500,7 +511,7 @@ function Modules({plugins, setPlugins, currentPluginSlug}) {
 					</ListItem>
 					{
 						Object.keys( thisPluginsModules ).map((module, index) => {
-							return <ListItem disablePadding>
+							return <ListItem key={index} disablePadding>
 								<ListItemButton selected={currentModule === module} onClick={() => setCurrentModule(module)}>
 									<ListItemText primary={thisPluginsModules[module].name} />
 								</ListItemButton>

@@ -1,34 +1,29 @@
-export default async function getServerFiles(url) {
-	const response = await fetch(url);
-	const text = await response.text();
+export default async function fetchRepoFiles(repoSlug, directoryPath = '' ) {
 	
-	const parser = new DOMParser();
-	const doc = parser.parseFromString(text, 'text/html');
-	const links = Array.from(doc.querySelectorAll('a'));
-  
-	const serverFiles = [];
-  
-	for (const link of links) {
-	  const href = link.getAttribute('href');
-	  if (href !== '../') { // Skip the parent directory link
-		const isDirectory = href.endsWith('/');
-		const fileName = isDirectory ? href.slice(0, -1) : href;
-		
-		serverFiles.push({
-		  name: fileName,
-		  url: new URL(href, url).href,
-		  isDirectory,
-		  contents: isDirectory ? await getServerFiles(new URL(href, url).href) : null
-		});
-	  }
-	}
-  
-	return serverFiles;
-  }
-  
-  // Example usage:
-  const url = './boiler-plugin/';
-  getServerFiles(url).then(serverFiles => {
-	console.log(serverFiles);
-  });
-  
+	const response = await fetch('https://pluginade.com/?repo=' + repoSlug + '&path=' + directoryPath, { headers: { 'Access-Control-Allow-Origin': '*' } });
+    const files = await response.text();
+
+	console.log(files);
+
+    // const repoFiles = [];
+
+    // for (const file of files) {
+    //     if (file.type === 'file') {
+    //         const fileContent = await fetch(file.download_url);
+    //         const blob = await fileContent.blob();
+
+    //         repoFiles.push({
+    //             name: file.name,
+    //             content: blob,
+    //         });
+    //     } else if (file.type === 'dir') {
+    //         const subDirFiles = await fetchGitHubRepoFiles(repoSlug, file.path);
+    //         repoFiles.push({
+    //             name: file.name,
+    //             contents: subDirFiles,
+    //         });
+    //     }
+    // }
+
+    // return repoFiles;
+}
