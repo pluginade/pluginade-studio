@@ -31,9 +31,11 @@ import PwaInstallButton from './PwaInstallButton';
 import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
 
-import fetchRepoFiles from './copyDirectory';
-const repoFiles = await fetchRepoFiles('sample-plugin');
-						console.log( 'a', repoFiles );
+// import getRemoteDirArray from './getRemoteDirArray.js';
+import boilerPlugin from './boilerPlugin';
+import copyDirToLocal from './copyDirToLocal';
+// const repoFiles = await fetchRepoFiles('sample-plugin');
+// 						console.log( 'a', repoFiles );
 
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
@@ -342,54 +344,22 @@ function CreatePlugin({openPlugin}) {
 			async function promptForDirectoryCreation() {
 				try {
 					// Prompt user to select a directory
-					const dirHandle = await window.showDirectoryPicker();
+					const parentDirHandle = await window.showDirectoryPicker();
+
+					const files = await boilerPlugin();
 			
-					// Check if a subdirectory exists
-					const subdirName = pluginDataState.plugin_dirname;
-					let subdirHandle;
-			
-					try {
-						subdirHandle = await dirHandle.getDirectoryHandle(subdirName);
-						setLoading(false);
+					const result = await copyDirToLocal( parentDirHandle, pluginDataState.plugin_dirname, files );
+
+					setLoading(false);
+
+					if ( result === 'dir-already-exists') {
 						setCreationState('error');
-						setCreationMessage(`Directory '${subdirName}' already exists.`);
-					} catch (error) {
-						// If not, create the directory
-						subdirHandle = await dirHandle.getDirectoryHandle(subdirName, { create: true });
-						setLoading(false);
+						setCreationMessage('Directory already exists');
+					}
+
+					if ( result === 'success' ) {
 						setCreationState('success');
-						setCreationMessage(`Directory '${subdirName}' created.`);
-
-						// Add the boiler plugin files.
-						const boilerFiles = {
-							[`${pluginDataState.plugin_dirname}.php`]: `<?php
-/**
- * Plugin Name: ${pluginDataState.plugin_name}
- * Plugin URI: ${pluginDataState.plugin_uri}
- * Description: ${pluginDataState.plugin_description}
- * Version: ${pluginDataState.plugin_version}
- * Author: ${pluginDataState.plugin_author}
- * Author URI: ${pluginDataState.plugin_author_uri}
- * License: ${pluginDataState.plugin_license}
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: ${pluginDataState.plugin_textdomain}
- * Domain Path: /languages
- * Requires at least: ${pluginDataState.plugin_min_wp_version}
- * Requires PHP: ${pluginDataState.plugin_min_php_version}
- * Update URI: ${pluginDataState.plugin_update_uri}
- */`,
- }
-						const repoFiles = await fetchRepoFiles('sample-plugin');
-						console.log( 'a', repoFiles );
- 						for (const [filename, contents] of Object.entries(boilerFiles)) {
-							const fileHandle = await subdirHandle.getFileHandle(filename, { create: true });
-							const writable = await fileHandle.createWritable();
-							await writable.write(contents);
-							await writable.close();
-						}
-
-						// Now that the plugin has been created, open it inside Pluginade Studio.
-						openPlugin( subdirHandle );
+						setCreationMessage('Plugin successfully created');
 					}
 			
 				} catch (error) {

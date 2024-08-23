@@ -1,4 +1,4 @@
-export default async function fetchRepoFiles(repoSlug, directoryPath = '' ) {
+export default async function getRemoteDirArray(repoSlug, directoryPath = '' ) {
 	
 	const response = await fetch('https://pluginade.com/?repo=' + repoSlug + '&path=' + directoryPath);
     const files = await response.json();
@@ -12,12 +12,14 @@ export default async function fetchRepoFiles(repoSlug, directoryPath = '' ) {
 
             repoFiles.push({
                 name: file.name,
+                type: 'file',
                 content: blob,
             });
         } else if (file.type === 'dir') {
-            const subDirFiles = await fetchRepoFiles(repoSlug, file.path);
+            const subDirFiles = await getRemoteDirArray(repoSlug, file.path);
             repoFiles.push({
                 name: file.name,
+                type: 'dir',
                 contents: subDirFiles,
             });
         }
