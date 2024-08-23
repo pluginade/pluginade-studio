@@ -1,6 +1,6 @@
 export default async function fetchRepoFiles(repoSlug, directoryPath = '' ) {
 	
-	const response = await fetch('https://pluginade.com/?repo=' + repoSlug + '&path=' + directoryPath, { headers: { 'Access-Control-Allow-Origin': '*' } });
+	const response = await fetch('https://pluginade.com/?repo=' + repoSlug + '&path=' + directoryPath);
     const files = await response.text();
 
 	console.log(files);
