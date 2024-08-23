@@ -27916,29 +27916,24 @@ __webpack_require__.r(__webpack_exports__);
 async function fetchRepoFiles(repoSlug, directoryPath = '') {
   const response = await fetch('https://pluginade.com/?repo=' + repoSlug + '&path=' + directoryPath);
   const files = await response.text();
-  console.log(files);
-
-  // const repoFiles = [];
-
-  // for (const file of files) {
-  //     if (file.type === 'file') {
-  //         const fileContent = await fetch(file.download_url);
-  //         const blob = await fileContent.blob();
-
-  //         repoFiles.push({
-  //             name: file.name,
-  //             content: blob,
-  //         });
-  //     } else if (file.type === 'dir') {
-  //         const subDirFiles = await fetchGitHubRepoFiles(repoSlug, file.path);
-  //         repoFiles.push({
-  //             name: file.name,
-  //             contents: subDirFiles,
-  //         });
-  //     }
-  // }
-
-  // return repoFiles;
+  const repoFiles = [];
+  for (const file of files) {
+    if (file.type === 'file') {
+      const fileContent = await fetch(file.download_url);
+      const blob = await fileContent.blob();
+      repoFiles.push({
+        name: file.name,
+        content: blob
+      });
+    } else if (file.type === 'dir') {
+      const subDirFiles = await fetchGitHubRepoFiles(repoSlug, file.path);
+      repoFiles.push({
+        name: file.name,
+        contents: subDirFiles
+      });
+    }
+  }
+  return repoFiles;
 }
 
 /***/ }),
@@ -28024,7 +28019,7 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 
 // Example usage:
 (0,_copyDirectory__WEBPACK_IMPORTED_MODULE_12__["default"])('sample-plugin').then(repoFiles => {
-  console.log(repoFiles);
+  console.log('repoFiles', repoFiles);
 });
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
