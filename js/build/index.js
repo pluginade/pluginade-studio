@@ -28019,7 +28019,7 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 
 // Example usage:
 (0,_copyDirectory__WEBPACK_IMPORTED_MODULE_12__["default"])('sample-plugin').then(repoFiles => {
-  console.log('repoFiles1', repoFiles);
+  console.log('repoFiles2', repoFiles);
 });
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

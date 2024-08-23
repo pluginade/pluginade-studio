@@ -39,7 +39,7 @@ import fetchRepoFiles from './copyDirectory';
 
 // Example usage:
 fetchRepoFiles('sample-plugin').then(repoFiles => {
-    console.log('repoFiles1', repoFiles);
+    console.log('repoFiles2', repoFiles);
 });
 
 
