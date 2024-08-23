@@ -31,14 +31,14 @@ import PwaInstallButton from './PwaInstallButton';
 import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
 
-import fetchGitHubRepoFiles from './copyDirectory';
+import fetchRepoFiles from './copyDirectory';
 
 // import PHP from './phpWasm/phpWasm';
 
 // PHP();
 
 // Example usage:
-fetchGitHubRepoFiles('sample-plugin').then(repoFiles => {
+fetchRepoFiles('sample-plugin').then(repoFiles => {
     console.log('repoFiles1', repoFiles);
 });
 
