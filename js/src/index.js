@@ -31,11 +31,11 @@ import PwaInstallButton from './PwaInstallButton';
 import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
 
-// import getRemoteDirArray from './getRemoteDirArray.js';
-import boilerPlugin from './boilerPlugin';
-import copyDirToLocal from './copyDirToLocal';
-// const repoFiles = await fetchRepoFiles('sample-plugin');
-// 						console.log( 'a', repoFiles );
+// import getRemoteDirArray from './utils/getRemoteDirArray.js';
+import boilerPlugin from './utils/boilerPlugin';
+import copyDirToLocal from './utils/copyDirToLocal';
+import parsePluginHeader from './utils/parsePluginHeader';
+import fixPluginHeader from './utils/fixPluginHeader';
 
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
@@ -348,19 +348,25 @@ function CreatePlugin({openPlugin}) {
 
 					const files = await boilerPlugin();
 			
-					const result = await copyDirToLocal( parentDirHandle, pluginDataState.plugin_dirname, files );
+					const pluginDirHandle = await copyDirToLocal( parentDirHandle, pluginDataState.plugin_dirname, files );
+
+					const stringFixerResult = await fixPluginHeader( pluginDirHandle, pluginDataState );
+
+					console.log( stringFixerResult );
 
 					setLoading(false);
 
-					if ( result === 'dir-already-exists') {
+					if ( pluginDirHandle === 'dir-already-exists') {
 						setCreationState('error');
 						setCreationMessage('Directory already exists');
 					}
 
-					if ( result === 'success' ) {
+					// if ( copyResult === 'success' ) {
 						setCreationState('success');
 						setCreationMessage('Plugin successfully created');
-					}
+
+						openPlugin(pluginDirHandle);
+					// }
 			
 				} catch (error) {
 					setLoading(false);
@@ -489,20 +495,6 @@ function Modules({plugins, setPlugins, currentPluginSlug}) {
 			</Box>
 		</Box>
 	);
-}
-
-function parsePluginHeader(pluginHeader) {
-    const result = {};
-    const regex = /(\*|\/)\s*(\w[\w\s-]+):\s*([\w\s:\/\.\-\@]+)/g;
-    let match;
-
-    while ((match = regex.exec(pluginHeader)) !== null) {
-        const key = match[2].trim().replace(/\s+/g, '_').toLowerCase();
-        const value = match[3].trim();
-        result[key] = value;
-    }
-
-    return result;
 }
 
 function CreateModule({pluginSlug, plugins, setPlugins, uponSuccess}) {
@@ -658,7 +650,7 @@ function PluginDataForm({pluginDataState, setPluginDataState, onSubmit}) {
 				)}
 			/>
 
-			<TextField
+			{/* <TextField
 				label="Plugin Namespace"
 				variant="outlined"
 				fullWidth
@@ -701,7 +693,7 @@ function PluginDataForm({pluginDataState, setPluginDataState, onSubmit}) {
 				required
 				value={pluginDataState.plugin_author_uri}
 				onChange={(event) => setPluginDataState({...pluginDataState, plugin_author_uri: event.target.value})}
-			/>
+			/> */}
 
 			<Button type="submit" variant="contained" color="secondary">
 				{loading ? <CircularProgress size={24} /> : 'Update plugin files' }

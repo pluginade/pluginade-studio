@@ -7,7 +7,7 @@ export default async function boilerPlugin() {
         },
         {
             "name": ".github",
-            "type": 'file',
+            "type": 'dir',
             "contents": [
                 {
                     "name": "workflows",

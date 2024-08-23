@@ -27902,152 +27902,6 @@ const PwaInstallButton = () => {
 
 /***/ }),
 
-/***/ "./js/src/boilerPlugin.js":
-/*!********************************!*\
-  !*** ./js/src/boilerPlugin.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ boilerPlugin)
-/* harmony export */ });
-async function boilerPlugin() {
-  return [{
-    "name": ".distignore",
-    "type": 'file',
-    "content": "wpps-scripts\n.pluginade\n.distignore\n.git\n.gitignore\nwporg\nnode_modules\ncss/src\njs/src\ntests\npackage.json\npackage-lock.json\n.nvmrc\nwebpack.config.js\ntsconfig.json\n.circleci\n.github\ncomposer.json\ncomposer.lock\npostcss.config.js\n.DS_Store\n.vscode\nzips\n"
-  }, {
-    "name": ".github",
-    "type": 'file',
-    "contents": [{
-      "name": "workflows",
-      "contents": [{
-        "name": "test-and-build.yml",
-        "content": "name: Test and Build\n\non: [push]\n\njobs:\n  lint-php:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting PHP\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:php\n\n  lint-js:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting JS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:js\n\n  lint-css:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting CSS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:css\n\n  test-js:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Testing JS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh test:js\n\n  phpunit:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: PHPUnit Integration Tests\n        working-directory: plugins/sample-plugin\n        run: |\n          sh pluginade.sh build\n          sh pluginade.sh test:phpunit\n\n  zip:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Creating the zip file\n        working-directory: plugins/sample-plugin\n        run: |\n          sh pluginade.sh build\n          sh pluginade.sh zip\n\n      - name: Upload artifacts\n        uses: actions/upload-artifact@v2\n        with:\n          name: pluginade-artifacts\n          path: /home/runner/work/your-repo-name/your-repo-name/plugins/sample-plugin\n"
-      }]
-    }]
-  }, {
-    "name": ".gitignore",
-    "type": 'file',
-    "content": "node_modules\n.DS_Store\nbuild\n/vendor\n*.zip\n/.pluginade\n"
-  }, {
-    "name": "pluginade.sh",
-    "type": 'file',
-    "content": "#!/bin/bash\n\n# This file lives in the root of a plugin directory to enable pluginade commands.\n\n# Set this to the version of pluginade-scripts you want to use.\n# For a list of available versions, see https://github.com/pluginade/pluginade-scripts/tags\npluginadeversion=\"0.0.3-beta-8\";\n\n# Change the following variables to your plugin's namespace and textdomain:\ntextdomain=\"sample-plugin\";\nnamespace=\"SamplePlugin\";\n\n# Dont make any more edits below this line.\n\n# Check if an argument is provided\nif [ -z \"$1\" ]; then\n\t# If no argument is provided, show help text.\n\techo \"Usage: sh pluginade.sh <The pluginade command you want to run>\"\n\techo \"See all available commands at:\"\n\techo \"https://github.com/pluginade/pluginade-scripts/blob/$pluginadeversion/available-commands.md\"\n\texit 1\nfi\n\n#  Set the plugin directory to be the current directory.\nplugindir=$PWD;\n\n#  Install pluginade-scripts if they are not already installed.\ninstall_pluginade() {\n\tif [ ! -d ./pluginade ]; then\n\t\techo \"Installing pluginade into ${plugindir}/.pluginade\";\n\t\tgit clone https://github.com/pluginade/pluginade-scripts ./.pluginade\n\t\tcd .pluginade && git fetch --tags && git reset --hard && git checkout $pluginadeversion && git pull origin $pluginadeversion\n\tfi\n}\n\nif [ $1 = 'install' ]; then\n\tinstall_pluginade;\n\texit 0;\nfi\n\n# Prior to running any command, ensure pluginade is ready.\ninstall_pluginade;\n\n# Go to the pluginade directory inside the plugin.\necho \"Going to ${plugindir}/.pluginade\";\ncd \"$plugindir\"/.pluginade;\n\n# Pass this command to pluginade-run.sh\nsh pluginade-run.sh -p \"${plugindir}\" -c $1 -t $textdomain -n $namespace;\nexit $?;\n"
-  }, {
-    "name": "sample-plugin.php",
-    "type": 'file',
-    "content": "<?php\n/**\n * Plugin Name: Sample Plugin\n * Plugin URI: pluginade.com\n * Description: A sample plugin which demonstrates how to build a plugin with Pluginade.\n * Version: 0.0.0\n * Author: Pluginade\n * Text Domain: sample-plugin\n * Domain Path: languages\n * License: GPLv2\n * License URI: http://www.gnu.org/licenses/gpl-2.0.txt\n * Requires at least: 6.0\n * Requires PHP: 7.4\n * Network:\n * Update URI:\n * Namespace: SamplePlugin\n *\n * @package pluginade-sample\n */\n\nnamespace SamplePlugin;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n\n/**\n * Automatically include wp modules, which are in the \"wp-modules\" directory.\n *\n * @return void\n */\nfunction include_custom_modules() {\n\t$wp_modules = glob( plugin_dir_path( __FILE__ ) . 'wp-modules*/*' );\n\n\tforeach ( $wp_modules as $wp_module ) {\n\t\t$module_name = basename( $wp_module );\n\t\t$filename    = $module_name . '.php';\n\t\t$filepath    = $wp_module . '/' . $filename;\n\n\t\tif ( is_readable( $filepath ) ) {\n\t\t\t// If the module data exists, load it.\n\t\t\trequire $filepath;\n\t\t} else {\n\t\t\t// Translators: The name of the module, and the filename that needs to exist inside that module.\n\t\t\techo esc_html( sprintf( __( 'The module called \"%1$s\" has a problem. It needs a file called \"%2$s\" to exist in its root directory.', 'sample-plugin' ), $module_name, $filename ) );\n\t\t\texit;\n\t\t}\n\t}\n}\nadd_action( 'plugins_loaded', __NAMESPACE__ . '\\include_custom_modules' );\n"
-  }, {
-    "name": "wp-modules",
-    "type": 'dir',
-    "contents": [{
-      "name": "sample-module-1",
-      "type": 'dir',
-      "contents": [{
-        "name": "js",
-        "type": 'dir',
-        "contents": [{
-          "name": "src",
-          "type": 'dir',
-          "contents": [{
-            "name": "index.js",
-            "type": 'file',
-            "content": "console.log( 'sample module 1' );\n"
-          }]
-        }]
-      }, {
-        "name": "package-lock.json",
-        "type": 'file',
-        "content": "{\n  \"name\": \"sample-module-1\",\n  \"version\": \"1.0.0\",\n  \"lockfileVersion\": 1\n}\n"
-      }, {
-        "name": "package.json",
-        "type": 'file',
-        "content": "{\n\t\"name\": \"sample-module-1\",\n\t\"version\": \"1.0.0\",\n\t\"description\": \"\",\n\t\"main\": \"index.js\",\n\t\"scripts\": {\n\t\t\"build\": \"wp-scripts build js/src/index.js --output-path=js/build/\",\n\t\t\"dev\": \"wp-scripts start js/src/index.js --output-path=js/build/\"\n\t},\n\t\"devDependencies\": {\n\t\t\"@wordpress/scripts\": \"^26.11.0\"\n\t},\n\t\"dependencies\": {\n\t\t\"react\": \"^18.1.0\"\n\t},\n\t\"keywords\": [],\n\t\"author\": \"\",\n\t\"license\": \"ISC\"\n}\n"
-      }, {
-        "name": "sample-module-1.php",
-        "type": 'file',
-        "content": "<?php\n/**\n * Module Name: Sample Module 1\n * Description: A sample module for pluginade.\n * Namespace: SampleModule1\n *\n * @package sample-plugin\n */\n\ndeclare(strict_types=1);\n\nnamespace SamplePlugin\\SampleModule1;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n"
-      }]
-    }, {
-      "name": "sample-module-2",
-      "type": 'dir',
-      "contents": [{
-        "name": "js",
-        "type": 'dir',
-        "contents": [{
-          "name": "src",
-          "type": 'dir',
-          "contents": [{
-            "name": "index.js",
-            "type": 'file',
-            "content": "console.log( 'sample module 2' );\n"
-          }]
-        }]
-      }, {
-        "name": "package-lock.json",
-        "type": 'file',
-        "content": "{\n  \"name\": \"sample-module-2\",\n  \"version\": \"1.0.0\",\n  \"lockfileVersion\": 1\n}\n"
-      }, {
-        "name": "package.json",
-        "type": 'file',
-        "content": "{\n  \"name\": \"sample-module-2\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n\t\"scripts\": {\n\t\t\"build\": \"wp-scripts build js/src/index.js --output-path=js/build/\",\n\t\t\"dev\": \"wp-scripts start js/src/index.js --output-path=js/build/\"\n\t},\n\t\"devDependencies\": {\n\t\t\"@wordpress/scripts\": \"^26.11.0\"\n\t},\n  \"dependencies\": {\n    \"react\": \"^18.1.0\",\n    \"@mui/material\": \"^5.14.5\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\"\n}\n"
-      }, {
-        "name": "sample-module-2.php",
-        "type": 'file',
-        "content": "<?php\n/**\n * Module Name: Sample Module 2\n * Description: A sample module for pluginade.\n * Namespace: SampleModule2\n *\n * @package sample-plugin\n */\n\ndeclare(strict_types=1);\n\nnamespace SamplePlugin\\SampleModule2;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n"
-      }]
-    }]
-  }];
-}
-
-/***/ }),
-
-/***/ "./js/src/copyDirToLocal.js":
-/*!**********************************!*\
-  !*** ./js/src/copyDirToLocal.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ copyDirToLocal)
-/* harmony export */ });
-async function copyDirToLocal(parentDirHandle, topLevelDirectoryName, directoryFiles) {
-  // Check if a subdirectory exists
-  let theMainDirHandle;
-  try {
-    theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName);
-    return 'dir-already-exists';
-  } catch (error) {
-    // If not, create the directory
-    theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName, {
-      create: true
-    });
-    directoryFiles.map(async (fileData, index) => {
-      if (fileData.type === 'dir') {
-        // Add these files in a subdirectory of the current parent.
-        await copyDirToLocal(theMainDirHandle, fileData.name, fileData.contents);
-      }
-      if (fileData.type === 'file') {
-        console.log(fileData);
-        const fileHandle = await theMainDirHandle.getFileHandle(fileData.name, {
-          create: true
-        });
-        const writable = await fileHandle.createWritable();
-        await writable.write(fileData.content);
-        await writable.close();
-      }
-    });
-  }
-  return 'success';
-}
-
-/***/ }),
-
 /***/ "./js/src/index.js":
 /*!*************************!*\
   !*** ./js/src/index.js ***!
@@ -28067,29 +27921,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fontsource_roboto_400_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fontsource/roboto/400.css */ "./node_modules/@fontsource/roboto/400.css");
 /* harmony import */ var _fontsource_roboto_500_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fontsource/roboto/500.css */ "./node_modules/@fontsource/roboto/500.css");
 /* harmony import */ var _fontsource_roboto_700_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fontsource/roboto/700.css */ "./node_modules/@fontsource/roboto/700.css");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
-/* harmony import */ var _mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @mui/material/useMediaQuery */ "./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/createTheme.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/ThemeProvider.js");
-/* harmony import */ var _mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @mui/material/Divider */ "./node_modules/@mui/material/Divider/Divider.js");
-/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
-/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
-/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
-/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
-/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
-/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
-/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
-/* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
-/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @mui/material/useMediaQuery */ "./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js");
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/createTheme.js");
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/ThemeProvider.js");
+/* harmony import */ var _mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @mui/material/Divider */ "./node_modules/@mui/material/Divider/Divider.js");
+/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
+/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
+/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
+/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
+/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
+/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
+/* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
+/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
 /* harmony import */ var _PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./PwaInstallButton */ "./js/src/PwaInstallButton.js");
 /* harmony import */ var _menuFile__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./menuFile */ "./js/src/menuFile.js");
 /* harmony import */ var _menuEdit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./menuEdit */ "./js/src/menuEdit.js");
-/* harmony import */ var _boilerPlugin__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./boilerPlugin */ "./js/src/boilerPlugin.js");
-/* harmony import */ var _copyDirToLocal__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./copyDirToLocal */ "./js/src/copyDirToLocal.js");
+/* harmony import */ var _utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utils/boilerPlugin */ "./js/src/utils/boilerPlugin.js");
+/* harmony import */ var _utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utils/copyDirToLocal */ "./js/src/utils/copyDirToLocal.js");
+/* harmony import */ var _utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./utils/parsePluginHeader */ "./js/src/utils/parsePluginHeader.js");
+/* harmony import */ var _utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./utils/fixPluginHeader */ "./js/src/utils/fixPluginHeader.js");
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__]);
 https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -28123,11 +27979,10 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 
 
 
-// import getRemoteDirArray from './getRemoteDirArray.js';
+// import getRemoteDirArray from './utils/getRemoteDirArray.js';
 
 
-// const repoFiles = await fetchRepoFiles('sample-plugin');
-// 						console.log( 'a', repoFiles );
+
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -28138,7 +27993,7 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_14__["default"])({
+const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_16__["default"])({
   palette: {
     mode: 'light',
     primary: {
@@ -28159,7 +28014,7 @@ const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_14__["defaul
     }
   }
 });
-const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_14__["default"])({
+const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_16__["default"])({
   palette: {
     mode: 'dark',
     primary: {
@@ -28206,7 +28061,7 @@ entriesInIndexDb.forEach(async entry => {
   }
 });
 function PluginadeApp() {
-  const prefersDarkMode = (0,_mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_15__["default"])('(prefers-color-scheme: dark)');
+  const prefersDarkMode = (0,_mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_17__["default"])('(prefers-color-scheme: dark)');
   const [showCreatePlugin, setShowCreatePluginState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [pluginDirHandles, setPluginDirHandles] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(thePluginDirHandles);
   const [plugins, setPlugins] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
@@ -28265,7 +28120,7 @@ function PluginadeApp() {
       if (fileExtension === 'php') {
         const file = await entry.getFile();
         const fileContents = await file.text();
-        const pluginData = parsePluginHeader(fileContents);
+        const pluginData = (0,_utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_14__["default"])(fileContents);
 
         // This PHP file did not have a plugin header.
         if (Object.keys(pluginData).length === 0) {
@@ -28305,51 +28160,51 @@ function PluginadeApp() {
     }
   }
   if (!('showOpenFilePicker' in self)) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_18__["default"], {
       theme: prefersDarkMode ? DarkTheme : DarkTheme
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_19__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
       className: "pluginade-studio",
       sx: {
         display: 'grid',
         gridTemplateRows: 'min-content min-content 1fr'
       }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
       sx: {
         backgroundColor: 'background20.default',
         display: 'flex'
       }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_19__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
       sx: {
         padding: 2,
         fontSize: '1em'
       },
       component: "h1"
-    }, "Pluginade Studio"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    }, "Pluginade Studio"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
       orientation: "vertical"
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_21__["default"], {
+    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
       severity: "error"
     }, 'Your browser does not support the File System Access API. Please use a browser that does. (Chrome 86+ or Edge 86+)'))));
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_18__["default"], {
     theme: prefersDarkMode ? DarkTheme : DarkTheme
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_19__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     className: "pluginade-studio",
     sx: {
       display: 'grid',
       gridTemplateRows: 'min-content min-content 1fr'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       backgroundColor: 'background20.default',
       display: 'flex'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_19__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
     sx: {
       padding: 2,
       fontSize: '1em'
     },
     component: "h1"
-  }, "Pluginade Studio"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__["default"], {
+  }, "Pluginade Studio"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
     orientation: "vertical"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuFile__WEBPACK_IMPORTED_MODULE_10__["default"], {
     onNewPlugin: () => {
@@ -28358,35 +28213,35 @@ function PluginadeApp() {
     onOpenPlugin: () => {
       openPlugin();
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
     orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuEdit__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuEdit__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
     orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
     orientation: "vertical"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     className: "pluginade-studio-body",
     sx: {
       display: 'grid',
       gridTemplateColumns: '200px min-content 1fr 1fr'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_19__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       backgroundColor: 'background20.default'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_22__["default"], null, Object.keys(plugins).map((plugin, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_23__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_24__["default"], null, Object.keys(plugins).map((plugin, index) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_25__["default"], {
       key: index,
       disablePadding: true
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_26__["default"], {
       selected: currentPluginTab === plugin,
       onClick: () => setCurrentPluginTab(plugin)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_25__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_27__["default"], {
       primary: plugins[plugin].plugin_name
     })));
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
     orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: showCreatePlugin ? 'none' : 'grid',
       height: '100%',
@@ -28401,7 +28256,7 @@ function PluginadeApp() {
       currentPluginSlug: currentPluginSlug,
       hidden: currentPluginSlug !== currentPluginTab
     });
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     className: "create-plugin",
     sx: {
       display: showCreatePlugin ? 'grid' : 'none',
@@ -28416,7 +28271,7 @@ function PluginadeApp() {
     plugins: plugins,
     setPlugins: setPlugins,
     openPlugin: openPlugin
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "output"
   })))));
 }
@@ -28447,17 +28302,21 @@ function CreatePlugin({
         try {
           // Prompt user to select a directory
           const parentDirHandle = await window.showDirectoryPicker();
-          const files = await (0,_boilerPlugin__WEBPACK_IMPORTED_MODULE_12__["default"])();
-          const result = await (0,_copyDirToLocal__WEBPACK_IMPORTED_MODULE_13__["default"])(parentDirHandle, pluginDataState.plugin_dirname, files);
+          const files = await (0,_utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_12__["default"])();
+          const pluginDirHandle = await (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_13__["default"])(parentDirHandle, pluginDataState.plugin_dirname, files);
+          const stringFixerResult = await (0,_utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_15__["default"])(pluginDirHandle, pluginDataState);
+          console.log(stringFixerResult);
           setLoading(false);
-          if (result === 'dir-already-exists') {
+          if (pluginDirHandle === 'dir-already-exists') {
             setCreationState('error');
             setCreationMessage('Directory already exists');
           }
-          if (result === 'success') {
-            setCreationState('success');
-            setCreationMessage('Plugin successfully created');
-          }
+
+          // if ( copyResult === 'success' ) {
+          setCreationState('success');
+          setCreationMessage('Plugin successfully created');
+          openPlugin(pluginDirHandle);
+          // }
         } catch (error) {
           setLoading(false);
           console.error('Directory selection canceled or failed:', error);
@@ -28470,17 +28329,17 @@ function CreatePlugin({
       setCreationMessage(error.message);
     }
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       width: '100%',
       height: '100%',
       overflow: 'hidden'
     }
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_26__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_21__["default"], {
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_28__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
     severity: "error"
-  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_21__["default"], {
+  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
     severity: "success"
-  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: 'grid',
       width: '100%',
@@ -28513,7 +28372,7 @@ function Plugin({
     'scans': 'Scans',
     'fixers': 'Fixers'
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     id: `plugin-tabpanel-${pluginDataState.plugin_dirname}`,
     sx: {
       display: hidden ? 'none' : 'grid',
@@ -28521,20 +28380,20 @@ function Plugin({
       height: '100%',
       overflow: 'hidden'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     className: "plugin-header",
     sx: {
       display: 'grid',
       gridTemplateRows: 'min-content min-content'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       padding: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_19__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
     variant: "h5",
     component: "h2"
-  }, pluginDataState.plugin_name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], null, pluginDataState.plugin_path)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_27__["default"], {
+  }, pluginDataState.plugin_name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, pluginDataState.plugin_path)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_29__["default"], {
     className: "plugin-control-tabs",
     value: currentTab,
     onChange: (event, newValue) => {
@@ -28543,75 +28402,75 @@ function Plugin({
     "aria-label": "Plugins Tools",
     variant: "scrollable"
   }, Object.keys(pluginTabs).map((tool, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_28__["default"], {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_30__["default"], {
       key: index,
       value: tool,
       label: pluginTabs[tool],
       ...a11yProps(tool)
     });
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_20__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     className: "plugin-content",
     sx: {
       display: 'block',
       height: '100%',
       overflow: 'hidden'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     id: `plugin-tabpanel-webpack`,
     sx: {
       display: 'webpack' === currentTab ? 'flex' : 'none',
       gap: 2,
       padding: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: 'grid',
       gap: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_19__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
     component: "p"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To enable webpack and watch for file changes, run the following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
     language: "shell",
     code: `
 						sh pluginade.sh dev;
 						`
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     id: `plugin-tabpanel-phpunit`,
     sx: {
       display: 'phpunit' === currentTab ? 'flex' : 'none',
       gap: 2,
       padding: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: 'grid',
       gap: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_19__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
     component: "p"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To run PHPUnit tests run the following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
     language: "bash",
     code: `sh pluginade.sh test:phpunit;`
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     id: `plugin-tabpanel-scans`,
     sx: {
       display: 'scans' === currentTab ? 'grid' : 'none',
       gap: 2,
       padding: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: 'grid',
       gap: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_19__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
     component: "p"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To scan your code using WPCS, run following in a terminal window:'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CopyCode, {
     language: "bash",
     code: `cd ${pluginDataState.plugin_path}; \n
 						sh pluginade.sh lint:php;
 						`
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     id: `plugin-tabpanel-modules`,
     sx: {
       display: 'modules' === currentTab ? 'block' : 'none',
@@ -28632,13 +28491,13 @@ function Modules({
   const thisPlugin = plugins[currentPluginSlug];
   const thisPluginsModules = thisPlugin.plugin_modules;
   const [currentModule, setCurrentModule] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(Object.keys(thisPluginsModules)[0]);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       padding: 2,
       height: '100%',
       overflow: 'hidden'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: 'grid',
       gridTemplateColumns: '200px 1fr',
@@ -28648,23 +28507,23 @@ function Modules({
       borderColor: 'background20.default',
       borderRadius: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_22__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_24__["default"], {
     sx: {
       overflow: 'auto',
       borderRight: '1px solid',
       borderRightColor: 'background20.default',
       backgroundColor: 'background20.default'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_23__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_25__["default"], {
     disablePadding: true
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: 'grid',
       alignItems: 'center',
       padding: 2,
       width: '100%'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_31__["default"], {
     variant: "contained",
     color: "secondary",
     "aria-label": "Create New Plugin",
@@ -28675,16 +28534,16 @@ function Modules({
       width: '100%'
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Module +', 'pluginade')))), Object.keys(thisPluginsModules).map((module, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_25__["default"], {
       key: index,
       disablePadding: true
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_26__["default"], {
       selected: currentModule === module,
       onClick: () => setCurrentModule(module)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_25__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_27__["default"], {
       primary: thisPluginsModules[module].name
     })));
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     className: 'tab-panel-create-module',
     sx: {
       height: '100%',
@@ -28696,17 +28555,6 @@ function Modules({
     plugins: plugins,
     setPlugins: setPlugins
   }))));
-}
-function parsePluginHeader(pluginHeader) {
-  const result = {};
-  const regex = /(\*|\/)\s*(\w[\w\s-]+):\s*([\w\s:\/\.\-\@]+)/g;
-  let match;
-  while ((match = regex.exec(pluginHeader)) !== null) {
-    const key = match[2].trim().replace(/\s+/g, '_').toLowerCase();
-    const value = match[3].trim();
-    result[key] = value;
-  }
-  return result;
 }
 function CreateModule({
   pluginSlug,
@@ -28729,17 +28577,17 @@ function CreateModule({
     plugin_update_uri: ''
   });
   async function createModule(setLoading) {}
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       width: '100%',
       height: '100%',
       overflow: 'hidden'
     }
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_26__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_21__["default"], {
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_28__["default"], null) : null, creationState === 'error' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
     severity: "error"
-  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_21__["default"], {
+  }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
     severity: "success"
-  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: 'grid',
       width: '100%',
@@ -28748,7 +28596,7 @@ function CreateModule({
       alignItems: 'start',
       justifyItems: 'start'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     component: "form",
     sx: {
       padding: 2,
@@ -28762,7 +28610,7 @@ function CreateModule({
       setLoading(true);
       onSubmit(event, setLoading);
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
     label: "Plugin Name",
     variant: "outlined",
     fullWidth: true,
@@ -28773,7 +28621,7 @@ function CreateModule({
       plugin_name: event.target.value,
       plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
     label: "Plugin Namespace",
     variant: "outlined",
     fullWidth: true,
@@ -28783,7 +28631,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_namespace: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
     label: "Plugin Description",
     variant: "outlined",
     fullWidth: true,
@@ -28793,7 +28641,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_description: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
     label: "Plugin Version",
     variant: "outlined",
     fullWidth: true,
@@ -28803,7 +28651,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_version: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
     label: "Plugin Author",
     variant: "outlined",
     fullWidth: true,
@@ -28813,7 +28661,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_author: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
     label: "Plugin Author URI",
     variant: "outlined",
     fullWidth: true,
@@ -28823,11 +28671,11 @@ function CreateModule({
       ...pluginDataState,
       plugin_author_uri: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_31__["default"], {
     type: "submit",
     variant: "contained",
     color: "secondary"
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_31__["default"], {
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_33__["default"], {
     size: 24
   }) : 'Update plugin files'))));
 }
@@ -28843,7 +28691,7 @@ function CopyCode({
       setCopied(false);
     }, 2000);
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: 'grid',
       gridTemplateRows: 'min-content 1fr min-content',
@@ -28852,7 +28700,7 @@ function CopyCode({
       borderColor: 'background20.default',
       borderRadius: 1
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     className: "language",
     sx: {
       padding: 1,
@@ -28860,7 +28708,7 @@ function CopyCode({
       borderBottom: '1px solid',
       borderBottomColor: 'background20.default'
     }
-  }, language), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  }, language), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     className: "code",
     sx: {
       padding: 1,
@@ -28870,7 +28718,7 @@ function CopyCode({
       lineHeight: 1,
       marginBottom: 1
     }
-  }, code), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
+  }, code), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_31__["default"], {
     variant: "contained",
     color: "secondary",
     onClick: copyCode
@@ -28882,7 +28730,7 @@ function PluginDataForm({
   onSubmit
 }) {
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     component: "form",
     sx: {
       padding: 2,
@@ -28896,7 +28744,7 @@ function PluginDataForm({
       setLoading(true);
       onSubmit(event, setLoading);
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
     label: "Plugin Name",
     variant: "outlined",
     fullWidth: true,
@@ -28907,66 +28755,16 @@ function PluginDataForm({
       plugin_name: event.target.value,
       plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
-    label: "Plugin Namespace",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_namespace,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_namespace: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
-    label: "Plugin Description",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_description,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_description: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
-    label: "Plugin Version",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_version,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_version: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
-    label: "Plugin Author",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_author,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_author: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_30__["default"], {
-    label: "Plugin Author URI",
-    variant: "outlined",
-    fullWidth: true,
-    required: true,
-    value: pluginDataState.plugin_author_uri,
-    onChange: event => setPluginDataState({
-      ...pluginDataState,
-      plugin_author_uri: event.target.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_31__["default"], {
     type: "submit",
     variant: "contained",
     color: "secondary"
-  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_31__["default"], {
+  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_33__["default"], {
     size: 24
   }) : 'Update plugin files'));
 }
 function TerminalWindow() {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       width: '100%',
       height: '100%'
@@ -29158,6 +28956,245 @@ function IconMenu({
     color: "text.secondary"
   }, "\u2318O")))));
 }
+
+/***/ }),
+
+/***/ "./js/src/utils/boilerPlugin.js":
+/*!**************************************!*\
+  !*** ./js/src/utils/boilerPlugin.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ boilerPlugin)
+/* harmony export */ });
+async function boilerPlugin() {
+  return [{
+    "name": ".distignore",
+    "type": 'file',
+    "content": "wpps-scripts\n.pluginade\n.distignore\n.git\n.gitignore\nwporg\nnode_modules\ncss/src\njs/src\ntests\npackage.json\npackage-lock.json\n.nvmrc\nwebpack.config.js\ntsconfig.json\n.circleci\n.github\ncomposer.json\ncomposer.lock\npostcss.config.js\n.DS_Store\n.vscode\nzips\n"
+  }, {
+    "name": ".github",
+    "type": 'dir',
+    "contents": [{
+      "name": "workflows",
+      "contents": [{
+        "name": "test-and-build.yml",
+        "content": "name: Test and Build\n\non: [push]\n\njobs:\n  lint-php:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting PHP\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:php\n\n  lint-js:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting JS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:js\n\n  lint-css:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting CSS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:css\n\n  test-js:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Testing JS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh test:js\n\n  phpunit:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: PHPUnit Integration Tests\n        working-directory: plugins/sample-plugin\n        run: |\n          sh pluginade.sh build\n          sh pluginade.sh test:phpunit\n\n  zip:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Creating the zip file\n        working-directory: plugins/sample-plugin\n        run: |\n          sh pluginade.sh build\n          sh pluginade.sh zip\n\n      - name: Upload artifacts\n        uses: actions/upload-artifact@v2\n        with:\n          name: pluginade-artifacts\n          path: /home/runner/work/your-repo-name/your-repo-name/plugins/sample-plugin\n"
+      }]
+    }]
+  }, {
+    "name": ".gitignore",
+    "type": 'file',
+    "content": "node_modules\n.DS_Store\nbuild\n/vendor\n*.zip\n/.pluginade\n"
+  }, {
+    "name": "pluginade.sh",
+    "type": 'file',
+    "content": "#!/bin/bash\n\n# This file lives in the root of a plugin directory to enable pluginade commands.\n\n# Set this to the version of pluginade-scripts you want to use.\n# For a list of available versions, see https://github.com/pluginade/pluginade-scripts/tags\npluginadeversion=\"0.0.3-beta-8\";\n\n# Change the following variables to your plugin's namespace and textdomain:\ntextdomain=\"sample-plugin\";\nnamespace=\"SamplePlugin\";\n\n# Dont make any more edits below this line.\n\n# Check if an argument is provided\nif [ -z \"$1\" ]; then\n\t# If no argument is provided, show help text.\n\techo \"Usage: sh pluginade.sh <The pluginade command you want to run>\"\n\techo \"See all available commands at:\"\n\techo \"https://github.com/pluginade/pluginade-scripts/blob/$pluginadeversion/available-commands.md\"\n\texit 1\nfi\n\n#  Set the plugin directory to be the current directory.\nplugindir=$PWD;\n\n#  Install pluginade-scripts if they are not already installed.\ninstall_pluginade() {\n\tif [ ! -d ./pluginade ]; then\n\t\techo \"Installing pluginade into ${plugindir}/.pluginade\";\n\t\tgit clone https://github.com/pluginade/pluginade-scripts ./.pluginade\n\t\tcd .pluginade && git fetch --tags && git reset --hard && git checkout $pluginadeversion && git pull origin $pluginadeversion\n\tfi\n}\n\nif [ $1 = 'install' ]; then\n\tinstall_pluginade;\n\texit 0;\nfi\n\n# Prior to running any command, ensure pluginade is ready.\ninstall_pluginade;\n\n# Go to the pluginade directory inside the plugin.\necho \"Going to ${plugindir}/.pluginade\";\ncd \"$plugindir\"/.pluginade;\n\n# Pass this command to pluginade-run.sh\nsh pluginade-run.sh -p \"${plugindir}\" -c $1 -t $textdomain -n $namespace;\nexit $?;\n"
+  }, {
+    "name": "sample-plugin.php",
+    "type": 'file',
+    "content": "<?php\n/**\n * Plugin Name: Sample Plugin\n * Plugin URI: pluginade.com\n * Description: A sample plugin which demonstrates how to build a plugin with Pluginade.\n * Version: 0.0.0\n * Author: Pluginade\n * Text Domain: sample-plugin\n * Domain Path: languages\n * License: GPLv2\n * License URI: http://www.gnu.org/licenses/gpl-2.0.txt\n * Requires at least: 6.0\n * Requires PHP: 7.4\n * Network:\n * Update URI:\n * Namespace: SamplePlugin\n *\n * @package pluginade-sample\n */\n\nnamespace SamplePlugin;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n\n/**\n * Automatically include wp modules, which are in the \"wp-modules\" directory.\n *\n * @return void\n */\nfunction include_custom_modules() {\n\t$wp_modules = glob( plugin_dir_path( __FILE__ ) . 'wp-modules*/*' );\n\n\tforeach ( $wp_modules as $wp_module ) {\n\t\t$module_name = basename( $wp_module );\n\t\t$filename    = $module_name . '.php';\n\t\t$filepath    = $wp_module . '/' . $filename;\n\n\t\tif ( is_readable( $filepath ) ) {\n\t\t\t// If the module data exists, load it.\n\t\t\trequire $filepath;\n\t\t} else {\n\t\t\t// Translators: The name of the module, and the filename that needs to exist inside that module.\n\t\t\techo esc_html( sprintf( __( 'The module called \"%1$s\" has a problem. It needs a file called \"%2$s\" to exist in its root directory.', 'sample-plugin' ), $module_name, $filename ) );\n\t\t\texit;\n\t\t}\n\t}\n}\nadd_action( 'plugins_loaded', __NAMESPACE__ . '\\include_custom_modules' );\n"
+  }, {
+    "name": "wp-modules",
+    "type": 'dir',
+    "contents": [{
+      "name": "sample-module-1",
+      "type": 'dir',
+      "contents": [{
+        "name": "js",
+        "type": 'dir',
+        "contents": [{
+          "name": "src",
+          "type": 'dir',
+          "contents": [{
+            "name": "index.js",
+            "type": 'file',
+            "content": "console.log( 'sample module 1' );\n"
+          }]
+        }]
+      }, {
+        "name": "package-lock.json",
+        "type": 'file',
+        "content": "{\n  \"name\": \"sample-module-1\",\n  \"version\": \"1.0.0\",\n  \"lockfileVersion\": 1\n}\n"
+      }, {
+        "name": "package.json",
+        "type": 'file',
+        "content": "{\n\t\"name\": \"sample-module-1\",\n\t\"version\": \"1.0.0\",\n\t\"description\": \"\",\n\t\"main\": \"index.js\",\n\t\"scripts\": {\n\t\t\"build\": \"wp-scripts build js/src/index.js --output-path=js/build/\",\n\t\t\"dev\": \"wp-scripts start js/src/index.js --output-path=js/build/\"\n\t},\n\t\"devDependencies\": {\n\t\t\"@wordpress/scripts\": \"^26.11.0\"\n\t},\n\t\"dependencies\": {\n\t\t\"react\": \"^18.1.0\"\n\t},\n\t\"keywords\": [],\n\t\"author\": \"\",\n\t\"license\": \"ISC\"\n}\n"
+      }, {
+        "name": "sample-module-1.php",
+        "type": 'file',
+        "content": "<?php\n/**\n * Module Name: Sample Module 1\n * Description: A sample module for pluginade.\n * Namespace: SampleModule1\n *\n * @package sample-plugin\n */\n\ndeclare(strict_types=1);\n\nnamespace SamplePlugin\\SampleModule1;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n"
+      }]
+    }, {
+      "name": "sample-module-2",
+      "type": 'dir',
+      "contents": [{
+        "name": "js",
+        "type": 'dir',
+        "contents": [{
+          "name": "src",
+          "type": 'dir',
+          "contents": [{
+            "name": "index.js",
+            "type": 'file',
+            "content": "console.log( 'sample module 2' );\n"
+          }]
+        }]
+      }, {
+        "name": "package-lock.json",
+        "type": 'file',
+        "content": "{\n  \"name\": \"sample-module-2\",\n  \"version\": \"1.0.0\",\n  \"lockfileVersion\": 1\n}\n"
+      }, {
+        "name": "package.json",
+        "type": 'file',
+        "content": "{\n  \"name\": \"sample-module-2\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n\t\"scripts\": {\n\t\t\"build\": \"wp-scripts build js/src/index.js --output-path=js/build/\",\n\t\t\"dev\": \"wp-scripts start js/src/index.js --output-path=js/build/\"\n\t},\n\t\"devDependencies\": {\n\t\t\"@wordpress/scripts\": \"^26.11.0\"\n\t},\n  \"dependencies\": {\n    \"react\": \"^18.1.0\",\n    \"@mui/material\": \"^5.14.5\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\"\n}\n"
+      }, {
+        "name": "sample-module-2.php",
+        "type": 'file',
+        "content": "<?php\n/**\n * Module Name: Sample Module 2\n * Description: A sample module for pluginade.\n * Namespace: SampleModule2\n *\n * @package sample-plugin\n */\n\ndeclare(strict_types=1);\n\nnamespace SamplePlugin\\SampleModule2;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n"
+      }]
+    }]
+  }];
+}
+
+/***/ }),
+
+/***/ "./js/src/utils/copyDirToLocal.js":
+/*!****************************************!*\
+  !*** ./js/src/utils/copyDirToLocal.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ copyDirToLocal)
+/* harmony export */ });
+async function copyDirToLocal(parentDirHandle, topLevelDirectoryName, directoryFiles) {
+  // Check if a subdirectory exists
+  let theMainDirHandle;
+  try {
+    theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName);
+    return 'dir-already-exists';
+  } catch (error) {
+    // If not, create the directory
+    theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName, {
+      create: true
+    });
+    for (const fileData of directoryFiles) {
+      if (fileData.type === 'dir') {
+        // Add these files in a subdirectory of the current parent.
+        await copyDirToLocal(theMainDirHandle, fileData.name, fileData.contents);
+      }
+      if (fileData.type === 'file') {
+        console.log('copying', fileData.name);
+        const fileHandle = await theMainDirHandle.getFileHandle(fileData.name, {
+          create: true
+        });
+        try {
+          const writable = await fileHandle.createWritable();
+          await writable.write(fileData.content);
+          await writable.close();
+        } catch (error) {
+          console.log(fileData);
+          console.log(error);
+        }
+      }
+    }
+    return theMainDirHandle;
+  }
+}
+
+/***/ }),
+
+/***/ "./js/src/utils/fixPluginHeader.js":
+/*!*****************************************!*\
+  !*** ./js/src/utils/fixPluginHeader.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ fixPluginHeader)
+/* harmony export */ });
+async function fixPluginHeader(pluginDirHandle, pluginData) {
+  console.log('fixPluginaheader );');
+  // Extract plugin data from the main plugin file.
+  for await (const entry of pluginDirHandle.values()) {
+    console.log(entry.name);
+
+    // Check if the entry is a php file by checking if it ends with .php
+    const fileExtensionRegex = /(?:\.([^.]+))?$/;
+    const fileExtension = fileExtensionRegex.exec(entry.name)[1];
+    if (fileExtension === 'php') {
+      const file = await entry.getFile();
+      const fileContents = await file.text();
+      console.log('fileContents', file.name, file);
+
+      // This PHP file did not have a plugin header.
+      if (Object.keys(pluginData).length === 0) {
+        continue;
+      }
+      let fixedFileHeader = `/**
+* Plugin Name: ` + pluginData[`plugin_name`] + `
+* Plugin URI: ` + pluginData[`plugin_uri`] + `
+* Description: ` + pluginData[`plugin_description`] + `
+* Version: ` + pluginData[`plugin_version`] + `
+* Author: ` + pluginData[`plugin_author`] + `
+* Text Domain: ` + pluginData[`plugin_textdomain`] + `
+* Domain Path: languages
+* License: GPLv2 or later
+*
+* @package ` + pluginData[`plugin_dirname`] + `
+*/`;
+
+      // Replace string occurrences
+      const updated = fileContents.replace(/\/\*\*[^*] \* Plugin Name:[^;]*\*\//g, fixedFileHeader);
+      const fileHandle = await pluginDirHandle.getFileHandle(pluginData.plugin_dirname + '.php', {
+        create: true
+      });
+      const writable = await fileHandle.createWritable();
+      await writable.write(updated);
+      await writable.close();
+
+      // We will also rename the file if the name of the plugin is different than the filename.
+      if (pluginData.plugin_dirname !== file.name) {
+        // Delete the original file, as we already made the new one with the right name.
+        await pluginDirHandle.removeEntry(file.name);
+      }
+    }
+  }
+  return true;
+}
+
+/***/ }),
+
+/***/ "./js/src/utils/parsePluginHeader.js":
+/*!*******************************************!*\
+  !*** ./js/src/utils/parsePluginHeader.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (fileContents => {
+  const result = {};
+  const regex = /(\*|\/)\s*(\w[\w\s-]+):\s*([\w\s:\/\.\-\@]+)/g;
+  let match;
+  while ((match = regex.exec(fileContents)) !== null) {
+    const key = match[2].trim().replace(/\s+/g, '_').toLowerCase();
+    const value = match[3].trim();
+    result[key] = value;
+  }
+  return result;
+});
 
 /***/ }),
 
