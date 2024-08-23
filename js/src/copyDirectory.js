@@ -1,7 +1,7 @@
 export default async function fetchRepoFiles(repoSlug, directoryPath = '' ) {
 	
 	const response = await fetch('https://pluginade.com/?repo=' + repoSlug + '&path=' + directoryPath);
-    const files = await response.text();
+    const files = await response.json();
 
     const repoFiles = [];
 

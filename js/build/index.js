@@ -27915,7 +27915,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 async function fetchRepoFiles(repoSlug, directoryPath = '') {
   const response = await fetch('https://pluginade.com/?repo=' + repoSlug + '&path=' + directoryPath);
-  const files = await response.text();
+  const files = await response.json();
   const repoFiles = [];
   for (const file of files) {
     if (file.type === 'file') {
