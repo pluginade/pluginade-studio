@@ -28325,7 +28325,6 @@ function PluginadeApp() {
     sx: {
       display: 'grid',
       gridTemplateColumns: '1fr',
-      padding: 1,
       backgroundColor: 'background20.default'
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_19__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -28462,7 +28461,8 @@ function Plugin({
     'webpack': 'Webpack',
     'phpunit': 'PHPUnit',
     'scans': 'Scans',
-    'fixers': 'Fixers'
+    'fixers': 'Fixers',
+    'playground': 'Playground'
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     id: `plugin-tabpanel-${pluginDataState.plugin_dirname}`,
@@ -28476,16 +28476,9 @@ function Plugin({
     className: "plugin-header",
     sx: {
       display: 'grid',
-      gridTemplateRows: 'min-content min-content'
+      gridTemplateRows: 'min-content'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
-    sx: {
-      padding: 2
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
-    variant: "h5",
-    component: "h2"
-  }, "Plugin: ", pluginDataState.plugin_name)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_26__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_26__["default"], {
     className: "plugin-control-tabs",
     value: currentTab,
     onChange: (event, newValue) => {
@@ -28573,7 +28566,30 @@ function Plugin({
     plugins: plugins,
     setPlugins: setPlugins,
     currentPluginSlug: currentPluginSlug
-  }))));
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    id: `plugin-tabpanel-playground`,
+    sx: {
+      display: 'playground' === currentTab ? 'block' : 'none',
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Playground, null))));
+}
+function Playground() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    sx: {
+      padding: 2,
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+    style: {
+      width: '100%',
+      height: '100%',
+      border: 0
+    },
+    src: "https://playground.wordpress.net/"
+  })));
 }
 function Modules({
   plugins,

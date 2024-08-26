@@ -309,7 +309,6 @@ function PluginadeApp() {
 				<Box className="pluginade-studio-body" sx={{
 					display: 'grid',
 					gridTemplateColumns: '1fr',
-					padding: 1,
 					backgroundColor: 'background20.default'
 				}}>
 					<CssBaseline />
@@ -438,14 +437,15 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 		'phpunit': 'PHPUnit',
 		'scans': 'Scans',
 		'fixers': 'Fixers',
+		'playground': 'Playground',
 	}
 
 	return (
 		<Box id={`plugin-tabpanel-${pluginDataState.plugin_dirname}`} sx={{display: (hidden ? 'none' : 'grid'), gridTemplateRows: 'min-content min-content 1fr', height: '100%', overflow: 'hidden'}}>
-			<Box className="plugin-header" sx={{display: 'grid'	, gridTemplateRows: 'min-content min-content'}}>
-				<Box sx={{padding: 2}}>
+			<Box className="plugin-header" sx={{display: 'grid'	, gridTemplateRows: 'min-content'}}>
+				{/* <Box sx={{padding: 2}}>
 					<Typography variant="h5" component="h2">Plugin: {pluginDataState.plugin_name}</Typography>
-				</Box>
+				</Box> */}
 				<Tabs className="plugin-control-tabs" value={currentTab} onChange={(event, newValue) => {setCurrentTab(newValue)}} aria-label="Plugins Tools" variant="scrollable">
 					{
 						Object.keys( pluginTabs ).map((tool, index) => {
@@ -487,6 +487,19 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 				<Box id={`plugin-tabpanel-modules`} sx={{display: 'modules' === currentTab ? 'block' : 'none', height: '100%', overflow: 'hidden'}}>
 					<Modules plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} />
 				</Box>
+				<Box id={`plugin-tabpanel-playground`} sx={{display: 'playground' === currentTab ? 'block' : 'none', height: '100%', overflow: 'hidden'}}>
+					<Playground />
+				</Box>
+			</Box>
+		</Box>
+	);
+}
+
+function Playground() {
+	return (
+		<Box sx={{padding: 2, height: '100%', overflow: 'hidden'}}>
+			<Box>
+				<iframe style={{width: '100%', height: '100%', border: 0}}src="https://playground.wordpress.net/"></iframe>
 			</Box>
 		</Box>
 	);
