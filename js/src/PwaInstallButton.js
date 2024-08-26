@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import InstallDesktopIcon from '@mui/icons-material/InstallDesktop';
 
 const PwaInstallButton = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -51,14 +53,16 @@ const PwaInstallButton = () => {
   };
 
   return (
-	isVisible && (
-	  
-	  <Button
-		id="install-button"
-		onClick={handleInstallClick}
-	>
-		Install As App
-	</Button>
+	isVisible && (  
+		<Button
+			id="install-button"
+			onClick={handleInstallClick}
+		>
+			<Box sx={{display: 'flex', gap: '.5em'}}>
+				<InstallDesktopIcon />
+				<span>Install As App</span>
+			</Box>
+		</Button>
 	)
   );
 };

@@ -16,6 +16,7 @@ import Divider from '@mui/material/Divider';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import List from '@mui/material/List';
@@ -30,6 +31,8 @@ import Alert from '@mui/material/Alert';
 import PwaInstallButton from './PwaInstallButton';
 import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
+
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 // import getRemoteDirArray from './utils/getRemoteDirArray.js';
 import boilerPlugin from './utils/boilerPlugin';
@@ -88,7 +91,7 @@ const DarkTheme = createTheme({
 			default: 'rgb(15, 25, 36)',
 		},
 		background20: {
-			default: 'rgb(15, 23, 31)',
+			default: 'rgb(16 24 32)',
 		},
 		secondary: {
 			light: '#ff7961',
@@ -124,7 +127,7 @@ entriesInIndexDb.forEach( async (entry) => {
 
 function PluginadeApp() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-	const [showCreatePlugin, setShowCreatePluginState] = useState(false);
+	const [showCreatePlugin, setShowCreatePlugin] = useState(false);
 	const [pluginDirHandles, setPluginDirHandles] = useState(thePluginDirHandles);
 	const [plugins, setPlugins] = useState({});
 	const [currentPluginTab, setCurrentPluginTabState] = useState( null );
@@ -142,6 +145,11 @@ function PluginadeApp() {
 
 	useEffect(() => {
 		window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
+
+		if ( ! currentPluginTab ) {
+			console.log( 'sgsdg', Object.keys(plugins) );
+			setCurrentPluginTabState(Object.keys(plugins).length > 0 ? Object.keys(plugins)[0] : null);
+		}
 	}, [plugins]);
 
 	function setCurrentPluginTab(value) {
@@ -151,23 +159,16 @@ function PluginadeApp() {
 			if (directoryHandleOrUndefined) {
 				window.localStorage.setItem('currentPluginTab', value);
 				setCurrentPluginTabState(value);
-				setShowCreatePluginState(false);
+				setShowCreatePlugin(false);
 			} else {
 				const directoryHandle = await window.showDirectoryPicker( { mode: 'readwrite' });
 				await set(plugin, directoryHandle);
 
 				window.localStorage.setItem('currentPluginTab', value);
 				setCurrentPluginTabState(value);
-				setShowCreatePluginState(false);
+				setShowCreatePlugin(false);
 			}
 		});
-	}
-
-	function setShowCreatePlugin(value) {
-		if ( value ) {
-			setCurrentPluginTabState( null );
-		}
-		setShowCreatePluginState(value);
 	}
 
 	async function openPlugin( dirHandle ) {
@@ -227,6 +228,8 @@ function PluginadeApp() {
 						}
 					};
 				});
+
+				setCurrentPluginTab( pluginData.plugin_dirname );
 			}
 		}
 	}
@@ -255,7 +258,7 @@ function PluginadeApp() {
 			<CssBaseline />
 			<Box className="pluginade-studio" sx={{
 				display: 'grid',
-				gridTemplateRows: 'min-content min-content 1fr'
+				gridTemplateRows: 'min-content min-content min-content min-content 1fr'
 			}}>
 				<Box sx={{backgroundColor: 'background20.default', display: 'flex'}}>
 					<Typography sx={{padding: 2, fontSize: '1em'}} component="h1">Pluginade Studio</Typography>
@@ -271,44 +274,62 @@ function PluginadeApp() {
 					<Divider orientation="vertical" />
 					<EditMenu />
 					<Divider orientation="vertical" />
-					<PwaInstallButton />
+					<Box sx={{display: 'flex', marginLeft: 'auto'}}>
+						<Divider orientation="vertical" />
+						<Button href="https://github.com/pluginade/pluginade-studio" aria-label="Check out this project on Github"><GitHubIcon /></Button>
+						<Divider orientation="vertical" />
+						<PwaInstallButton />
+						<Divider orientation="vertical" />
+					</Box>
+				</Box>
+				<Divider />
+				<Box sx={{backgroundColor: 'background20.default', display: 'flex'}}>
+					{/* <Typography sx={{fontSize: '.8em'}} component="h2">Open Plugins:</Typography> */}
 					<Divider orientation="vertical" />
+					{ showCreatePlugin ? <Box></Box> : (
+						<Tabs
+							value={currentPluginTab}
+							onChange={(event, newValue) => {
+								setCurrentPluginTab(newValue)
+							}}
+							variant="scrollable"
+							scrollButtons="auto"
+							aria-label="Open Plugins. Choose one to work on it."
+							sx={{minHeight: '40px'}}
+						>
+							{
+								Object.keys( plugins ).map((plugin, index) => {
+									return <Tab key={index} value={plugin} label={plugins[plugin].plugin_name} sx={{minHeight: '40px'}}/>
+								})
+							}
+						</Tabs>
+					) }
 				</Box>
 				<Divider />
 				<Box className="pluginade-studio-body" sx={{
 					display: 'grid',
-					gridTemplateColumns: '200px min-content 1fr 1fr'
+					gridTemplateColumns: '1fr',
+					padding: 1,
+					backgroundColor: 'background20.default'
 				}}>
 					<CssBaseline />
-					<Box sx={{backgroundColor: 'background20.default'}}>
-						<List>
+					<Box sx={{backgroundColor: 'background.default', width: '100%', borderRadius: '.4em'}}>
+						<Box sx={{display: (showCreatePlugin ? 'none' : 'grid'), height: '100%', overflow: 'hidden'}}>
 							{
 								Object.keys( plugins ).map((plugin, index) => {
-									return <ListItem key={index} disablePadding>
-										<ListItemButton selected={currentPluginTab === plugin} onClick={() => setCurrentPluginTab(plugin)}>
-											<ListItemText primary={plugins[plugin].plugin_name} />
-										</ListItemButton>
-									</ListItem>
+									const currentPluginSlug = plugin;
+
+									return <Plugin key={index} plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} hidden={currentPluginSlug !== currentPluginTab } />
 								})
 							}
-						</List>
-					</Box>
-					<Divider orientation="vertical" />
-					<Box sx={{display: (showCreatePlugin ? 'none' : 'grid'), height: '100%', overflow: 'hidden'}}>
-						{
-							Object.keys( plugins ).map((plugin, index) => {
-								const currentPluginSlug = plugin;
-
-								return <Plugin key={index} plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} hidden={currentPluginSlug !== currentPluginTab } />
-							})
-						}
-						{/* <TerminalWindow /> */}
-					</Box>
-					<Box className="create-plugin" sx={{display: (showCreatePlugin ? 'grid' : 'none'), height: '100%', width: '100%', overflow: 'auto', alignItems: 'center', justifyItems: 'center' }}>
-						<CreatePlugin uponSuccess={(newPluginSlug) => setCurrentPluginTab(newPluginSlug)} plugins={plugins} setPlugins={setPlugins} openPlugin={openPlugin} />
-					</Box>
-					<Box>
-					<div id="output"></div>
+							{/* <TerminalWindow /> */}
+						</Box>
+						<Box className="create-plugin" sx={{display: (showCreatePlugin ? 'grid' : 'none'), height: '100%', width: '100%', overflow: 'auto', alignItems: 'center', justifyItems: 'center' }}>
+							<CreatePlugin setShowCreatePlugin={setShowCreatePlugin} uponSuccess={(newPluginSlug) => setCurrentPluginTab(newPluginSlug)} plugins={plugins} setPlugins={setPlugins} openPlugin={openPlugin} />
+						</Box>
+						<Box>
+						<div id="output"></div>
+						</Box>
 					</Box>
 				</Box>
 			</Box>
@@ -317,7 +338,7 @@ function PluginadeApp() {
 }
 root.render(<PluginadeApp />);
 
-function CreatePlugin({openPlugin}) {
+function CreatePlugin({openPlugin, setShowCreatePlugin}) {
 	const [creationState, setCreationState] = useState('initial');
 	const [creationMessage, setCreationMessage] = useState('');
 
@@ -370,6 +391,8 @@ function CreatePlugin({openPlugin}) {
 			
 				} catch (error) {
 					setLoading(false);
+					setCreationState( 'error' );
+					setCreationMessage('Directory selection canceled or failed. Try again.');
 					console.error('Directory selection canceled or failed:', error);
 				}
 			}
@@ -388,11 +411,19 @@ function CreatePlugin({openPlugin}) {
 		{creationState === 'error' ? <Alert severity="error">{creationMessage}</Alert> : null}
 		{creationState === 'success' ? <Alert severity="success">{creationMessage}</Alert> : null}
 		
-		<Box sx={{display: 'grid', width: '100%', height: '100%', overflow: 'auto', alignItems: 'center', justifyItems: 'center'}}>
-			<PluginDataForm pluginDataState={pluginDataState} setPluginDataState={setPluginDataState} onSubmit={(event, setLoading)=>{
-				event.preventDefault();
-				createPlugin(setLoading, pluginDataState);
-			}} />
+		<Box>
+			<PluginDataForm
+				pluginDataState={pluginDataState}
+				setPluginDataState={setPluginDataState}
+				onSubmit={(event, setLoading)=>{
+					event.preventDefault();
+					createPlugin(setLoading, pluginDataState);
+				}}
+				saveButtonText={"Choose plugin location on disk"} 
+				onCancel={() => {
+					setShowCreatePlugin(false);
+				}}
+			/>
 		</Box>
 	</Box>
 }
@@ -413,8 +444,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 		<Box id={`plugin-tabpanel-${pluginDataState.plugin_dirname}`} sx={{display: (hidden ? 'none' : 'grid'), gridTemplateRows: 'min-content min-content 1fr', height: '100%', overflow: 'hidden'}}>
 			<Box className="plugin-header" sx={{display: 'grid'	, gridTemplateRows: 'min-content min-content'}}>
 				<Box sx={{padding: 2}}>
-					<Typography variant="h5" component="h2">{pluginDataState.plugin_name}</Typography>
-					<Box>{pluginDataState.plugin_path}</Box>
+					<Typography variant="h5" component="h2">Plugin: {pluginDataState.plugin_name}</Typography>
 				</Box>
 				<Tabs className="plugin-control-tabs" value={currentTab} onChange={(event, newValue) => {setCurrentTab(newValue)}} aria-label="Plugins Tools" variant="scrollable">
 					{
@@ -590,7 +620,7 @@ function CreateModule({pluginSlug, plugins, setPlugins, uponSuccess}) {
 				/>
 
 				<Button type="submit" variant="contained" color="secondary">
-					{creationState === 'creating' ? <CircularProgress size={24} /> : 'Update plugin files' }
+					{creationState === 'creating' ? <CircularProgress size={24} /> : 'Update Module files' }
 				</Button>
 			</Box>
 		</Box>
@@ -626,15 +656,16 @@ function CopyCode({language, code}) {
 	);
 }
 
-function PluginDataForm({pluginDataState, setPluginDataState, onSubmit}) {
+function PluginDataForm({pluginDataState, setPluginDataState, onSubmit, onCancel, saveButtonText="Update Plugin Files"}) {
 	const [loading, setLoading] = useState(false);
 
 	return (
-		<Box component="form" sx={{padding: 2, display: 'grid', gap: 3, width: '100%', maxWidth: '400px'}} onSubmit={(event) => {
+		<Box component="form" sx={{padding: 2, display: 'grid', gap: 3, width: '100%', maxWidth: '50%'}} onSubmit={(event) => {
 			event.preventDefault();
 			setLoading( true );
 			onSubmit(event, setLoading);
 		}}>
+			<Typography sx={{fontSize: '1.3em'}} component="h2">Create a new plugin</Typography>
 			<TextField
 				label="Plugin Name"
 				variant="outlined"
@@ -694,10 +725,16 @@ function PluginDataForm({pluginDataState, setPluginDataState, onSubmit}) {
 				value={pluginDataState.plugin_author_uri}
 				onChange={(event) => setPluginDataState({...pluginDataState, plugin_author_uri: event.target.value})}
 			/> */}
-
-			<Button type="submit" variant="contained" color="secondary">
-				{loading ? <CircularProgress size={24} /> : 'Update plugin files' }
-			</Button>
+			<Box sx={{display: 'flex', gap: 2}}>
+				<Button variant="contained" color="secondary" onClick={() => {
+					onCancel();
+				}}>
+					Cancel
+				</Button>
+				<Button type="submit" variant="contained" color="primary">
+					{saveButtonText}
+				</Button>
+			</Box>
 		</Box>
 	);
 }

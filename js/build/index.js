@@ -4000,6 +4000,57 @@ var _default = exports["default"] = (0, _createSvgIcon.default)( /*#__PURE__*/(0
 
 /***/ }),
 
+/***/ "./node_modules/@mui/icons-material/GitHub.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@mui/icons-material/GitHub.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+'use client';
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@mui/icons-material/utils/createSvgIcon.js"));
+var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+var _default = exports["default"] = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"
+}), 'GitHub');
+
+/***/ }),
+
+/***/ "./node_modules/@mui/icons-material/InstallDesktop.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@mui/icons-material/InstallDesktop.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+"use client";
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@mui/icons-material/utils/createSvgIcon.js"));
+var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _default = exports["default"] = (0, _createSvgIcon.default)([/*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "M20 17H4V5h8V3H4c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h4v2h8v-2h4c1.1 0 2-.9 2-2v-3h-2z"
+}, "0"), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "m17 14 5-5-1.41-1.41L18 10.17V3h-2v7.17l-2.59-2.58L12 9z"
+}, "1")], 'InstallDesktop');
+
+/***/ }),
+
 /***/ "./node_modules/@mui/icons-material/utils/createSvgIcon.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/@mui/icons-material/utils/createSvgIcon.js ***!
@@ -27844,7 +27895,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
 /* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_icons_material_InstallDesktop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/icons-material/InstallDesktop */ "./node_modules/@mui/icons-material/InstallDesktop.js");
+
+
 
 
 
@@ -27896,7 +27951,12 @@ const PwaInstallButton = () => {
   return isVisible && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
     id: "install-button",
     onClick: handleInstallClick
-  }, "Install As App");
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    sx: {
+      display: 'flex',
+      gap: '.5em'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_icons_material_InstallDesktop__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Install As App")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PwaInstallButton);
 
@@ -27928,26 +27988,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @mui/material/Divider */ "./node_modules/@mui/material/Divider/Divider.js");
 /* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
 /* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
-/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
-/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
-/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
-/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
-/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
-/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
+/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
+/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
+/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
+/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
+/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
 /* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
 /* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
 /* harmony import */ var _PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./PwaInstallButton */ "./js/src/PwaInstallButton.js");
 /* harmony import */ var _menuFile__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./menuFile */ "./js/src/menuFile.js");
 /* harmony import */ var _menuEdit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./menuEdit */ "./js/src/menuEdit.js");
+/* harmony import */ var _mui_icons_material_GitHub__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/icons-material/GitHub */ "./node_modules/@mui/icons-material/GitHub.js");
 /* harmony import */ var _utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utils/boilerPlugin */ "./js/src/utils/boilerPlugin.js");
 /* harmony import */ var _utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utils/copyDirToLocal */ "./js/src/utils/copyDirToLocal.js");
 /* harmony import */ var _utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./utils/parsePluginHeader */ "./js/src/utils/parsePluginHeader.js");
 /* harmony import */ var _utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./utils/fixPluginHeader */ "./js/src/utils/fixPluginHeader.js");
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__]);
 https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
+
 
 
 
@@ -28031,7 +28094,7 @@ const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_16__["default
       default: 'rgb(15, 25, 36)'
     },
     background20: {
-      default: 'rgb(15, 23, 31)'
+      default: 'rgb(16 24 32)'
     },
     secondary: {
       light: '#ff7961',
@@ -28062,7 +28125,7 @@ entriesInIndexDb.forEach(async entry => {
 });
 function PluginadeApp() {
   const prefersDarkMode = (0,_mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_17__["default"])('(prefers-color-scheme: dark)');
-  const [showCreatePlugin, setShowCreatePluginState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [showCreatePlugin, setShowCreatePlugin] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [pluginDirHandles, setPluginDirHandles] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(thePluginDirHandles);
   const [plugins, setPlugins] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   const [currentPluginTab, setCurrentPluginTabState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
@@ -28078,6 +28141,10 @@ function PluginadeApp() {
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
+    if (!currentPluginTab) {
+      console.log('sgsdg', Object.keys(plugins));
+      setCurrentPluginTabState(Object.keys(plugins).length > 0 ? Object.keys(plugins)[0] : null);
+    }
   }, [plugins]);
   function setCurrentPluginTab(value) {
     // Make sure we have permission to use the file system for each open plugin.
@@ -28086,7 +28153,7 @@ function PluginadeApp() {
       if (directoryHandleOrUndefined) {
         window.localStorage.setItem('currentPluginTab', value);
         setCurrentPluginTabState(value);
-        setShowCreatePluginState(false);
+        setShowCreatePlugin(false);
       } else {
         const directoryHandle = await window.showDirectoryPicker({
           mode: 'readwrite'
@@ -28094,15 +28161,9 @@ function PluginadeApp() {
         await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.set)(plugin, directoryHandle);
         window.localStorage.setItem('currentPluginTab', value);
         setCurrentPluginTabState(value);
-        setShowCreatePluginState(false);
+        setShowCreatePlugin(false);
       }
     });
-  }
-  function setShowCreatePlugin(value) {
-    if (value) {
-      setCurrentPluginTabState(null);
-    }
-    setShowCreatePluginState(value);
   }
   async function openPlugin(dirHandle) {
     console.log('opening', dirHandle);
@@ -28156,6 +28217,7 @@ function PluginadeApp() {
             }
           };
         });
+        setCurrentPluginTab(pluginData.plugin_dirname);
       }
     }
   }
@@ -28191,7 +28253,7 @@ function PluginadeApp() {
     className: "pluginade-studio",
     sx: {
       display: 'grid',
-      gridTemplateRows: 'min-content min-content 1fr'
+      gridTemplateRows: 'min-content min-content min-content min-content 1fr'
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
@@ -28217,31 +28279,62 @@ function PluginadeApp() {
     orientation: "vertical"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_menuEdit__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
     orientation: "vertical"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    sx: {
+      display: 'flex',
+      marginLeft: 'auto'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
+    orientation: "vertical"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    href: "https://github.com/pluginade/pluginade-studio",
+    "aria-label": "Check out this project on Github"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_icons_material_GitHub__WEBPACK_IMPORTED_MODULE_25__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
+    orientation: "vertical"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
     orientation: "vertical"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    sx: {
+      backgroundColor: 'background20.default',
+      display: 'flex'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
+    orientation: "vertical"
+  }), showCreatePlugin ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    value: currentPluginTab,
+    onChange: (event, newValue) => {
+      setCurrentPluginTab(newValue);
+    },
+    variant: "scrollable",
+    scrollButtons: "auto",
+    "aria-label": "Open Plugins. Choose one to work on it.",
+    sx: {
+      minHeight: '40px'
+    }
+  }, Object.keys(plugins).map((plugin, index) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_27__["default"], {
+      key: index,
+      value: plugin,
+      label: plugins[plugin].plugin_name,
+      sx: {
+        minHeight: '40px'
+      }
+    });
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     className: "pluginade-studio-body",
     sx: {
       display: 'grid',
-      gridTemplateColumns: '200px min-content 1fr 1fr'
+      gridTemplateColumns: '1fr',
+      padding: 1,
+      backgroundColor: 'background20.default'
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_19__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
-      backgroundColor: 'background20.default'
+      backgroundColor: 'background.default',
+      width: '100%',
+      borderRadius: '.4em'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_24__["default"], null, Object.keys(plugins).map((plugin, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_25__["default"], {
-      key: index,
-      disablePadding: true
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_26__["default"], {
-      selected: currentPluginTab === plugin,
-      onClick: () => setCurrentPluginTab(plugin)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_27__["default"], {
-      primary: plugins[plugin].plugin_name
-    })));
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_22__["default"], {
-    orientation: "vertical"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: showCreatePlugin ? 'none' : 'grid',
       height: '100%',
@@ -28267,17 +28360,19 @@ function PluginadeApp() {
       justifyItems: 'center'
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreatePlugin, {
+    setShowCreatePlugin: setShowCreatePlugin,
     uponSuccess: newPluginSlug => setCurrentPluginTab(newPluginSlug),
     plugins: plugins,
     setPlugins: setPlugins,
     openPlugin: openPlugin
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "output"
-  })))));
+  }))))));
 }
 root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginadeApp, null));
 function CreatePlugin({
-  openPlugin
+  openPlugin,
+  setShowCreatePlugin
 }) {
   const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('initial');
   const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
@@ -28319,6 +28414,8 @@ function CreatePlugin({
           // }
         } catch (error) {
           setLoading(false);
+          setCreationState('error');
+          setCreationMessage('Directory selection canceled or failed. Try again.');
           console.error('Directory selection canceled or failed:', error);
         }
       }
@@ -28339,21 +28436,16 @@ function CreatePlugin({
     severity: "error"
   }, creationMessage) : null, creationState === 'success' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_23__["default"], {
     severity: "success"
-  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
-    sx: {
-      display: 'grid',
-      width: '100%',
-      height: '100%',
-      overflow: 'auto',
-      alignItems: 'center',
-      justifyItems: 'center'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginDataForm, {
+  }, creationMessage) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PluginDataForm, {
     pluginDataState: pluginDataState,
     setPluginDataState: setPluginDataState,
     onSubmit: (event, setLoading) => {
       event.preventDefault();
       createPlugin(setLoading, pluginDataState);
+    },
+    saveButtonText: "Choose plugin location on disk",
+    onCancel: () => {
+      setShowCreatePlugin(false);
     }
   })));
 }
@@ -28393,7 +28485,7 @@ function Plugin({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
     variant: "h5",
     component: "h2"
-  }, pluginDataState.plugin_name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, pluginDataState.plugin_path)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_29__["default"], {
+  }, "Plugin: ", pluginDataState.plugin_name)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_26__["default"], {
     className: "plugin-control-tabs",
     value: currentTab,
     onChange: (event, newValue) => {
@@ -28402,7 +28494,7 @@ function Plugin({
     "aria-label": "Plugins Tools",
     variant: "scrollable"
   }, Object.keys(pluginTabs).map((tool, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_30__["default"], {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_27__["default"], {
       key: index,
       value: tool,
       label: pluginTabs[tool],
@@ -28507,14 +28599,14 @@ function Modules({
       borderColor: 'background20.default',
       borderRadius: 2
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_List__WEBPACK_IMPORTED_MODULE_29__["default"], {
     sx: {
       overflow: 'auto',
       borderRight: '1px solid',
       borderRightColor: 'background20.default',
       backgroundColor: 'background20.default'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_25__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_30__["default"], {
     disablePadding: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
@@ -28523,7 +28615,7 @@ function Modules({
       padding: 2,
       width: '100%'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_31__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_24__["default"], {
     variant: "contained",
     color: "secondary",
     "aria-label": "Create New Plugin",
@@ -28534,13 +28626,13 @@ function Modules({
       width: '100%'
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Module +', 'pluginade')))), Object.keys(thisPluginsModules).map((module, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_25__["default"], {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_30__["default"], {
       key: index,
       disablePadding: true
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_31__["default"], {
       selected: currentModule === module,
       onClick: () => setCurrentModule(module)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_32__["default"], {
       primary: thisPluginsModules[module].name
     })));
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -28610,7 +28702,7 @@ function CreateModule({
       setLoading(true);
       onSubmit(event, setLoading);
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_33__["default"], {
     label: "Plugin Name",
     variant: "outlined",
     fullWidth: true,
@@ -28621,7 +28713,7 @@ function CreateModule({
       plugin_name: event.target.value,
       plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_33__["default"], {
     label: "Plugin Namespace",
     variant: "outlined",
     fullWidth: true,
@@ -28631,7 +28723,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_namespace: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_33__["default"], {
     label: "Plugin Description",
     variant: "outlined",
     fullWidth: true,
@@ -28641,7 +28733,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_description: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_33__["default"], {
     label: "Plugin Version",
     variant: "outlined",
     fullWidth: true,
@@ -28651,7 +28743,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_version: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_33__["default"], {
     label: "Plugin Author",
     variant: "outlined",
     fullWidth: true,
@@ -28661,7 +28753,7 @@ function CreateModule({
       ...pluginDataState,
       plugin_author: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_33__["default"], {
     label: "Plugin Author URI",
     variant: "outlined",
     fullWidth: true,
@@ -28671,13 +28763,13 @@ function CreateModule({
       ...pluginDataState,
       plugin_author_uri: event.target.value
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_31__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_24__["default"], {
     type: "submit",
     variant: "contained",
     color: "secondary"
-  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_33__["default"], {
+  }, creationState === 'creating' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_34__["default"], {
     size: 24
-  }) : 'Update plugin files'))));
+  }) : 'Update Module files'))));
 }
 function CopyCode({
   language,
@@ -28718,7 +28810,7 @@ function CopyCode({
       lineHeight: 1,
       marginBottom: 1
     }
-  }, code), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_31__["default"], {
+  }, code), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_24__["default"], {
     variant: "contained",
     color: "secondary",
     onClick: copyCode
@@ -28727,7 +28819,9 @@ function CopyCode({
 function PluginDataForm({
   pluginDataState,
   setPluginDataState,
-  onSubmit
+  onSubmit,
+  onCancel,
+  saveButtonText = "Update Plugin Files"
 }) {
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -28737,14 +28831,19 @@ function PluginDataForm({
       display: 'grid',
       gap: 3,
       width: '100%',
-      maxWidth: '400px'
+      maxWidth: '50%'
     },
     onSubmit: event => {
       event.preventDefault();
       setLoading(true);
       onSubmit(event, setLoading);
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_32__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
+    sx: {
+      fontSize: '1.3em'
+    },
+    component: "h2"
+  }, "Create a new plugin"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_33__["default"], {
     label: "Plugin Name",
     variant: "outlined",
     fullWidth: true,
@@ -28755,13 +28854,22 @@ function PluginDataForm({
       plugin_name: event.target.value,
       plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
     })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_31__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    sx: {
+      display: 'flex',
+      gap: 2
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    variant: "contained",
+    color: "secondary",
+    onClick: () => {
+      onCancel();
+    }
+  }, "Cancel"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_24__["default"], {
     type: "submit",
     variant: "contained",
-    color: "secondary"
-  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_33__["default"], {
-    size: 24
-  }) : 'Update plugin files'));
+    color: "primary"
+  }, saveButtonText)));
 }
 function TerminalWindow() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
