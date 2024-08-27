@@ -433,11 +433,15 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 
 	const pluginTabs = {
 		'modules': 'Modules',
+		'code': 'Code',
 		'webpack': 'Webpack',
-		'phpunit': 'PHPUnit',
-		'scans': 'Scans',
+		'test': 'Test',
+		'lint': 'Lint',
+		'security': 'Security',
 		'fixers': 'Fixers',
 		'playground': 'Playground',
+		'build': 'Build',
+		'deploy': 'Deploy',
 	}
 
 	return (
@@ -455,9 +459,9 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 				</Tabs>
 			</Box>
 			<Divider />
-			<Box className="plugin-content" sx={{display: 'block', height: '100%', overflow: 'hidden'}}>
-				<Box id={`plugin-tabpanel-webpack`} sx={{display: 'webpack' === currentTab ? 'flex' : 'none', gap: 2, padding: 2}}>
-					<Box sx={{display: 'grid', gap: 2}}>
+			<Box className="plugin-content" sx={{display: 'block', width: '100%', height: '100%', overflow: 'hidden'}}>
+				<Box id={`plugin-tabpanel-webpack`} sx={{display: 'webpack' === currentTab ? 'flex' : 'none', gap: 2, padding: 2, width:'100%'}}>
+					<Box sx={{display: 'grid', gap: 2, width: '100%'}}>
 						<Box>
 							<Typography component="p">{__( 'To enable webpack and watch for file changes, run the following in a terminal window:')}</Typography>
 						</Box>
@@ -489,6 +493,9 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 				</Box>
 				<Box id={`plugin-tabpanel-playground`} sx={{display: 'playground' === currentTab ? 'block' : 'none', height: '100%', overflow: 'hidden'}}>
 					<Playground />
+				</Box>
+				<Box id={`plugin-tabpanel-code`} sx={{display: 'code' === currentTab ? 'block' : 'none', height: '100%', overflow: 'hidden'}}>
+					<iframe src="https://stackblitz.com/edit/http-server-ay7ze5?file=package.json" width="100%" height="500px"></iframe>
 				</Box>
 			</Box>
 		</Box>

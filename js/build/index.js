@@ -28458,11 +28458,15 @@ function Plugin({
   const [currentTab, setCurrentTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('modules');
   const pluginTabs = {
     'modules': 'Modules',
+    'code': 'Code',
     'webpack': 'Webpack',
-    'phpunit': 'PHPUnit',
-    'scans': 'Scans',
+    'test': 'Test',
+    'lint': 'Lint',
+    'security': 'Security',
     'fixers': 'Fixers',
-    'playground': 'Playground'
+    'playground': 'Playground',
+    'build': 'Build',
+    'deploy': 'Deploy'
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     id: `plugin-tabpanel-${pluginDataState.plugin_dirname}`,
@@ -28497,6 +28501,7 @@ function Plugin({
     className: "plugin-content",
     sx: {
       display: 'block',
+      width: '100%',
       height: '100%',
       overflow: 'hidden'
     }
@@ -28505,12 +28510,14 @@ function Plugin({
     sx: {
       display: 'webpack' === currentTab ? 'flex' : 'none',
       gap: 2,
-      padding: 2
+      padding: 2,
+      width: '100%'
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
     sx: {
       display: 'grid',
-      gap: 2
+      gap: 2,
+      width: '100%'
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_21__["default"], {
     component: "p"
@@ -28573,7 +28580,18 @@ function Plugin({
       height: '100%',
       overflow: 'hidden'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Playground, null))));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Playground, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    id: `plugin-tabpanel-code`,
+    sx: {
+      display: 'code' === currentTab ? 'block' : 'none',
+      height: '100%',
+      overflow: 'hidden'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+    src: "https://stackblitz.com/edit/http-server-ay7ze5?file=package.json",
+    width: "100%",
+    height: "500px"
+  }))));
 }
 function Playground() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
