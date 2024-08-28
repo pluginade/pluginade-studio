@@ -31,6 +31,7 @@ import Alert from '@mui/material/Alert';
 import PwaInstallButton from './PwaInstallButton';
 import FileMenu from './menuFile';
 import EditMenu from './menuEdit';
+import CodeEditor from './Code';
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -495,7 +496,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 					<Playground />
 				</Box>
 				<Box id={`plugin-tabpanel-code`} sx={{display: 'code' === currentTab ? 'block' : 'none', height: '100%', overflow: 'hidden'}}>
-					<iframe src="https://stackblitz.com/edit/http-server-ay7ze5?file=package.json" width="100%" height="500px"></iframe>
+					<CodeEditor />
 				</Box>
 			</Box>
 		</Box>
