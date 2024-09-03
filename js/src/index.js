@@ -41,6 +41,8 @@ import copyDirToLocal from './utils/copyDirToLocal';
 import parsePluginHeader from './utils/parsePluginHeader';
 import fixPluginHeader from './utils/fixPluginHeader';
 
+import './stackblitz/index.js';
+
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
 	  navigator.serviceWorker.register('/service-worker.js')
