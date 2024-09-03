@@ -1,8 +1,5 @@
 import { WebContainer } from '@webcontainer/api';
 
-// Call only once
-const webcontainerInstance = await WebContainer.boot();
-
 const files = {
 	// This is a file - provide its path as a key:
 	'package.json': {
@@ -37,17 +34,29 @@ const files = {
 
 await webcontainerInstance.mount(files);
 
-await startDevServer();
+window.addEventListener('load', async () => {
+	// Call only once
+	webcontainerInstance = await WebContainer.boot();
+	await webcontainerInstance.mount(files);
+  
+	const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
+	console.log(packageJSON);
 
-async function startDevServer() {
+	const exitCode = await installDependencies();
+
+	console.log( 'Response from installDependencies:', exitCode );
+
+	if (exitCode !== 0) {
+		throw new Error('Installation failed');
+	};
+});
+
+async function installDependencies() {
 	const installProcess = await webcontainerInstance.spawn('npm', ['install']);
-  
-	const installExitCode = await installProcess.exit;
-  
-	if (installExitCode !== 0) {
-	  throw new Error('Unable to run npm install');
-	}
-  
-	// `npm run dev`
-	await webcontainerInstance.spawn('npm', ['run', 'dev']);
+
+	installProcess.output.pipeTo(new WritableStream({
+	  write(data) {
+		console.log(data);
+	  }
+	}));
 }

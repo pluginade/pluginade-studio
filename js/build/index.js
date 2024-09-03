@@ -29774,9 +29774,6 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webcontainer_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @webcontainer/api */ "./node_modules/@webcontainer/api/dist/index.js");
 
-
-// Call only once
-const webcontainerInstance = await _webcontainer_api__WEBPACK_IMPORTED_MODULE_0__.WebContainer.boot();
 const files = {
   // This is a file - provide its path as a key:
   'package.json': {
@@ -29809,16 +29806,26 @@ const files = {
   }
 };
 await webcontainerInstance.mount(files);
-await startDevServer();
-async function startDevServer() {
-  const installProcess = await webcontainerInstance.spawn('npm', ['install']);
-  const installExitCode = await installProcess.exit;
-  if (installExitCode !== 0) {
-    throw new Error('Unable to run npm install');
+window.addEventListener('load', async () => {
+  // Call only once
+  webcontainerInstance = await _webcontainer_api__WEBPACK_IMPORTED_MODULE_0__.WebContainer.boot();
+  await webcontainerInstance.mount(files);
+  const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
+  console.log(packageJSON);
+  const exitCode = await installDependencies();
+  console.log('Response from installDependencies:', exitCode);
+  if (exitCode !== 0) {
+    throw new Error('Installation failed');
   }
-
-  // `npm run dev`
-  await webcontainerInstance.spawn('npm', ['run', 'dev']);
+  ;
+});
+async function installDependencies() {
+  const installProcess = await webcontainerInstance.spawn('npm', ['install']);
+  installProcess.output.pipeTo(new WritableStream({
+    write(data) {
+      console.log(data);
+    }
+  }));
 }
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
