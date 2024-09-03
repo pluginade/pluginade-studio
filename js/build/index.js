@@ -29943,6 +29943,7 @@ async function startWebContainer(files) {
   ;
 }
 async function runCommandInWebContainer(webcontainerInstance, command, args = [], onOutput) {
+  console.log(webcontainerInstance);
   const installProcess = await webcontainerInstance.spawn(command, args);
   installProcess.output.pipeTo(new WritableStream({
     write(data) {
