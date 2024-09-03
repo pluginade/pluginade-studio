@@ -28671,8 +28671,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./utils/parsePluginHeader */ "./js/src/utils/parsePluginHeader.js");
 /* harmony import */ var _utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./utils/fixPluginHeader */ "./js/src/utils/fixPluginHeader.js");
 /* harmony import */ var _stackblitz_index_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./stackblitz/index.js */ "./js/src/stackblitz/index.js");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__, _stackblitz_index_js__WEBPACK_IMPORTED_MODULE_17__]);
-([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__, _stackblitz_index_js__WEBPACK_IMPORTED_MODULE_17__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__]);
+https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 
@@ -29767,10 +29767,9 @@ function IconMenu({
 /*!************************************!*\
   !*** ./js/src/stackblitz/index.js ***!
   \************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webcontainer_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @webcontainer/api */ "./node_modules/@webcontainer/api/dist/index.js");
 
@@ -29805,7 +29804,9 @@ const files = {
     }
   }
 };
-await webcontainerInstance.mount(files);
+
+// await webcontainerInstance.mount(files);
+
 window.addEventListener('load', async () => {
   // Call only once
   webcontainerInstance = await _webcontainer_api__WEBPACK_IMPORTED_MODULE_0__.WebContainer.boot();
@@ -29827,8 +29828,6 @@ async function installDependencies() {
     }
   }));
 }
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } }, 1);
 
 /***/ }),
 

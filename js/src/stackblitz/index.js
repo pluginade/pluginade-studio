@@ -32,7 +32,7 @@ const files = {
 	},
 };
 
-await webcontainerInstance.mount(files);
+// await webcontainerInstance.mount(files);
 
 window.addEventListener('load', async () => {
 	// Call only once
