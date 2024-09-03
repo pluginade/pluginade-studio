@@ -29809,7 +29809,7 @@ const files = {
 
 window.addEventListener('load', async () => {
   // Call only once
-  webcontainerInstance = await _webcontainer_api__WEBPACK_IMPORTED_MODULE_0__.WebContainer.boot();
+  const webcontainerInstance = await _webcontainer_api__WEBPACK_IMPORTED_MODULE_0__.WebContainer.boot();
   await webcontainerInstance.mount(files);
   const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
   console.log(packageJSON);

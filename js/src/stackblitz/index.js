@@ -36,7 +36,7 @@ const files = {
 
 window.addEventListener('load', async () => {
 	// Call only once
-	webcontainerInstance = await WebContainer.boot();
+	const webcontainerInstance = await WebContainer.boot();
 	await webcontainerInstance.mount(files);
   
 	const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
