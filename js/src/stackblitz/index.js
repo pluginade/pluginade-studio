@@ -44,12 +44,15 @@ export default () => {
 	const [output, setOutput] = useState('');
 
 	useEffect(() => {
-		const term = new Terminal();
-		term.open(terminalRef.current);
-		setXTerm(term);
+		async function doSetUp() {
+			const term = new Terminal();
+			term.open(terminalRef.current);
+			setXTerm(term);
 
-		const theWebContainer = startWebContainer( files );
-		setWebContainer( theWebContainer );
+			const theWebContainer = await startWebContainer( files );
+			setWebContainer( theWebContainer );
+		}
+		doSetUp();
 	}, []);
 
 	return (

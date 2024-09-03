@@ -29907,11 +29907,14 @@ const files = {
   const [webContainer, setWebContainer] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [output, setOutput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const term = new _xterm_xterm__WEBPACK_IMPORTED_MODULE_2__.Terminal();
-    term.open(terminalRef.current);
-    setXTerm(term);
-    const theWebContainer = startWebContainer(files);
-    setWebContainer(theWebContainer);
+    async function doSetUp() {
+      const term = new _xterm_xterm__WEBPACK_IMPORTED_MODULE_2__.Terminal();
+      term.open(terminalRef.current);
+      setXTerm(term);
+      const theWebContainer = await startWebContainer(files);
+      setWebContainer(theWebContainer);
+    }
+    doSetUp();
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
