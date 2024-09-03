@@ -29813,14 +29813,14 @@ window.addEventListener('load', async () => {
   await webcontainerInstance.mount(files);
   const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
   console.log(packageJSON);
-  const exitCode = await installDependencies();
+  const exitCode = await installDependencies(webcontainerInstance);
   console.log('Response from installDependencies:', exitCode);
   if (exitCode !== 0) {
     throw new Error('Installation failed');
   }
   ;
 });
-async function installDependencies() {
+async function installDependencies(webcontainerInstance) {
   const installProcess = await webcontainerInstance.spawn('npm', ['install']);
   installProcess.output.pipeTo(new WritableStream({
     write(data) {

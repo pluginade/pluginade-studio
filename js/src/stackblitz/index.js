@@ -42,7 +42,7 @@ window.addEventListener('load', async () => {
 	const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
 	console.log(packageJSON);
 
-	const exitCode = await installDependencies();
+	const exitCode = await installDependencies( webcontainerInstance );
 
 	console.log( 'Response from installDependencies:', exitCode );
 
@@ -51,7 +51,7 @@ window.addEventListener('load', async () => {
 	};
 });
 
-async function installDependencies() {
+async function installDependencies( webcontainerInstance ) {
 	const installProcess = await webcontainerInstance.spawn('npm', ['install']);
 
 	installProcess.output.pipeTo(new WritableStream({
