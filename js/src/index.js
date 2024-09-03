@@ -41,7 +41,7 @@ import copyDirToLocal from './utils/copyDirToLocal';
 import parsePluginHeader from './utils/parsePluginHeader';
 import fixPluginHeader from './utils/fixPluginHeader';
 
-import './stackblitz/index.js';
+import WebContainer from './stackblitz/index.js';
 
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
@@ -495,10 +495,10 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 					<Modules plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} />
 				</Box>
 				<Box id={`plugin-tabpanel-playground`} sx={{display: 'playground' === currentTab ? 'block' : 'none', height: '100%', overflow: 'hidden'}}>
-					<Playground />
+					{/* <Playground /> */}
 				</Box>
 				<Box id={`plugin-tabpanel-code`} sx={{display: 'code' === currentTab ? 'block' : 'none', height: '100%', overflow: 'hidden'}}>
-					<CodeEditor />
+					<WebContainer />
 				</Box>
 			</Box>
 		</Box>

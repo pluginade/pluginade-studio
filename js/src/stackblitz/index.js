@@ -1,4 +1,9 @@
+import React, { useState, useRef, useEffect } from 'react';
 import { WebContainer } from '@webcontainer/api';
+import { Terminal } from '@xterm/xterm';
+
+// Import the styles
+import '@xterm/xterm/css/xterm.css';
 
 const files = {
 	// This is a file - provide its path as a key:
@@ -32,15 +37,45 @@ const files = {
 	},
 };
 
-// await webcontainerInstance.mount(files);
+export default () => {
+	const terminalRef = useRef(null);
+	const [xTerm, setXTerm] = useState(null);
+	const [webContainer, setWebContainer] = useState(null);
+	const [output, setOutput] = useState('');
 
-window.addEventListener('load', async () => {
+	useEffect(() => {
+		const term = new Terminal();
+		term.open(terminalRef.current);
+		setXTerm(term);
+
+		const theWebContainer = startWebContainer( files );
+		setWebContainer( theWebContainer );
+	}, []);
+
+	return (
+		<div>
+			<button
+				onClick={() => {
+					xTerm.write('Running npm install \r\n');
+					runCommandInWebContainer( webContainer, 'npm', ['install'], (data) => {
+						setOutput(data)
+						xTerm.write(data);
+					})
+				}}>Run npm install</button>
+			<div ref={terminalRef} />
+		</div>
+	);
+}
+
+async function startWebContainer( files ) {
 	// Call only once
 	const webcontainerInstance = await WebContainer.boot();
 	await webcontainerInstance.mount(files);
   
 	const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
 	console.log(packageJSON);
+
+	return webcontainerInstance;
 
 	const exitCode = await installDependencies( webcontainerInstance );
 
@@ -49,14 +84,14 @@ window.addEventListener('load', async () => {
 	if (exitCode !== 0) {
 		throw new Error('Installation failed');
 	};
-});
+}
 
-async function installDependencies( webcontainerInstance ) {
-	const installProcess = await webcontainerInstance.spawn('npm', ['install']);
+async function runCommandInWebContainer( webcontainerInstance, command, args = [], onOutput ) {
+	const installProcess = await webcontainerInstance.spawn(command, args);
 
 	installProcess.output.pipeTo(new WritableStream({
 	  write(data) {
-		console.log(data);
+		onOutput(data);
 	  }
 	}));
 }
