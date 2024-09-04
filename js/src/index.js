@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import { createRoot } from 'react-dom/client';
+import { useDebouncedCallback } from 'use-debounce';
 import {__} from '@wordpress/i18n';
 import { get, entries, set } from 'https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js';
 
@@ -397,27 +398,28 @@ function CreatePlugin({openPlugin, setShowCreatePlugin}) {
 					// Prompt user to select a directory
 					const parentDirHandle = await window.showDirectoryPicker();
 
-					const files = await boilerPlugin();
-			
-					const pluginDirHandle = await copyDirToLocal( parentDirHandle, pluginDataState.plugin_dirname, files );
-
-					const stringFixerResult = await fixPluginHeader( pluginDirHandle, pluginDataState );
-
-					console.log( stringFixerResult );
-
-					setLoading(false);
-
-					if ( pluginDirHandle === 'dir-already-exists') {
+					try {
+						await parentDirHandle.getDirectoryHandle(pluginDataState.plugin_dirname);
+						setLoading(false);
 						setCreationState('error');
 						setCreationMessage('Directory already exists');
-					}
+						return;
+					} catch (error) {
+						const files = await boilerPlugin();
+			
+						const pluginDirHandle = await copyDirToLocal( parentDirHandle, files, pluginDataState.plugin_dirname );
 
-					// if ( copyResult === 'success' ) {
+						const stringFixerResult = await fixPluginHeader( pluginDirHandle, pluginDataState );
+
+						console.log( stringFixerResult );
+
+						setLoading(false);
+
 						setCreationState('success');
 						setCreationMessage('Plugin successfully created');
-
 						openPlugin(pluginDirHandle);
-					// }
+					
+					}
 			
 				} catch (error) {
 					setLoading(false);
@@ -568,6 +570,13 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 		mountPlugin();
 	}, [webContainer.instance]);
 
+	const terminalOutputDebounced = useDebouncedCallback(
+		(callbackFunction) => {
+			callbackFunction();
+		},
+		100
+	);
+
 	return (
 		<Box sx={{display: 'grid', gap: 1, overflow: 'hidden', gridTemplateRows: 'min-content 1fr', width: '100%'}}>
 			<Box>
@@ -604,9 +613,13 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 											commandOptions: button.commandOptions,
 											onOutput: async (data) => {
 												setTerminalOutput(data);
-												const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
-												console.log( 'File in web container:', pluginFilesFromWebContainer );
-												copyDirToLocal( pluginData.dirHandle, pluginData.plugin_dirname, pluginFilesFromWebContainer );
+												
+												// When the output stops for x seconds, copy the files from the web container to the local file system.
+												terminalOutputDebounced(async () => {
+													const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
+													console.log( 'File in web container:', pluginFilesFromWebContainer );
+													copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+												})
 											},
 											onProcessStart: (process) => {
 												setCurrentlyActiveButton(button);
