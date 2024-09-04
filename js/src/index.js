@@ -550,9 +550,12 @@ function Webpack({webContainer, pluginData}) {
 				webContainer.runCommand( 'cd', [pluginData.plugin_dirname], (data) => {
 					setTerminalOutput(data);
 				})
-				webContainer.runCommand( 'npm', ['install'], (data) => {
+				webContainer.runCommand( 'ls', [], (data) => {
 					setTerminalOutput(data);
 				})
+				// webContainer.runCommand( 'npm', ['install'], (data) => {
+				// 	setTerminalOutput(data);
+				// })
 			}}>Run npm install</Button>
 			
 			<Terminal terminalOutput={terminalOutput} />

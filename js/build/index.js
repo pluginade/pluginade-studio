@@ -29427,9 +29427,12 @@ function Webpack({
         webContainer.runCommand('cd', [pluginData.plugin_dirname], data => {
           setTerminalOutput(data);
         });
-        webContainer.runCommand('npm', ['install'], data => {
+        webContainer.runCommand('ls', [], data => {
           setTerminalOutput(data);
         });
+        // webContainer.runCommand( 'npm', ['install'], (data) => {
+        // 	setTerminalOutput(data);
+        // })
       },
       children: "Run npm install"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {
