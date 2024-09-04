@@ -30277,7 +30277,6 @@ async function copyDirToLocal(parentDirHandle, directoryFiles, topLevelDirectory
     try {
       theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName);
     } catch (error) {
-      // If not, create the directory
       theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName, {
         create: true
       });
@@ -30285,10 +30284,10 @@ async function copyDirToLocal(parentDirHandle, directoryFiles, topLevelDirectory
   } else {
     theMainDirHandle = parentDirHandle;
   }
-  for (const filename of Object.keys(directoryFiles)) {
-    if ('node_modules' === filename) {
+  const fileOperations = Object.keys(directoryFiles).map(async filename => {
+    if (filename === 'node_modules') {
       // Skip node_modules
-      continue;
+      // return;
     }
     if ('directory' in directoryFiles[filename]) {
       // Add these files in a subdirectory of the current parent.
@@ -30301,14 +30300,14 @@ async function copyDirToLocal(parentDirHandle, directoryFiles, topLevelDirectory
       });
       try {
         const writable = await fileHandle.createWritable();
-        await writable.write(directoryFiles[filename].file.contents);
-        await writable.close();
+        const stream = directoryFiles[filename].file.contents.stream();
+        await stream.pipeTo(writable);
       } catch (error) {
-        console.log(fileData);
         console.log(error);
       }
     }
-  }
+  });
+  await Promise.all(fileOperations);
   return theMainDirHandle;
 }
 
