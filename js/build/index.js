@@ -29426,7 +29426,10 @@ function Webpack({
       children: "Webpack"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
       onClick: () => {
-        webContainer.runCommand('npm', ['install'], {
+        // webContainer.runCommand( 'npm', ['install'], {cwd: pluginData.plugin_dirname}, (data) => {
+        // 	setTerminalOutput(data);
+        // })
+        webContainer.runCommand('sh', ['pluginade.sh, install'], {
           cwd: pluginData.plugin_dirname
         }, data => {
           setTerminalOutput(data);
