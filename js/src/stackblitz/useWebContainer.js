@@ -12,8 +12,8 @@ export default () => {
 		doSetUp();
 	}, []);
 
-	async function runCommandInWebContainer( command, args = [], onOutput ) {
-		const installProcess = await webContainer.spawn(command, args);
+	async function runCommandInWebContainer( command, args = [], options = {}, onOutput ) {
+		const installProcess = await webContainer.spawn(command, args, options);
 
 		installProcess.output.pipeTo(new WritableStream({
 		write(data) {

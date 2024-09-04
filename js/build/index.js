@@ -28692,9 +28692,10 @@ __webpack_require__.r(__webpack_exports__);
 
   // When the terminalOutput changes, write it to the terminal
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (xTerm) {
+    if (xTerm && terminalOutput) {
       fitAddon.fit();
       xTerm.write(terminalOutput);
+      setTerminalOutput(null);
     }
   }, [terminalOutput]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -29424,15 +29425,11 @@ function Webpack({
       children: "Webpack"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
       onClick: () => {
-        webContainer.runCommand('cd', [pluginData.plugin_dirname], data => {
+        webContainer.runCommand('npm', ['install'], {
+          cwd: pluginData.plugin_dirname
+        }, data => {
           setTerminalOutput(data);
         });
-        webContainer.runCommand('ls', [], data => {
-          setTerminalOutput(data);
-        });
-        // webContainer.runCommand( 'npm', ['install'], (data) => {
-        // 	setTerminalOutput(data);
-        // })
       },
       children: "Run npm install"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -29999,8 +29996,8 @@ __webpack_require__.r(__webpack_exports__);
     }
     doSetUp();
   }, []);
-  async function runCommandInWebContainer(command, args = [], onOutput) {
-    const installProcess = await webContainer.spawn(command, args);
+  async function runCommandInWebContainer(command, args = [], options = {}, onOutput) {
+    const installProcess = await webContainer.spawn(command, args, options);
     installProcess.output.pipeTo(new WritableStream({
       write(data) {
         onOutput(data);

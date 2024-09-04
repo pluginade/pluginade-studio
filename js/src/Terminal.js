@@ -24,9 +24,10 @@ export default ({terminalOutput}) => {
 
 	// When the terminalOutput changes, write it to the terminal
 	useEffect(() => {
-		if (xTerm) {
+		if (xTerm && terminalOutput) {
 			fitAddon.fit();
 			xTerm.write(terminalOutput);
+			setTerminalOutput(null);
 		}
 	}, [terminalOutput]);
 
