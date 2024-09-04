@@ -16,6 +16,10 @@ export default async function copyDirToLocal(parentDirHandle, directoryFiles, to
     }
 
     for ( const filename of Object.keys( directoryFiles ) ) {
+        if ( 'node_modules' === filename ) {
+            // Skip node_modules
+            continue;
+        }
         if ( 'directory' in directoryFiles[filename] ) {
             // Add these files in a subdirectory of the current parent.
             await copyDirToLocal(theMainDirHandle, directoryFiles[filename].directory, filename);
