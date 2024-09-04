@@ -28888,6 +28888,9 @@ function PluginadeApp() {
   const [currentPluginTab, setCurrentPluginTabState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const webContainer = (0,_stackblitz_useWebContainer__WEBPACK_IMPORTED_MODULE_14__["default"])();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!webContainer.instance) {
+      return;
+    }
     actuallyOpenPlugins.forEach(async plugin => {
       const directoryHandleOrUndefined = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.get)(plugin);
       if (directoryHandleOrUndefined) {
@@ -28896,7 +28899,7 @@ function PluginadeApp() {
         openPlugin(null);
       }
     });
-  }, []);
+  }, [webContainer.instance]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
     if (!currentPluginTab) {

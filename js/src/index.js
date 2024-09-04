@@ -139,6 +139,10 @@ function PluginadeApp() {
 	const webContainer = useWebContainer();
 
 	useEffect( () => {
+		if ( ! webContainer.instance ) {
+			return;
+		}
+
 		actuallyOpenPlugins.forEach( async (plugin) => {
 			const directoryHandleOrUndefined = await get(plugin);
 			if ( directoryHandleOrUndefined ) {
@@ -147,7 +151,7 @@ function PluginadeApp() {
 				openPlugin( null );
 			}
 		} );
-	}, []);
+	}, [webContainer.instance]);
 
 	useEffect(() => {
 		window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
