@@ -28817,7 +28817,7 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 // 	});
 // }
 
-console.log('Pluginade Studio V0.0.2');
+console.log('Pluginade Studio V0.0.3');
 const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_20__["default"])({
   palette: {
     mode: 'light',
@@ -29456,7 +29456,7 @@ function WebContainerTerminal({
           padding: 2
         },
         children: buttons.map((button, index) => {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.Fragment, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
                 component: "p",
@@ -29506,11 +29506,11 @@ function WebContainerTerminal({
                   });
                 },
                 children: currentProcess && currentlyActiveButton === button ? button.killLabel : button.runLabel
-              }, index)]
-            }, index), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
               orientation: "vertical"
             })]
-          });
+          }, index);
         })
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {

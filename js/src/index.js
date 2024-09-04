@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import { createRoot } from 'react-dom/client';
 import { useDebouncedCallback } from 'use-debounce';
 import {__} from '@wordpress/i18n';
@@ -58,7 +58,7 @@ import fixPluginHeader from './utils/fixPluginHeader';
 // 	});
 // }
 
-console.log( 'Pluginade Studio V0.0.2' );
+console.log( 'Pluginade Studio V0.0.3' );
 
 const LightTheme = createTheme({
 	palette: {
@@ -585,62 +585,61 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				<Box sx={{display: 'flex', gap: 1, padding: 2}}>
 					{ buttons.map((button, index) => {
 						return (
-							<>
-							<Box key={index}>
-								<Typography component="p">{button.label}</Typography>
-								<Button
-									key={index}
-									variant="contained"
-									color="secondary"
-									onClick={async () => {
+							<Fragment key={index}>
+								<Box>
+									<Typography component="p">{button.label}</Typography>
+									<Button
+										variant="contained"
+										color="secondary"
+										onClick={async () => {
 
-										if ( currentProcess && currentlyActiveButton === button ) {
-											await currentProcess.kill();
-											setCurrentlyActiveButton(null);
-											setCurrentProcess(null);
-											return;
-										}
-
-										setTerminalOutput('Starting: ' + button.command + '\r\n');
-
-										// Kill any running processes in this terminal.
-										if (currentProcess) {
-											await currentProcess.kill();
-										}
-
-										// Run the command assigned to this button.
-										webContainer.runCommand({
-											command: button.command,
-											commandArgs: button.commandArgs,
-											commandOptions: button.commandOptions,
-											onOutput: async (data) => {
-												setTerminalOutput(data);
-												
-												// When the output stops for x seconds, copy the files from the web container to the local file system.
-												terminalOutputDebounced(async () => {
-													const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
-													console.log( 'Filez in web container:', pluginFilesFromWebContainer );
-													copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-												})
-											},
-											onProcessStart: (process) => {
-												setCurrentlyActiveButton(button);
-												setCurrentProcess(process);
-												console.log('Process started:', process);
-											},
-											onProcessEnd: (exitCode) => {
+											if ( currentProcess && currentlyActiveButton === button ) {
+												await currentProcess.kill();
 												setCurrentlyActiveButton(null);
 												setCurrentProcess(null);
-												console.log('Process ended with exit code:', exitCode);
+												return;
 											}
-										})
-									}}
-								>
-									{ currentProcess && currentlyActiveButton === button ? button.killLabel : button.runLabel }
-								</Button>
-							</Box>
-							<Divider orientation="vertical" />
-							</>
+
+											setTerminalOutput('Starting: ' + button.command + '\r\n');
+
+											// Kill any running processes in this terminal.
+											if (currentProcess) {
+												await currentProcess.kill();
+											}
+
+											// Run the command assigned to this button.
+											webContainer.runCommand({
+												command: button.command,
+												commandArgs: button.commandArgs,
+												commandOptions: button.commandOptions,
+												onOutput: async (data) => {
+													setTerminalOutput(data);
+													
+													// When the output stops for x seconds, copy the files from the web container to the local file system.
+													terminalOutputDebounced(async () => {
+														const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
+														console.log( 'Filez in web container:', pluginFilesFromWebContainer );
+														copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+													})
+												},
+												onProcessStart: (process) => {
+													setCurrentlyActiveButton(button);
+													setCurrentProcess(process);
+													console.log('Process started:', process);
+												},
+												onProcessEnd: (exitCode) => {
+													setCurrentlyActiveButton(null);
+													setCurrentProcess(null);
+													console.log('Process ended with exit code:', exitCode);
+												}
+											})
+										}}
+									>
+										{ currentProcess && currentlyActiveButton === button ? button.killLabel : button.runLabel }
+									</Button>
+								</Box>
+								<Divider orientation="vertical" />
+							</Fragment>
 						)
 					})}
 				</Box>
