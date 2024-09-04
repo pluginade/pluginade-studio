@@ -139,10 +139,6 @@ function PluginadeApp() {
 	const webContainer = useWebContainer();
 
 	useEffect( () => {
-		if ( ! webContainer.instance ) {
-			return;
-		}
-
 		actuallyOpenPlugins.forEach( async (plugin) => {
 			const directoryHandleOrUndefined = await get(plugin);
 			if ( directoryHandleOrUndefined ) {
@@ -151,7 +147,7 @@ function PluginadeApp() {
 				openPlugin( null );
 			}
 		} );
-	}, [webContainer.instance]);
+	}, []);
 
 	useEffect(() => {
 		window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
@@ -208,15 +204,6 @@ function PluginadeApp() {
 				isWpPlugin = true;
 
 				pluginData.filesObject = await getFilesObject( dirHandle );
-
-				// Mount the plugin into the webContainer.
-				if ( webContainer.instance ) {
-					// Make a directory in the webContainer for this plugin
-					await webContainer.instance.fs.mkdir( pluginData.plugin_dirname );
-					await webContainer.instance.mount( pluginData.filesObject, { mountPoint: pluginData.plugin_dirname } );
-					const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
-					console.log( 'mounted?', content );
-				}
 
 				let hasWpModules = false;
 				for await (const possibleWpModulesEntry of dirHandle.values()) {
@@ -505,7 +492,18 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 			<Divider />
 			<Box className="plugin-content" sx={{display: 'grid', overflow: 'hidden'}}>
 				<Box id={`plugin-tabpanel-webpack`} sx={{display: 'webpack' === currentTab ? 'flex' : 'none', gap: 2, padding: 2, overflow: 'hidden'}}>
-					<Webpack webContainer={webContainer} pluginData={pluginDataState}/>
+					<WebContainerTerminal webContainer={webContainer} pluginData={pluginDataState} buttons={
+						[
+							{
+								label: 'Run webpack in watch mode',
+								runLabel: 'Start webpack watch',
+								killLabel: 'Stop webpack watch',
+								command: 'npm',
+								commandArgs: ['run', 'pluginade-webpack-dev'],
+								commandOptions: {}
+							},
+						]
+					} />
 				</Box>
 				<Box id={`plugin-tabpanel-phpunit`} sx={{display: 'phpunit' === currentTab ? 'flex' : 'none', gap: 2, padding: 2}}>
 					<Box sx={{display: 'grid', gap: 2}}>
@@ -516,14 +514,26 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 					</Box>
 				</Box>
 				<Box id={`plugin-tabpanel-lint`} sx={{display: 'lint' === currentTab ? 'grid' : 'none', gap: 2, padding: 2}}>
-					<Box sx={{display: 'grid', gap: 2}}>
-						<Box>
-							<Typography component="p">{__( 'To scan your code using WPCS, run following in a terminal window:')}</Typography>
-						</Box>
-						<CopyCode language="bash" code={`cd ${pluginDataState.plugin_path}; \n
-						sh pluginade.sh lint:php;
-						`} />
-					</Box>
+					<WebContainerTerminal webContainer={webContainer} pluginData={pluginDataState} buttons={
+						[
+							{
+								label: 'Lint the javascript in the plugin',
+								runLabel: 'Start linting the javascript',
+								killLabel: 'Stop linting the javascript',
+								command: 'npm',
+								commandArgs: ['run', 'pluginade-lint-js'],
+								commandOptions: {}
+							},
+							{
+								label: 'Fix linting issues in the javascript in the plugin',
+								runLabel: 'Fix linting issues',
+								killLabel: 'Stop fixing linting issues',
+								command: 'npm',
+								commandArgs: ['run', 'pluginade-lint-js'],
+								commandOptions: {}
+							}
+						]
+					} />
 				</Box>
 				<Box id={`plugin-tabpanel-modules`} sx={{display: 'modules' === currentTab ? 'block' : 'none', height: '100%', overflow: 'hidden'}}>
 					<Modules plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} />
@@ -539,18 +549,93 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 	);
 }
 
-function Webpack({webContainer, pluginData}) {
-	const [terminalOutput, setTerminalOutput] = useState('Starting Webpack...');
+function WebContainerTerminal({webContainer, pluginData, buttons}) {
+	const [terminalOutput, setTerminalOutput] = useState('');
+	const [currentlyActiveButton, setCurrentlyActiveButton] = useState(null);
+	const [currentProcess, setCurrentProcess] = useState(null);
+
+	useEffect(() => {
+		async function mountPlugin() {
+			// Mount the plugin into the webContainer.
+			if ( webContainer.instance ) {
+				// Make a directory in the webContainer for this plugin
+				await webContainer.instance.fs.mkdir( pluginData.plugin_dirname );
+				await webContainer.instance.mount( pluginData.filesObject, { mountPoint: pluginData.plugin_dirname } );
+				const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
+				console.log( 'mounted?', content );
+			}
+		}
+		mountPlugin();
+	}, [webContainer.instance]);
 
 	return (
-		<Box sx={{display: 'grid', gap: 2, overflow: 'hidden', gridTemplateRows: 'min-content min-content 1fr', width: '100%'}}>
-			<Typography component="h2">Webpack</Typography>
-			<Button
-			onClick={() => {
-				webContainer.runCommand( 'npm', ['run', 'pluginade-install'], {cwd: pluginData.plugin_dirname}, (data) => {
-					setTerminalOutput(data);
-				})
-			}}>Run npm install</Button>
+		<Box sx={{display: 'grid', gap: 1, overflow: 'hidden', gridTemplateRows: 'min-content 1fr', width: '100%'}}>
+			<Box>
+				<Box sx={{display: 'flex', gap: 1, padding: 2}}>
+					{ buttons.map((button, index) => {
+						return (
+							<>
+							<Box key={index}>
+								<Typography component="p">{button.label}</Typography>
+								<Button
+									key={index}
+									variant="contained"
+									color="secondary"
+									onClick={async () => {
+
+										if ( currentProcess && currentlyActiveButton === button ) {
+											await currentProcess.kill();
+											setCurrentlyActiveButton(null);
+											setCurrentProcess(null);
+											return;
+										}
+
+										setTerminalOutput('Starting: ' + button.command + '\r\n');
+
+										// Kill any running processes in this terminal.
+										if (currentProcess) {
+											await currentProcess.kill();
+										}
+
+										// Run the command assigned to this button.
+										webContainer.runCommand({
+											command: button.command,
+											commandArgs: button.commandArgs,
+											commandOptions: button.commandOptions,
+											onOutput: async (data) => {
+												setTerminalOutput(data);
+											},
+											onProcessStart: (process) => {
+												setCurrentlyActiveButton(button);
+												setCurrentProcess(process);
+												console.log('Process started:', process);
+											},
+											onProcessEnd: (exitCode) => {
+												setCurrentlyActiveButton(null);
+												setCurrentProcess(null);
+												console.log('Process ended with exit code:', exitCode);
+											}
+										})
+									}}
+								>
+									{ currentProcess && currentlyActiveButton === button ? button.killLabel : button.runLabel }
+								</Button>
+							</Box>
+							<Divider orientation="vertical" />
+							</>
+						)
+					})}
+				</Box>
+				{/* <Button
+					variant="contained" color="secondary" 
+					onClick={() => {
+						webContainer.runCommand( 'npm', ['run', 'pluginade-install'], {cwd: pluginData.plugin_dirname}, async (data) => {
+							setTerminalOutput(data);
+							const pluginFilesFromWebContainer = await webContainer.instance.getPluginFiles(pluginData.plugin_dirname);
+							copyDirToLocal( pluginData.dirHandle, pluginData.plugin_dirname, pluginFilesFromWebContainer );
+						})
+					}}>Run npm install</Button> */}
+			</Box>
 			
 			<Terminal terminalOutput={terminalOutput} setTerminalOutput={setTerminalOutput} />
 			

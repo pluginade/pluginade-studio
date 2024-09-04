@@ -12,18 +12,31 @@ export default () => {
 		doSetUp();
 	}, []);
 
-	async function runCommandInWebContainer( command, args = [], options = {}, onOutput ) {
-		const installProcess = await webContainer.spawn(command, args, options);
+	async function runCommandInWebContainer( command, args = [], options = {}, onOutput, onProcessStart, onProcessEnd ) {
+		const webContainerProcess = await webContainer.spawn(command, args, options);
 
-		installProcess.output.pipeTo(new WritableStream({
-		write(data) {
-			onOutput(data);
+		if (onProcessStart) {
+			onProcessStart(webContainerProcess);
 		}
+
+		webContainerProcess.output.pipeTo(new WritableStream({
+			write(data) {
+				onOutput(data);
+			}
 		}));
+
+		const exitCode = await webContainerProcess.exit;
+		onProcessEnd(exitCode);
+	}
+
+	async function getPluginFiles( plugin_dirname ) {
+		const files = await webContainer.fs.readdir( plugin_dirname );
+		return files;
 	}
 
 	return {
 		instance: webContainer,
-		runCommand: runCommandInWebContainer
+		runCommand: runCommandInWebContainer,
+		getPluginFiles,
 	}
 }

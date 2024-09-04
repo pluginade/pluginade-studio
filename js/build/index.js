@@ -28890,9 +28890,6 @@ function PluginadeApp() {
   const [currentPluginTab, setCurrentPluginTabState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const webContainer = (0,_stackblitz_useWebContainer__WEBPACK_IMPORTED_MODULE_14__["default"])();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (!webContainer.instance) {
-      return;
-    }
     actuallyOpenPlugins.forEach(async plugin => {
       const directoryHandleOrUndefined = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.get)(plugin);
       if (directoryHandleOrUndefined) {
@@ -28901,7 +28898,7 @@ function PluginadeApp() {
         openPlugin(null);
       }
     });
-  }, [webContainer.instance]);
+  }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
     if (!currentPluginTab) {
@@ -28953,17 +28950,6 @@ function PluginadeApp() {
         pluginData.plugin_dirname = dirHandle.name;
         isWpPlugin = true;
         pluginData.filesObject = await getFilesObject(dirHandle);
-
-        // Mount the plugin into the webContainer.
-        if (webContainer.instance) {
-          // Make a directory in the webContainer for this plugin
-          await webContainer.instance.fs.mkdir(pluginData.plugin_dirname);
-          await webContainer.instance.mount(pluginData.filesObject, {
-            mountPoint: pluginData.plugin_dirname
-          });
-          const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
-          console.log('mounted?', content);
-        }
         let hasWpModules = false;
         for await (const possibleWpModulesEntry of dirHandle.values()) {
           if (possibleWpModulesEntry.name === 'wp-modules') {
@@ -29327,9 +29313,17 @@ function Plugin({
           padding: 2,
           overflow: 'hidden'
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(Webpack, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(WebContainerTerminal, {
           webContainer: webContainer,
-          pluginData: pluginDataState
+          pluginData: pluginDataState,
+          buttons: [{
+            label: 'Run webpack in watch mode',
+            runLabel: 'Start webpack watch',
+            killLabel: 'Stop webpack watch',
+            command: 'npm',
+            commandArgs: ['run', 'pluginade-webpack-dev'],
+            commandOptions: {}
+          }]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
         id: `plugin-tabpanel-phpunit`,
@@ -29360,22 +29354,24 @@ function Plugin({
           gap: 2,
           padding: 2
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-          sx: {
-            display: 'grid',
-            gap: 2
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
-              component: "p",
-              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To scan your code using WPCS, run following in a terminal window:')
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(CopyCode, {
-            language: "bash",
-            code: `cd ${pluginDataState.plugin_path}; \n
-						sh pluginade.sh lint:php;
-						`
-          })]
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(WebContainerTerminal, {
+          webContainer: webContainer,
+          pluginData: pluginDataState,
+          buttons: [{
+            label: 'Lint the javascript in the plugin',
+            runLabel: 'Start linting the javascript',
+            killLabel: 'Stop linting the javascript',
+            command: 'npm',
+            commandArgs: ['run', 'pluginade-lint-js'],
+            commandOptions: {}
+          }, {
+            label: 'Fix linting issues in the javascript in the plugin',
+            runLabel: 'Fix linting issues',
+            killLabel: 'Stop fixing linting issues',
+            command: 'npm',
+            commandArgs: ['run', 'pluginade-lint-js'],
+            commandOptions: {}
+          }]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
         id: `plugin-tabpanel-modules`,
@@ -29408,31 +29404,95 @@ function Plugin({
     })]
   });
 }
-function Webpack({
+function WebContainerTerminal({
   webContainer,
-  pluginData
+  pluginData,
+  buttons
 }) {
-  const [terminalOutput, setTerminalOutput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('Starting Webpack...');
+  const [terminalOutput, setTerminalOutput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [currentlyActiveButton, setCurrentlyActiveButton] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [currentProcess, setCurrentProcess] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    async function mountPlugin() {
+      // Mount the plugin into the webContainer.
+      if (webContainer.instance) {
+        // Make a directory in the webContainer for this plugin
+        await webContainer.instance.fs.mkdir(pluginData.plugin_dirname);
+        await webContainer.instance.mount(pluginData.filesObject, {
+          mountPoint: pluginData.plugin_dirname
+        });
+        const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
+        console.log('mounted?', content);
+      }
+    }
+    mountPlugin();
+  }, [webContainer.instance]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
     sx: {
       display: 'grid',
-      gap: 2,
+      gap: 1,
       overflow: 'hidden',
-      gridTemplateRows: 'min-content min-content 1fr',
+      gridTemplateRows: 'min-content 1fr',
       width: '100%'
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
-      component: "h2",
-      children: "Webpack"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
-      onClick: () => {
-        webContainer.runCommand('npm', ['run', 'pluginade-install'], {
-          cwd: pluginData.plugin_dirname
-        }, data => {
-          setTerminalOutput(data);
-        });
-      },
-      children: "Run npm install"
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        sx: {
+          display: 'flex',
+          gap: 1,
+          padding: 2
+        },
+        children: buttons.map((button, index) => {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
+                component: "p",
+                children: button.label
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+                variant: "contained",
+                color: "secondary",
+                onClick: async () => {
+                  if (currentProcess && currentlyActiveButton === button) {
+                    await currentProcess.kill();
+                    setCurrentlyActiveButton(null);
+                    setCurrentProcess(null);
+                    return;
+                  }
+                  setTerminalOutput('Starting: ' + button.command + '\r\n');
+
+                  // Kill any running processes in this terminal.
+                  if (currentProcess) {
+                    await currentProcess.kill();
+                  }
+
+                  // Run the command assigned to this button.
+                  webContainer.runCommand({
+                    command: button.command,
+                    commandArgs: button.commandArgs,
+                    commandOptions: button.commandOptions,
+                    onOutput: async data => {
+                      setTerminalOutput(data);
+                    },
+                    onProcessStart: process => {
+                      setCurrentlyActiveButton(button);
+                      setCurrentProcess(process);
+                      console.log('Process started:', process);
+                    },
+                    onProcessEnd: exitCode => {
+                      setCurrentlyActiveButton(null);
+                      setCurrentProcess(null);
+                      console.log('Process ended with exit code:', exitCode);
+                    }
+                  });
+                },
+                children: currentProcess && currentlyActiveButton === button ? button.killLabel : button.runLabel
+              }, index)]
+            }, index), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+              orientation: "vertical"
+            })]
+          });
+        })
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {
       terminalOutput: terminalOutput,
       setTerminalOutput: setTerminalOutput
@@ -29998,17 +30058,27 @@ __webpack_require__.r(__webpack_exports__);
     }
     doSetUp();
   }, []);
-  async function runCommandInWebContainer(command, args = [], options = {}, onOutput) {
-    const installProcess = await webContainer.spawn(command, args, options);
-    installProcess.output.pipeTo(new WritableStream({
+  async function runCommandInWebContainer(command, args = [], options = {}, onOutput, onProcessStart, onProcessEnd) {
+    const webContainerProcess = await webContainer.spawn(command, args, options);
+    if (onProcessStart) {
+      onProcessStart(webContainerProcess);
+    }
+    webContainerProcess.output.pipeTo(new WritableStream({
       write(data) {
         onOutput(data);
       }
     }));
+    const exitCode = await webContainerProcess.exit;
+    onProcessEnd(exitCode);
+  }
+  async function getPluginFiles(plugin_dirname) {
+    const files = await webContainer.fs.readdir(plugin_dirname);
+    return files;
   }
   return {
     instance: webContainer,
-    runCommand: runCommandInWebContainer
+    runCommand: runCommandInWebContainer,
+    getPluginFiles
   };
 });
 
@@ -30155,19 +30225,19 @@ async function copyDirToLocal(parentDirHandle, topLevelDirectoryName, directoryF
     theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName, {
       create: true
     });
-    for (const fileData of directoryFiles) {
-      if (fileData.type === 'dir') {
+    for (const filename of Object.keys(directoryFiles)) {
+      if ('directory' in directoryFiles[filename]) {
         // Add these files in a subdirectory of the current parent.
-        await copyDirToLocal(theMainDirHandle, fileData.name, fileData.contents);
+        await copyDirToLocal(theMainDirHandle, filename, directoryFiles[filename].directory);
       }
-      if (fileData.type === 'file') {
-        console.log('copying', fileData.name);
-        const fileHandle = await theMainDirHandle.getFileHandle(fileData.name, {
+      if ('file' in directoryFiles[filename]) {
+        console.log('copying', filename);
+        const fileHandle = await theMainDirHandle.getFileHandle(filename, {
           create: true
         });
         try {
           const writable = await fileHandle.createWritable();
-          await writable.write(fileData.content);
+          await writable.write(directoryFiles[filename].file.contents);
           await writable.close();
         } catch (error) {
           console.log(fileData);

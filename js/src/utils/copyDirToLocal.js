@@ -10,17 +10,17 @@ export default async function copyDirToLocal(parentDirHandle, topLevelDirectoryN
         // If not, create the directory
         theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName, { create: true });
 
-        for (const fileData of directoryFiles) {
-            if (fileData.type === 'dir') {
+        for ( const filename of Object.keys( directoryFiles ) ) {
+            if ( 'directory' in directoryFiles[filename] ) {
                 // Add these files in a subdirectory of the current parent.
-                await copyDirToLocal(theMainDirHandle, fileData.name, fileData.contents);
+                await copyDirToLocal(theMainDirHandle, filename, directoryFiles[filename].directory);
             }
-            if (fileData.type === 'file') {
-                console.log('copying', fileData.name);
-                const fileHandle = await theMainDirHandle.getFileHandle(fileData.name, { create: true });
+            if ( 'file' in directoryFiles[filename] ) {
+                console.log('copying', filename);
+                const fileHandle = await theMainDirHandle.getFileHandle(filename, { create: true });
                 try {
                     const writable = await fileHandle.createWritable();
-                    await writable.write(fileData.content);
+                    await writable.write(directoryFiles[filename].file.contents);
                     await writable.close();
                 } catch (error) {
                     console.log(fileData);
@@ -29,7 +29,6 @@ export default async function copyDirToLocal(parentDirHandle, topLevelDirectoryN
             }
         }
 
-        
         return theMainDirHandle;
 
     }
