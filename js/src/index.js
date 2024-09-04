@@ -604,7 +604,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 											commandOptions: button.commandOptions,
 											onOutput: async (data) => {
 												setTerminalOutput(data);
-												const pluginFilesFromWebContainer = await webContainer.instance.getPluginFiles(pluginData.plugin_dirname);
+												const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
 												console.log( 'File in web container:', pluginFilesFromWebContainer );
 												copyDirToLocal( pluginData.dirHandle, pluginData.plugin_dirname, pluginFilesFromWebContainer );
 											},
