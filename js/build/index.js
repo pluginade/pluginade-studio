@@ -28722,6 +28722,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var use_debounce__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! use-debounce */ "./node_modules/use-debounce/dist/index.module.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
 /* harmony import */ var https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js */ "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index.scss */ "./js/src/index.scss");
@@ -28739,12 +28740,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
 /* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
 /* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
-/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
-/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
-/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
-/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
-/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
+/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
+/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
+/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
+/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
 /* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
 /* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
 /* harmony import */ var _PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./PwaInstallButton */ "./js/src/PwaInstallButton.js");
@@ -28761,6 +28762,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__]);
 https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -28815,6 +28817,7 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 // 	});
 // }
 
+console.log('Pluginade Studio V0.0.1');
 const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_20__["default"])({
   palette: {
     mode: 'light',
@@ -29191,21 +29194,22 @@ function CreatePlugin({
         try {
           // Prompt user to select a directory
           const parentDirHandle = await window.showDirectoryPicker();
-          const files = await (0,_utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_13__["default"])();
-          const pluginDirHandle = await (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(parentDirHandle, pluginDataState.plugin_dirname, files);
-          const stringFixerResult = await (0,_utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_18__["default"])(pluginDirHandle, pluginDataState);
-          console.log(stringFixerResult);
-          setLoading(false);
-          if (pluginDirHandle === 'dir-already-exists') {
+          try {
+            await parentDirHandle.getDirectoryHandle(pluginDataState.plugin_dirname);
+            setLoading(false);
             setCreationState('error');
             setCreationMessage('Directory already exists');
+            return;
+          } catch (error) {
+            const files = await (0,_utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_13__["default"])();
+            const pluginDirHandle = await (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(parentDirHandle, files, pluginDataState.plugin_dirname);
+            const stringFixerResult = await (0,_utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_18__["default"])(pluginDirHandle, pluginDataState);
+            console.log(stringFixerResult);
+            setLoading(false);
+            setCreationState('success');
+            setCreationMessage('Plugin successfully created');
+            openPlugin(pluginDirHandle);
           }
-
-          // if ( copyResult === 'success' ) {
-          setCreationState('success');
-          setCreationMessage('Plugin successfully created');
-          openPlugin(pluginDirHandle);
-          // }
         } catch (error) {
           setLoading(false);
           setCreationState('error');
@@ -29433,6 +29437,9 @@ function WebContainerTerminal({
     }
     mountPlugin();
   }, [webContainer.instance]);
+  const terminalOutputDebounced = (0,use_debounce__WEBPACK_IMPORTED_MODULE_33__.useDebouncedCallback)(callbackFunction => {
+    callbackFunction();
+  }, 100);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
     sx: {
       display: 'grid',
@@ -29478,9 +29485,13 @@ function WebContainerTerminal({
                     commandOptions: button.commandOptions,
                     onOutput: async data => {
                       setTerminalOutput(data);
-                      const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
-                      console.log('File in web container:', pluginFilesFromWebContainer);
-                      (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(pluginData.dirHandle, pluginData.plugin_dirname, pluginFilesFromWebContainer);
+
+                      // When the output stops for x seconds, copy the files from the web container to the local file system.
+                      terminalOutputDebounced(async () => {
+                        const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
+                        console.log('Filez in web container:', pluginFilesFromWebContainer);
+                        (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(pluginData.dirHandle, pluginFilesFromWebContainer);
+                      });
                     },
                     onProcessStart: process => {
                       setCurrentlyActiveButton(button);
@@ -29551,14 +29562,14 @@ function Modules({
         borderColor: 'background20.default',
         borderRadius: 2
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_List__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_List__WEBPACK_IMPORTED_MODULE_34__["default"], {
         sx: {
           overflow: 'auto',
           borderRight: '1px solid',
           borderRightColor: 'background20.default',
           backgroundColor: 'background20.default'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_34__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_35__["default"], {
           disablePadding: true,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
             sx: {
@@ -29581,12 +29592,12 @@ function Modules({
             })
           })
         }), Object.keys(thisPluginsModules).map((module, index) => {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_34__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_35__["default"], {
             disablePadding: true,
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_35__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_36__["default"], {
               selected: currentModule === module,
               onClick: () => setCurrentModule(module),
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_36__["default"], {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_37__["default"], {
                 primary: thisPluginsModules[module].name
               })
             })
@@ -29664,7 +29675,7 @@ function CreateModule({
           setLoading(true);
           onSubmit(event, setLoading);
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_37__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
           label: "Plugin Name",
           variant: "outlined",
           fullWidth: true,
@@ -29675,7 +29686,7 @@ function CreateModule({
             plugin_name: event.target.value,
             plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_37__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
           label: "Plugin Namespace",
           variant: "outlined",
           fullWidth: true,
@@ -29685,7 +29696,7 @@ function CreateModule({
             ...pluginDataState,
             plugin_namespace: event.target.value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_37__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
           label: "Plugin Description",
           variant: "outlined",
           fullWidth: true,
@@ -29695,7 +29706,7 @@ function CreateModule({
             ...pluginDataState,
             plugin_description: event.target.value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_37__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
           label: "Plugin Version",
           variant: "outlined",
           fullWidth: true,
@@ -29705,7 +29716,7 @@ function CreateModule({
             ...pluginDataState,
             plugin_version: event.target.value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_37__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
           label: "Plugin Author",
           variant: "outlined",
           fullWidth: true,
@@ -29715,7 +29726,7 @@ function CreateModule({
             ...pluginDataState,
             plugin_author: event.target.value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_37__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
           label: "Plugin Author URI",
           variant: "outlined",
           fullWidth: true,
@@ -29729,7 +29740,7 @@ function CreateModule({
           type: "submit",
           variant: "contained",
           color: "secondary",
-          children: creationState === 'creating' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_38__["default"], {
+          children: creationState === 'creating' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_39__["default"], {
             size: 24
           }) : 'Update Module files'
         })]
@@ -29814,7 +29825,7 @@ function PluginDataForm({
       },
       component: "h2",
       children: "Create a new plugin"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_37__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
       label: "Plugin Name",
       variant: "outlined",
       fullWidth: true,
@@ -30230,39 +30241,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ copyDirToLocal)
 /* harmony export */ });
-async function copyDirToLocal(parentDirHandle, topLevelDirectoryName, directoryFiles) {
+async function copyDirToLocal(parentDirHandle, directoryFiles, topLevelDirectoryName = null) {
   // Check if a subdirectory exists
   let theMainDirHandle;
-  try {
-    theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName);
-    return 'dir-already-exists';
-  } catch (error) {
-    // If not, create the directory
-    theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName, {
-      create: true
-    });
-    for (const filename of Object.keys(directoryFiles)) {
-      if ('directory' in directoryFiles[filename]) {
-        // Add these files in a subdirectory of the current parent.
-        await copyDirToLocal(theMainDirHandle, filename, directoryFiles[filename].directory);
-      }
-      if ('file' in directoryFiles[filename]) {
-        console.log('copying', filename);
-        const fileHandle = await theMainDirHandle.getFileHandle(filename, {
-          create: true
-        });
-        try {
-          const writable = await fileHandle.createWritable();
-          await writable.write(directoryFiles[filename].file.contents);
-          await writable.close();
-        } catch (error) {
-          console.log(fileData);
-          console.log(error);
-        }
+
+  // Create a directory for the top level directory, unless it is blank. If blank, just copy the files to the parent directory.
+  if (topLevelDirectoryName) {
+    try {
+      theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName);
+    } catch (error) {
+      // If not, create the directory
+      theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName, {
+        create: true
+      });
+    }
+  } else {
+    theMainDirHandle = parentDirHandle;
+  }
+  for (const filename of Object.keys(directoryFiles)) {
+    if ('directory' in directoryFiles[filename]) {
+      // Add these files in a subdirectory of the current parent.
+      await copyDirToLocal(theMainDirHandle, directoryFiles[filename].directory, filename);
+    }
+    if ('file' in directoryFiles[filename]) {
+      console.log('copying', filename);
+      const fileHandle = await theMainDirHandle.getFileHandle(filename, {
+        create: true
+      });
+      try {
+        const writable = await fileHandle.createWritable();
+        await writable.write(directoryFiles[filename].file.contents);
+        await writable.close();
+      } catch (error) {
+        console.log(fileData);
+        console.log(error);
       }
     }
-    return theMainDirHandle;
   }
+  return theMainDirHandle;
 }
 
 /***/ }),
@@ -68635,6 +68651,27 @@ Tannin.prototype.dcnpgettext = function( domain, context, singular, plural, n ) 
 	// representing the singular value.
 	return index === 0 ? singular : plural;
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/use-debounce/dist/index.module.js":
+/*!********************************************************!*\
+  !*** ./node_modules/use-debounce/dist/index.module.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useDebounce: () => (/* binding */ o),
+/* harmony export */   useDebouncedCallback: () => (/* binding */ c),
+/* harmony export */   useThrottledCallback: () => (/* binding */ f)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function c(e,u,c){var i=this,a=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),o=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0),f=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),l=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)([]),v=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),m=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),d=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(e),g=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(!0);d.current=e;var p="undefined"!=typeof window,w=!u&&0!==u&&p;if("function"!=typeof e)throw new TypeError("Expected a function");u=+u||0;var s=!!(c=c||{}).leading,x=!("trailing"in c)||!!c.trailing,h="maxWait"in c,y="debounceOnServer"in c&&!!c.debounceOnServer,F=h?Math.max(+c.maxWait||0,u):null;(0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function(){return g.current=!0,function(){g.current=!1}},[]);var A=(0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function(){var r=function(r){var n=l.current,t=v.current;return l.current=v.current=null,o.current=r,m.current=d.current.apply(t,n)},n=function(r,n){w&&cancelAnimationFrame(f.current),f.current=w?requestAnimationFrame(r):setTimeout(r,n)},t=function(r){if(!g.current)return!1;var n=r-a.current;return!a.current||n>=u||n<0||h&&r-o.current>=F},e=function(n){return f.current=null,x&&l.current?r(n):(l.current=v.current=null,m.current)},c=function r(){var c=Date.now();if(t(c))return e(c);if(g.current){var i=u-(c-a.current),f=h?Math.min(i,F-(c-o.current)):i;n(r,f)}},A=function(){if(p||y){var e=Date.now(),d=t(e);if(l.current=[].slice.call(arguments),v.current=i,a.current=e,d){if(!f.current&&g.current)return o.current=a.current,n(c,u),s?r(a.current):m.current;if(h)return n(c,u),r(a.current)}return f.current||n(c,u),m.current}};return A.cancel=function(){f.current&&(w?cancelAnimationFrame(f.current):clearTimeout(f.current)),o.current=0,l.current=a.current=v.current=f.current=null},A.isPending=function(){return!!f.current},A.flush=function(){return f.current?e(Date.now()):m.current},A},[s,h,u,F,x,w,p,y]);return A}function i(r,n){return r===n}function a(r,n){return n}function o(n,t,o){var f=o&&o.equalityFn||i,l=(0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(a,n),v=l[0],m=l[1],d=c((0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function(r){return m(r)},[m]),t,o),g=(0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(n);return f(g.current,n)||(d(n),g.current=n),f(v,n)&&d.cancel(),[v,d]}function f(r,n,t){var e=void 0===t?{}:t,u=e.leading,i=e.trailing;return c(r,n,{maxWait:n,leading:void 0===u||u,trailing:void 0===i||i})}
+//# sourceMappingURL=index.module.js.map
 
 
 /***/ }),
