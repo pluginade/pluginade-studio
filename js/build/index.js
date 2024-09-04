@@ -29318,30 +29318,7 @@ function Plugin({
           gap: 2,
           padding: 2,
           overflow: 'hidden'
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(WebContainerTerminal, {
-          webContainer: webContainer,
-          pluginData: pluginDataState,
-          buttons: [{
-            label: 'Build webpack for production',
-            runLabel: 'Build webpack',
-            killLabel: 'Stop build',
-            command: 'npm',
-            commandArgs: ['run', 'pluginade-webpack-build'],
-            commandOptions: {
-              cwd: pluginDataState.plugin_dirname
-            }
-          }, {
-            label: 'Run webpack in watch mode',
-            runLabel: 'Start webpack watch',
-            killLabel: 'Stop webpack watch',
-            command: 'npm',
-            commandArgs: ['run', 'pluginade-webpack-dev'],
-            commandOptions: {
-              cwd: pluginDataState.plugin_dirname
-            }
-          }]
-        })
+        }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         id: `plugin-tabpanel-phpunit`,
         sx: {

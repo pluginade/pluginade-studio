@@ -495,7 +495,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 			<Divider />
 			<Box className="plugin-content" sx={{display: 'grid', overflow: 'hidden'}}>
 				<Box id={`plugin-tabpanel-webpack`} sx={{display: 'webpack' === currentTab ? 'flex' : 'none', gap: 2, padding: 2, overflow: 'hidden'}}>
-					<WebContainerTerminal webContainer={webContainer} pluginData={pluginDataState} buttons={
+					{/* <WebContainerTerminal webContainer={webContainer} pluginData={pluginDataState} buttons={
 						[
 							{
 								label: 'Build webpack for production',
@@ -514,7 +514,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 								commandOptions: {cwd: pluginDataState.plugin_dirname}
 							},
 						]
-					} />
+					} /> */}
 				</Box>
 				<Box id={`plugin-tabpanel-phpunit`} sx={{display: 'phpunit' === currentTab ? 'flex' : 'none', gap: 2, padding: 2}}>
 					<Box sx={{display: 'grid', gap: 2}}>
