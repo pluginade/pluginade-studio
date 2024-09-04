@@ -29323,7 +29323,7 @@ function Plugin({
             command: 'npm',
             commandArgs: ['run', 'pluginade-webpack-dev'],
             commandOptions: {
-              cwd: pluginData.plugin_dirname
+              cwd: pluginDataState.plugin_dirname
             }
           }]
         })
@@ -29366,7 +29366,7 @@ function Plugin({
             command: 'npm',
             commandArgs: ['run', 'pluginade-lint-js'],
             commandOptions: {
-              cwd: pluginData.plugin_dirname
+              cwd: pluginDataState.plugin_dirname
             }
           }, {
             label: 'Fix linting issues in the javascript in the plugin',
@@ -29375,7 +29375,7 @@ function Plugin({
             command: 'npm',
             commandArgs: ['run', 'pluginade-lint-js'],
             commandOptions: {
-              cwd: pluginData.plugin_dirname
+              cwd: pluginDataState.plugin_dirname
             }
           }]
         })

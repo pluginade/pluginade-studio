@@ -500,7 +500,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 								killLabel: 'Stop webpack watch',
 								command: 'npm',
 								commandArgs: ['run', 'pluginade-webpack-dev'],
-								commandOptions: {cwd: pluginData.plugin_dirname}
+								commandOptions: {cwd: pluginDataState.plugin_dirname}
 							},
 						]
 					} />
@@ -522,7 +522,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 								killLabel: 'Stop linting the javascript',
 								command: 'npm',
 								commandArgs: ['run', 'pluginade-lint-js'],
-								commandOptions: {cwd: pluginData.plugin_dirname}
+								commandOptions: {cwd: pluginDataState.plugin_dirname}
 							},
 							{
 								label: 'Fix linting issues in the javascript in the plugin',
@@ -530,7 +530,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 								killLabel: 'Stop fixing linting issues',
 								command: 'npm',
 								commandArgs: ['run', 'pluginade-lint-js'],
-								commandOptions: {cwd: pluginData.plugin_dirname}
+								commandOptions: {cwd: pluginDataState.plugin_dirname}
 							}
 						]
 					} />
