@@ -569,13 +569,13 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				console.log( 'mounted?', content );
 
 				// Watch the container for file changes, and update the local file system to match.
-				webContainer.instance.fs.watch( pluginData.plugin_dirname, async (changes) => {
-					console.log( 'Changes:', changes );
-					const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
-					console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
-					copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+				// webContainer.instance.fs.watch( pluginData.plugin_dirname, async (changes) => {
+				// 	console.log( 'Changes:', changes );
+				// 	const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+				// 	console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
+				// 	copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
 					
-				});
+				// });
 			}
 		}
 		mountPlugin();
@@ -623,13 +623,6 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 												commandOptions: button.commandOptions,
 												onOutput: async (data) => {
 													setTerminalOutput(data);
-													
-													// When the output stops for x seconds, copy the files from the web container to the local file system.
-													// terminalOutputDebounced(async () => {
-													// 	const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
-													// 	console.log( 'Filez in web container:', pluginFilesFromWebContainer );
-													// 	copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-													// })
 												},
 												onProcessStart: (process) => {
 													setCurrentlyActiveButton(button);
@@ -640,6 +633,12 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 													setCurrentlyActiveButton(null);
 													setCurrentProcess(null);
 													console.log('Process ended with exit code:', exitCode);
+													// When the output stops for x seconds, copy the files from the web container to the local file system.
+													terminalOutputDebounced(async () => {
+														const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+														console.log( 'Filez in web container:', pluginFilesFromWebContainer );
+														copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+													})
 												}
 											})
 										}}
