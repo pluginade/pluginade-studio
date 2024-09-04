@@ -30,7 +30,7 @@ export default () => {
 	}
 
 	async function getPluginFiles( plugin_dirname ) {
-		const files = await webContainer.fs.readdir( plugin_dirname );
+		const files = await webContainer.fs.readdir( plugin_dirname, {withFileTypes: true}  );
 		return files;
 	}
 

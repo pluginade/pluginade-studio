@@ -30099,7 +30099,9 @@ __webpack_require__.r(__webpack_exports__);
     onProcessEnd(exitCode);
   }
   async function getPluginFiles(plugin_dirname) {
-    const files = await webContainer.fs.readdir(plugin_dirname);
+    const files = await webContainer.fs.readdir(plugin_dirname, {
+      withFileTypes: true
+    });
     return files;
   }
   return {
