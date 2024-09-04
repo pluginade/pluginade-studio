@@ -28900,7 +28900,6 @@ function PluginadeApp() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
     if (!currentPluginTab) {
-      console.log('sgsdg', Object.keys(plugins));
       setCurrentPluginTabState(Object.keys(plugins).length > 0 ? Object.keys(plugins)[0] : null);
     }
   }, [plugins]);
@@ -28953,11 +28952,11 @@ function PluginadeApp() {
         // Mount the plugin into the webContainer.
         if (webContainer.instance) {
           // Make a directory in the webContainer for this plugin
-          await webcontainerInstance.fs.mkdir(pluginData.plugin_dirname);
-          webContainer.instance.mount(pluginData.filesObject, {
+          await webContainer.instance.fs.mkdir(pluginData.plugin_dirname);
+          await webContainer.instance.mount(pluginData.filesObject, {
             mountPoint: pluginData.plugin_dirname
           });
-          const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/package.json', 'utf-8');
+          const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
           console.log('mounted?', content);
         }
         let hasWpModules = false;
