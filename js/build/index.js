@@ -28719,49 +28719,52 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var use_debounce__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! use-debounce */ "./node_modules/use-debounce/dist/index.module.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
-/* harmony import */ var https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js */ "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index.scss */ "./js/src/index.scss");
-/* harmony import */ var _fontsource_roboto_300_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fontsource/roboto/300.css */ "./node_modules/@fontsource/roboto/300.css");
-/* harmony import */ var _fontsource_roboto_400_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fontsource/roboto/400.css */ "./node_modules/@fontsource/roboto/400.css");
-/* harmony import */ var _fontsource_roboto_500_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fontsource/roboto/500.css */ "./node_modules/@fontsource/roboto/500.css");
-/* harmony import */ var _fontsource_roboto_700_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fontsource/roboto/700.css */ "./node_modules/@fontsource/roboto/700.css");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
-/* harmony import */ var _mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @mui/material/useMediaQuery */ "./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/createTheme.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/ThemeProvider.js");
-/* harmony import */ var _mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/Divider */ "./node_modules/@mui/material/Divider/Divider.js");
-/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
-/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
-/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
-/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
-/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
-/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
-/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
-/* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
-/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
-/* harmony import */ var _PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./PwaInstallButton */ "./js/src/PwaInstallButton.js");
-/* harmony import */ var _menuFile__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./menuFile */ "./js/src/menuFile.js");
-/* harmony import */ var _menuEdit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./menuEdit */ "./js/src/menuEdit.js");
-/* harmony import */ var _Code__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Code */ "./js/src/Code.js");
-/* harmony import */ var _mui_icons_material_GitHub__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @mui/icons-material/GitHub */ "./node_modules/@mui/icons-material/GitHub.js");
-/* harmony import */ var _utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utils/boilerPlugin */ "./js/src/utils/boilerPlugin.js");
-/* harmony import */ var _stackblitz_useWebContainer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./stackblitz/useWebContainer */ "./js/src/stackblitz/useWebContainer.js");
-/* harmony import */ var _Terminal__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Terminal */ "./js/src/Terminal.js");
-/* harmony import */ var _utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./utils/copyDirToLocal */ "./js/src/utils/copyDirToLocal.js");
-/* harmony import */ var _utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./utils/parsePluginHeader */ "./js/src/utils/parsePluginHeader.js");
-/* harmony import */ var _utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./utils/fixPluginHeader */ "./js/src/utils/fixPluginHeader.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__]);
-https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/* harmony import */ var _version_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./version.js */ "./js/src/version.js");
+/* harmony import */ var _version_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_version_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var use_debounce__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! use-debounce */ "./node_modules/use-debounce/dist/index.module.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
+/* harmony import */ var https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js */ "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./index.scss */ "./js/src/index.scss");
+/* harmony import */ var _fontsource_roboto_300_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fontsource/roboto/300.css */ "./node_modules/@fontsource/roboto/300.css");
+/* harmony import */ var _fontsource_roboto_400_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fontsource/roboto/400.css */ "./node_modules/@fontsource/roboto/400.css");
+/* harmony import */ var _fontsource_roboto_500_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fontsource/roboto/500.css */ "./node_modules/@fontsource/roboto/500.css");
+/* harmony import */ var _fontsource_roboto_700_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fontsource/roboto/700.css */ "./node_modules/@fontsource/roboto/700.css");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @mui/material/useMediaQuery */ "./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js");
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/createTheme.js");
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/ThemeProvider.js");
+/* harmony import */ var _mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @mui/material/Divider */ "./node_modules/@mui/material/Divider/Divider.js");
+/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/CssBaseline.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @mui/material/Tabs */ "./node_modules/@mui/material/Tabs/Tabs.js");
+/* harmony import */ var _mui_material_Tab__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @mui/material/Tab */ "./node_modules/@mui/material/Tab/Tab.js");
+/* harmony import */ var _mui_material_List__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @mui/material/List */ "./node_modules/@mui/material/List/List.js");
+/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
+/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
+/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
+/* harmony import */ var _mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @mui/material/LinearProgress */ "./node_modules/@mui/material/LinearProgress/LinearProgress.js");
+/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/Alert.js");
+/* harmony import */ var _PwaInstallButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./PwaInstallButton */ "./js/src/PwaInstallButton.js");
+/* harmony import */ var _menuFile__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./menuFile */ "./js/src/menuFile.js");
+/* harmony import */ var _menuEdit__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./menuEdit */ "./js/src/menuEdit.js");
+/* harmony import */ var _Code__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Code */ "./js/src/Code.js");
+/* harmony import */ var _mui_icons_material_GitHub__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @mui/icons-material/GitHub */ "./node_modules/@mui/icons-material/GitHub.js");
+/* harmony import */ var _utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./utils/boilerPlugin */ "./js/src/utils/boilerPlugin.js");
+/* harmony import */ var _stackblitz_useWebContainer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./stackblitz/useWebContainer */ "./js/src/stackblitz/useWebContainer.js");
+/* harmony import */ var _Terminal__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Terminal */ "./js/src/Terminal.js");
+/* harmony import */ var _utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./utils/copyDirToLocal */ "./js/src/utils/copyDirToLocal.js");
+/* harmony import */ var _utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./utils/parsePluginHeader */ "./js/src/utils/parsePluginHeader.js");
+/* harmony import */ var _utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./utils/fixPluginHeader */ "./js/src/utils/fixPluginHeader.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_4__]);
+https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_4__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -28817,8 +28820,7 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 // 	});
 // }
 
-console.log('Pluginade Studio V0.0.4');
-const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_20__["default"])({
+const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_21__["default"])({
   palette: {
     mode: 'light',
     primary: {
@@ -28839,7 +28841,7 @@ const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_20__["defaul
     }
   }
 });
-const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_20__["default"])({
+const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_21__["default"])({
   palette: {
     mode: 'dark',
     primary: {
@@ -28866,7 +28868,7 @@ const DarkTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_20__["default
   }
 });
 const domNode = document.getElementById('pluginade');
-const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(domNode);
+const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_2__.createRoot)(domNode);
 function a11yProps(index) {
   return {
     id: `plugin-tab-${index}`,
@@ -28876,7 +28878,7 @@ function a11yProps(index) {
 const thePluginDirHandles = {};
 const pluginadePluginsLocalStorage = window.localStorage.getItem('pluginadePlugins') ? JSON.parse(window.localStorage.getItem('pluginadePlugins')) : [];
 const actuallyOpenPlugins = pluginadePluginsLocalStorage;
-const entriesInIndexDb = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.entries)();
+const entriesInIndexDb = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_4__.entries)();
 entriesInIndexDb.forEach(async entry => {
   if (pluginadePluginsLocalStorage.includes(entry[0])) {
     thePluginDirHandles[entry[0]] = entry[1];
@@ -28886,15 +28888,15 @@ entriesInIndexDb.forEach(async entry => {
   }
 });
 function PluginadeApp() {
-  const prefersDarkMode = (0,_mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_21__["default"])('(prefers-color-scheme: dark)');
-  const [showCreatePlugin, setShowCreatePlugin] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [pluginDirHandles, setPluginDirHandles] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(thePluginDirHandles);
-  const [plugins, setPlugins] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
-  const [currentPluginTab, setCurrentPluginTabState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const webContainer = (0,_stackblitz_useWebContainer__WEBPACK_IMPORTED_MODULE_14__["default"])();
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+  const prefersDarkMode = (0,_mui_material_useMediaQuery__WEBPACK_IMPORTED_MODULE_22__["default"])('(prefers-color-scheme: dark)');
+  const [showCreatePlugin, setShowCreatePlugin] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [pluginDirHandles, setPluginDirHandles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(thePluginDirHandles);
+  const [plugins, setPlugins] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
+  const [currentPluginTab, setCurrentPluginTabState] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const webContainer = (0,_stackblitz_useWebContainer__WEBPACK_IMPORTED_MODULE_15__["default"])();
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     actuallyOpenPlugins.forEach(async plugin => {
-      const directoryHandleOrUndefined = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.get)(plugin);
+      const directoryHandleOrUndefined = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_4__.get)(plugin);
       if (directoryHandleOrUndefined) {
         openPlugin(directoryHandleOrUndefined);
       } else {
@@ -28902,7 +28904,7 @@ function PluginadeApp() {
       }
     });
   }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     window.localStorage.setItem('pluginadePlugins', JSON.stringify(Object.keys(plugins)));
     if (!currentPluginTab) {
       setCurrentPluginTabState(Object.keys(plugins).length > 0 ? Object.keys(plugins)[0] : null);
@@ -28911,7 +28913,7 @@ function PluginadeApp() {
   function setCurrentPluginTab(value) {
     // Make sure we have permission to use the file system for each open plugin.
     Object.keys(plugins).forEach(async plugin => {
-      const directoryHandleOrUndefined = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.get)(plugin);
+      const directoryHandleOrUndefined = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_4__.get)(plugin);
       if (directoryHandleOrUndefined) {
         window.localStorage.setItem('currentPluginTab', value);
         setCurrentPluginTabState(value);
@@ -28920,7 +28922,7 @@ function PluginadeApp() {
         const directoryHandle = await window.showDirectoryPicker({
           mode: 'readwrite'
         });
-        await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.set)(plugin, directoryHandle);
+        await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_4__.set)(plugin, directoryHandle);
         window.localStorage.setItem('currentPluginTab', value);
         setCurrentPluginTabState(value);
         setShowCreatePlugin(false);
@@ -28943,7 +28945,7 @@ function PluginadeApp() {
       if (fileExtension === 'php') {
         const file = await entry.getFile();
         const fileContents = await file.text();
-        const pluginData = (0,_utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_17__["default"])(fileContents);
+        const pluginData = (0,_utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_18__["default"])(fileContents);
 
         // This PHP file did not have a plugin header.
         if (Object.keys(pluginData).length === 0) {
@@ -28971,7 +28973,7 @@ function PluginadeApp() {
           pluginData.plugin_modules = {};
         }
         pluginData.dirHandle = dirHandle;
-        await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.set)(pluginData.plugin_dirname, dirHandle);
+        await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_4__.set)(pluginData.plugin_dirname, dirHandle);
         setPlugins(nonStalePlugins => {
           return {
             ...nonStalePlugins,
@@ -28985,31 +28987,31 @@ function PluginadeApp() {
     }
   }
   if (!('showOpenFilePicker' in self)) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_22__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
       theme: prefersDarkMode ? DarkTheme : DarkTheme,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_23__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_24__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         className: "pluginade-studio",
         sx: {
           display: 'grid',
           gridTemplateRows: 'min-content min-content 1fr'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
           sx: {
             backgroundColor: 'background20.default',
             display: 'flex'
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_26__["default"], {
             sx: {
               padding: 2,
               fontSize: '1em'
             },
             component: "h1",
             children: "Pluginade Studio"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {
             orientation: "vertical"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_27__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_28__["default"], {
             severity: "error",
             children: 'Your browser does not support the File System Access API. Please use a browser that does. (Chrome 86+ or Edge 86+)'
           })
@@ -29017,64 +29019,64 @@ function PluginadeApp() {
       })]
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_22__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
     theme: prefersDarkMode ? DarkTheme : DarkTheme,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_23__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_24__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
       className: "pluginade-studio",
       sx: {
         display: 'grid',
         gridTemplateRows: 'min-content min-content min-content min-content 1fr'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         sx: {
           backgroundColor: 'background20.default',
           display: 'flex'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_26__["default"], {
           sx: {
             padding: 2,
             fontSize: '1em'
           },
           component: "h1",
           children: "Pluginade Studio"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {
           orientation: "vertical"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_menuFile__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_menuFile__WEBPACK_IMPORTED_MODULE_11__["default"], {
           onNewPlugin: () => {
             setShowCreatePlugin(true);
           },
           onOpenPlugin: () => {
             openPlugin();
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {
           orientation: "vertical"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_menuEdit__WEBPACK_IMPORTED_MODULE_11__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_menuEdit__WEBPACK_IMPORTED_MODULE_12__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {
           orientation: "vertical"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
           sx: {
             display: 'flex',
             marginLeft: 'auto'
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {
             orientation: "vertical"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
             href: "https://github.com/pluginade/pluginade-studio",
             "aria-label": "Check out this project on Github",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_icons_material_GitHub__WEBPACK_IMPORTED_MODULE_29__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_icons_material_GitHub__WEBPACK_IMPORTED_MODULE_30__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {
             orientation: "vertical"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_PwaInstallButton__WEBPACK_IMPORTED_MODULE_9__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_PwaInstallButton__WEBPACK_IMPORTED_MODULE_10__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {
             orientation: "vertical"
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         sx: {
           backgroundColor: 'background20.default',
           display: 'flex'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {
           orientation: "vertical"
-        }), showCreatePlugin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_30__["default"], {
+        }), showCreatePlugin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_31__["default"], {
           value: currentPluginTab,
           onChange: (event, newValue) => {
             setCurrentPluginTab(newValue);
@@ -29086,7 +29088,7 @@ function PluginadeApp() {
             minHeight: '40px'
           },
           children: Object.keys(plugins).map((plugin, index) => {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_31__["default"], {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_32__["default"], {
               value: plugin,
               label: plugins[plugin].plugin_name,
               sx: {
@@ -29095,7 +29097,7 @@ function PluginadeApp() {
             }, index);
           })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         className: "pluginade-studio-body",
         sx: {
           display: 'grid',
@@ -29103,14 +29105,14 @@ function PluginadeApp() {
           backgroundColor: 'background20.default',
           overflow: 'hidden'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_23__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_24__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
           sx: {
             display: showCreatePlugin ? 'none' : 'grid',
             overflow: 'hidden'
           },
           children: Object.keys(plugins).map((plugin, index) => {
             const currentPluginSlug = plugin;
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(Plugin, {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(Plugin, {
               plugins: plugins,
               setPlugins: setPlugins,
               currentPluginSlug: currentPluginSlug,
@@ -29118,7 +29120,7 @@ function PluginadeApp() {
               webContainer: webContainer
             }, index);
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
           className: "create-plugin",
           sx: {
             display: showCreatePlugin ? 'grid' : 'none',
@@ -29128,15 +29130,15 @@ function PluginadeApp() {
             alignItems: 'center',
             justifyItems: 'center'
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(CreatePlugin, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(CreatePlugin, {
             setShowCreatePlugin: setShowCreatePlugin,
             uponSuccess: newPluginSlug => setCurrentPluginTab(newPluginSlug),
             plugins: plugins,
             setPlugins: setPlugins,
             openPlugin: openPlugin
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)("div", {
             id: "output"
           })
         })]
@@ -29144,7 +29146,7 @@ function PluginadeApp() {
     })]
   });
 }
-root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(PluginadeApp, {}));
+root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(PluginadeApp, {}));
 function getFilesObject(dirHandle) {
   const filesObject = {};
   return new Promise(async (resolve, reject) => {
@@ -29171,9 +29173,9 @@ function CreatePlugin({
   openPlugin,
   setShowCreatePlugin
 }) {
-  const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('initial');
-  const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [pluginDataState, setPluginDataState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('initial');
+  const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
+  const [pluginDataState, setPluginDataState] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     plugin_name: '',
     plugin_dirname: '',
     plugin_textdomain: '',
@@ -29201,9 +29203,9 @@ function CreatePlugin({
             setCreationMessage('Directory already exists');
             return;
           } catch (error) {
-            const files = await (0,_utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_13__["default"])();
-            const pluginDirHandle = await (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(parentDirHandle, files, pluginDataState.plugin_dirname);
-            const stringFixerResult = await (0,_utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_18__["default"])(pluginDirHandle, pluginDataState);
+            const files = await (0,_utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_14__["default"])();
+            const pluginDirHandle = await (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_17__["default"])(parentDirHandle, files, pluginDataState.plugin_dirname);
+            const stringFixerResult = await (0,_utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_19__["default"])(pluginDirHandle, pluginDataState);
             console.log(stringFixerResult);
             setLoading(false);
             setCreationState('success');
@@ -29224,20 +29226,20 @@ function CreatePlugin({
       setCreationMessage(error.message);
     }
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     sx: {
       width: '100%',
       height: '100%',
       overflow: 'hidden'
     },
-    children: [creationState === 'creating' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_32__["default"], {}) : null, creationState === 'error' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    children: [creationState === 'creating' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_33__["default"], {}) : null, creationState === 'error' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_28__["default"], {
       severity: "error",
       children: creationMessage
-    }) : null, creationState === 'success' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    }) : null, creationState === 'success' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_28__["default"], {
       severity: "success",
       children: creationMessage
-    }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(PluginDataForm, {
+    }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(PluginDataForm, {
         pluginDataState: pluginDataState,
         setPluginDataState: setPluginDataState,
         onSubmit: (event, setLoading) => {
@@ -29260,7 +29262,7 @@ function Plugin({
   webContainer
 }) {
   const pluginDataState = plugins[currentPluginSlug];
-  const [currentTab, setCurrentTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('modules');
+  const [currentTab, setCurrentTab] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('modules');
   const pluginTabs = {
     'modules': 'Modules',
     'code': 'Code',
@@ -29273,7 +29275,7 @@ function Plugin({
     'build': 'Build',
     'deploy': 'Deploy'
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     id: `plugin-tabpanel-${pluginDataState.plugin_dirname}`,
     sx: {
       display: hidden ? 'none' : 'grid',
@@ -29281,13 +29283,13 @@ function Plugin({
       height: '100%',
       overflow: 'hidden'
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
       className: "plugin-header",
       sx: {
         display: 'grid',
         gridTemplateRows: 'min-content'
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_30__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Tabs__WEBPACK_IMPORTED_MODULE_31__["default"], {
         className: "plugin-control-tabs",
         value: currentTab,
         onChange: (event, newValue) => {
@@ -29296,20 +29298,20 @@ function Plugin({
         "aria-label": "Plugins Tools",
         variant: "scrollable",
         children: Object.keys(pluginTabs).map((tool, index) => {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_31__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Tab__WEBPACK_IMPORTED_MODULE_32__["default"], {
             value: tool,
             label: pluginTabs[tool],
             ...a11yProps(tool)
           }, index);
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
       className: "plugin-content",
       sx: {
         display: 'grid',
         overflow: 'hidden'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         id: `plugin-tabpanel-webpack`,
         sx: {
           display: 'webpack' === currentTab ? 'flex' : 'none',
@@ -29317,7 +29319,7 @@ function Plugin({
           padding: 2,
           overflow: 'hidden'
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(WebContainerTerminal, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(WebContainerTerminal, {
           webContainer: webContainer,
           pluginData: pluginDataState,
           buttons: [{
@@ -29340,36 +29342,36 @@ function Plugin({
             }
           }]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         id: `plugin-tabpanel-phpunit`,
         sx: {
           display: 'phpunit' === currentTab ? 'flex' : 'none',
           gap: 2,
           padding: 2
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
           sx: {
             display: 'grid',
             gap: 2
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_26__["default"], {
               component: "p",
-              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To run PHPUnit tests run the following in a terminal window:')
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('To run PHPUnit tests run the following in a terminal window:')
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(CopyCode, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(CopyCode, {
             language: "bash",
             code: `sh pluginade.sh test:phpunit;`
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         id: `plugin-tabpanel-lint`,
         sx: {
           display: 'lint' === currentTab ? 'grid' : 'none',
           gap: 2,
           padding: 2
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(WebContainerTerminal, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(WebContainerTerminal, {
           webContainer: webContainer,
           pluginData: pluginDataState,
           buttons: [{
@@ -29392,33 +29394,33 @@ function Plugin({
             }
           }]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         id: `plugin-tabpanel-modules`,
         sx: {
           display: 'modules' === currentTab ? 'block' : 'none',
           height: '100%',
           overflow: 'hidden'
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(Modules, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(Modules, {
           plugins: plugins,
           setPlugins: setPlugins,
           currentPluginSlug: currentPluginSlug
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         id: `plugin-tabpanel-playground`,
         sx: {
           display: 'playground' === currentTab ? 'block' : 'none',
           height: '100%',
           overflow: 'hidden'
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         id: `plugin-tabpanel-code`,
         sx: {
           display: 'code' === currentTab ? 'block' : 'none',
           height: '100%',
           overflow: 'hidden'
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {})
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_16__["default"], {})
       })]
     })]
   });
@@ -29428,10 +29430,10 @@ function WebContainerTerminal({
   pluginData,
   buttons
 }) {
-  const [terminalOutput, setTerminalOutput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [currentlyActiveButton, setCurrentlyActiveButton] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const [currentProcess, setCurrentProcess] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+  const [terminalOutput, setTerminalOutput] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
+  const [currentlyActiveButton, setCurrentlyActiveButton] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const [currentProcess, setCurrentProcess] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     async function mountPlugin() {
       // Mount the plugin into the webContainer.
       if (webContainer.instance) {
@@ -29444,23 +29446,28 @@ function WebContainerTerminal({
         console.log('mounted?', content);
 
         // Watch the container for file changes, and update the local file system to match.
+        webContainer.instance.fs.watch(pluginData.plugin_dirname, async (change, filename) => {
+          console.log('Changes:', change, filename);
+          // const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+          // console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
+          // copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+        });
         webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, {
           recursive: true
         }, (event, filename) => {
-          console.log(`file: ${filename} action: ${event}`);
+          console.log(`1. file: ${filename} action: ${event}`);
         });
-
-        // const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
-        // console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
-        // copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+        webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, {}, (event, filename) => {
+          console.log(`2. file: ${filename} action: ${event}`);
+        });
       }
     }
     mountPlugin();
   }, [webContainer.instance]);
-  const terminalOutputDebounced = (0,use_debounce__WEBPACK_IMPORTED_MODULE_33__.useDebouncedCallback)(callbackFunction => {
+  const terminalOutputDebounced = (0,use_debounce__WEBPACK_IMPORTED_MODULE_34__.useDebouncedCallback)(callbackFunction => {
     callbackFunction();
   }, 100);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     sx: {
       display: 'grid',
       gap: 1,
@@ -29468,20 +29475,20 @@ function WebContainerTerminal({
       gridTemplateRows: 'min-content 1fr',
       width: '100%'
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         sx: {
           display: 'flex',
           gap: 1,
           padding: 2
         },
         children: buttons.map((button, index) => {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_26__["default"], {
                 component: "p",
                 children: button.label
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
                 variant: "contained",
                 color: "secondary",
                 onClick: async () => {
@@ -29526,27 +29533,27 @@ function WebContainerTerminal({
                 },
                 children: currentProcess && currentlyActiveButton === button ? button.killLabel : button.runLabel
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_27__["default"], {
               orientation: "vertical"
             })]
           }, index);
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_16__["default"], {
       terminalOutput: terminalOutput,
       setTerminalOutput: setTerminalOutput
     })]
   });
 }
 function Playground() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     sx: {
       padding: 2,
       height: '100%',
       overflow: 'hidden'
     },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("iframe", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)("iframe", {
         style: {
           width: '100%',
           height: '100%',
@@ -29564,14 +29571,14 @@ function Modules({
 }) {
   const thisPlugin = plugins[currentPluginSlug];
   const thisPluginsModules = thisPlugin.plugin_modules;
-  const [currentModule, setCurrentModule] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(Object.keys(thisPluginsModules)[0]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  const [currentModule, setCurrentModule] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Object.keys(thisPluginsModules)[0]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     sx: {
       padding: 2,
       height: '100%',
       overflow: 'hidden'
     },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
       sx: {
         display: 'grid',
         gridTemplateColumns: '200px 1fr',
@@ -29581,23 +29588,23 @@ function Modules({
         borderColor: 'background20.default',
         borderRadius: 2
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_List__WEBPACK_IMPORTED_MODULE_34__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_List__WEBPACK_IMPORTED_MODULE_35__["default"], {
         sx: {
           overflow: 'auto',
           borderRight: '1px solid',
           borderRightColor: 'background20.default',
           backgroundColor: 'background20.default'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_35__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_36__["default"], {
           disablePadding: true,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
             sx: {
               display: 'grid',
               alignItems: 'center',
               padding: 2,
               width: '100%'
             },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
               variant: "contained",
               color: "secondary",
               "aria-label": "Create New Plugin",
@@ -29607,29 +29614,29 @@ function Modules({
               sx: {
                 width: '100%'
               },
-              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Module +', 'pluginade')
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('New Module +', 'pluginade')
             })
           })
         }), Object.keys(thisPluginsModules).map((module, index) => {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_35__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_36__["default"], {
             disablePadding: true,
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_36__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_37__["default"], {
               selected: currentModule === module,
               onClick: () => setCurrentModule(module),
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_37__["default"], {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_38__["default"], {
                 primary: thisPluginsModules[module].name
               })
             })
           }, index);
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         className: 'tab-panel-create-module',
         sx: {
           height: '100%',
           overflow: 'hidden',
           display: currentModule === 'pluginadeCreateNewModule' ? 'block' : 'none'
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(CreateModule, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(CreateModule, {
           pluginSlug: currentPluginSlug,
           plugins: plugins,
           setPlugins: setPlugins
@@ -29644,9 +29651,9 @@ function CreateModule({
   setPlugins,
   uponSuccess
 }) {
-  const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('initial');
-  const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const [pluginDataState, setPluginDataState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  const [creationState, setCreationState] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('initial');
+  const [creationMessage, setCreationMessage] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
+  const [pluginDataState, setPluginDataState] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     plugin_name: '',
     plugin_dirname: '',
     plugin_textdomain: '',
@@ -29659,19 +29666,19 @@ function CreateModule({
     plugin_update_uri: ''
   });
   async function createModule(setLoading) {}
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     sx: {
       width: '100%',
       height: '100%',
       overflow: 'hidden'
     },
-    children: [creationState === 'creating' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_32__["default"], {}) : null, creationState === 'error' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    children: [creationState === 'creating' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_33__["default"], {}) : null, creationState === 'error' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_28__["default"], {
       severity: "error",
       children: creationMessage
-    }) : null, creationState === 'success' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    }) : null, creationState === 'success' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_28__["default"], {
       severity: "success",
       children: creationMessage
-    }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
       sx: {
         display: 'grid',
         width: '100%',
@@ -29680,7 +29687,7 @@ function CreateModule({
         alignItems: 'start',
         justifyItems: 'start'
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         component: "form",
         sx: {
           padding: 2,
@@ -29694,7 +29701,7 @@ function CreateModule({
           setLoading(true);
           onSubmit(event, setLoading);
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_39__["default"], {
           label: "Plugin Name",
           variant: "outlined",
           fullWidth: true,
@@ -29705,7 +29712,7 @@ function CreateModule({
             plugin_name: event.target.value,
             plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_39__["default"], {
           label: "Plugin Namespace",
           variant: "outlined",
           fullWidth: true,
@@ -29715,7 +29722,7 @@ function CreateModule({
             ...pluginDataState,
             plugin_namespace: event.target.value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_39__["default"], {
           label: "Plugin Description",
           variant: "outlined",
           fullWidth: true,
@@ -29725,7 +29732,7 @@ function CreateModule({
             ...pluginDataState,
             plugin_description: event.target.value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_39__["default"], {
           label: "Plugin Version",
           variant: "outlined",
           fullWidth: true,
@@ -29735,7 +29742,7 @@ function CreateModule({
             ...pluginDataState,
             plugin_version: event.target.value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_39__["default"], {
           label: "Plugin Author",
           variant: "outlined",
           fullWidth: true,
@@ -29745,7 +29752,7 @@ function CreateModule({
             ...pluginDataState,
             plugin_author: event.target.value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_39__["default"], {
           label: "Plugin Author URI",
           variant: "outlined",
           fullWidth: true,
@@ -29755,11 +29762,11 @@ function CreateModule({
             ...pluginDataState,
             plugin_author_uri: event.target.value
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
           type: "submit",
           variant: "contained",
           color: "secondary",
-          children: creationState === 'creating' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_39__["default"], {
+          children: creationState === 'creating' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_40__["default"], {
             size: 24
           }) : 'Update Module files'
         })]
@@ -29771,7 +29778,7 @@ function CopyCode({
   language,
   code
 }) {
-  const [copied, setCopied] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [copied, setCopied] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   function copyCode() {
     navigator.clipboard.writeText(code);
     setCopied(true);
@@ -29779,7 +29786,7 @@ function CopyCode({
       setCopied(false);
     }, 2000);
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     sx: {
       display: 'grid',
       gridTemplateRows: 'min-content 1fr min-content',
@@ -29788,7 +29795,7 @@ function CopyCode({
       borderColor: 'background20.default',
       borderRadius: 1
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
       className: "language",
       sx: {
         padding: 1,
@@ -29797,7 +29804,7 @@ function CopyCode({
         borderBottomColor: 'background20.default'
       },
       children: language
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
       className: "code",
       sx: {
         padding: 1,
@@ -29808,7 +29815,7 @@ function CopyCode({
         marginBottom: 1
       },
       children: code
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
       variant: "contained",
       color: "secondary",
       onClick: copyCode,
@@ -29823,8 +29830,8 @@ function PluginDataForm({
   onCancel,
   saveButtonText = "Update Plugin Files"
 }) {
-  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     component: "form",
     sx: {
       padding: 2,
@@ -29838,13 +29845,13 @@ function PluginDataForm({
       setLoading(true);
       onSubmit(event, setLoading);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_26__["default"], {
       sx: {
         fontSize: '1.3em'
       },
       component: "h2",
       children: "Create a new plugin"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_38__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_39__["default"], {
       label: "Plugin Name",
       variant: "outlined",
       fullWidth: true,
@@ -29855,19 +29862,19 @@ function PluginDataForm({
         plugin_name: event.target.value,
         plugin_dirname: event.target.value.replace(/\s+/g, '-').toLowerCase()
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
       sx: {
         display: 'flex',
         gap: 2
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
         variant: "contained",
         color: "secondary",
         onClick: () => {
           onCancel();
         },
         children: "Cancel"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_29__["default"], {
         type: "submit",
         variant: "contained",
         color: "primary",
@@ -29877,7 +29884,7 @@ function PluginDataForm({
   });
 }
 function TerminalWindow() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     sx: {
       width: '100%',
       height: '100%'
@@ -29885,13 +29892,13 @@ function TerminalWindow() {
   });
 }
 function PingGoogle() {
-  const [response, setResponse] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [response, setResponse] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   function runShellCommand() {
     fetch('/wp-json/pluginade/v1/ping-google').then(response => response.json()).then(data => {
       setResponse(data);
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(TerminalWindow, {});
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(TerminalWindow, {});
 }
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
@@ -30410,6 +30417,16 @@ __webpack_require__.r(__webpack_exports__);
   }
   return result;
 });
+
+/***/ }),
+
+/***/ "./js/src/version.js":
+/*!***************************!*\
+  !*** ./js/src/version.js ***!
+  \***************************/
+/***/ (() => {
+
+console.log('Pluginade Studio V0.0.6');
 
 /***/ }),
 

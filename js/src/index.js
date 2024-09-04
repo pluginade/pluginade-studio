@@ -1,3 +1,4 @@
+import './version.js';
 import React, {useState, useEffect, Fragment} from 'react';
 import { createRoot } from 'react-dom/client';
 import { useDebouncedCallback } from 'use-debounce';
@@ -57,8 +58,6 @@ import fixPluginHeader from './utils/fixPluginHeader';
 // 		});
 // 	});
 // }
-
-console.log( 'Pluginade Studio V0.0.4' );
 
 const LightTheme = createTheme({
 	palette: {
@@ -577,15 +576,20 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				console.log( 'mounted?', content );
 
 				// Watch the container for file changes, and update the local file system to match.
-				webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, { recursive: true }, (event, filename) => {
-					console.log(`file: ${filename} action: ${event}`);
-				});
-					
+				webContainer.instance.fs.watch( pluginData.plugin_dirname, async (change, filename) => {
+					console.log( 'Changes:', change, filename );
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-					
+				});
+				webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, { recursive: true }, (event, filename) => {
+					console.log(`1. file: ${filename} action: ${event}`);
+				});
+				webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, {}, (event, filename) => {
+					console.log(`2. file: ${filename} action: ${event}`);
+				});
 				
+					
 			}
 		}
 		mountPlugin();
