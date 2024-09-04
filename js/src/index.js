@@ -35,7 +35,8 @@ import CodeEditor from './Code';
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-// import getRemoteDirArray from './utils/getRemoteDirArray.js';
+import getRemoteDirArray from './utils/getRemoteDirArray.js';
+console.log( await getRemoteDirArray('sample-plugin') );
 import boilerPlugin from './utils/boilerPlugin';
 import copyDirToLocal from './utils/copyDirToLocal';
 import parsePluginHeader from './utils/parsePluginHeader';

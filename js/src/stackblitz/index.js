@@ -49,8 +49,8 @@ export default () => {
 			term.open(terminalRef.current);
 			setXTerm(term);
 
-			const theWebContainer = await startWebContainer( files );
-			setWebContainer( theWebContainer );
+			const webcontainerInstance = await WebContainer.boot();
+			setWebContainer( webcontainerInstance );
 		}
 		doSetUp();
 	}, []);
