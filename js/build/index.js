@@ -29321,6 +29321,15 @@ function Plugin({
           webContainer: webContainer,
           pluginData: pluginDataState,
           buttons: [{
+            label: 'Build webpack for production',
+            runLabel: 'Build webpack',
+            killLabel: 'Stop build',
+            command: 'npm',
+            commandArgs: ['run', 'pluginade-webpack-build'],
+            commandOptions: {
+              cwd: pluginDataState.plugin_dirname
+            }
+          }, {
             label: 'Run webpack in watch mode',
             runLabel: 'Start webpack watch',
             killLabel: 'Stop webpack watch',
@@ -29500,16 +29509,16 @@ function WebContainerTerminal({
                       setCurrentProcess(process);
                       console.log('Process started:', process);
                     },
-                    onProcessEnd: exitCode => {
+                    onProcessEnd: async exitCode => {
                       setCurrentlyActiveButton(null);
                       setCurrentProcess(null);
                       console.log('Process ended with exit code:', exitCode);
                       // When the output stops for x seconds, copy the files from the web container to the local file system.
-                      terminalOutputDebounced(async () => {
-                        const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
-                        console.log('Filez in web container:', pluginFilesFromWebContainer);
-                        (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(pluginData.dirHandle, pluginFilesFromWebContainer);
-                      });
+                      // terminalOutputDebounced(async () => {
+                      const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+                      console.log('Filez in web container:', pluginFilesFromWebContainer);
+                      (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(pluginData.dirHandle, pluginFilesFromWebContainer);
+                      // })
                     }
                   });
                 },
@@ -30277,6 +30286,7 @@ async function copyDirToLocal(parentDirHandle, directoryFiles, topLevelDirectory
     try {
       theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName);
     } catch (error) {
+      // If not, create the directory
       theMainDirHandle = await parentDirHandle.getDirectoryHandle(topLevelDirectoryName, {
         create: true
       });
@@ -30284,10 +30294,10 @@ async function copyDirToLocal(parentDirHandle, directoryFiles, topLevelDirectory
   } else {
     theMainDirHandle = parentDirHandle;
   }
-  const fileOperations = Object.keys(directoryFiles).map(async filename => {
-    if (filename === 'node_modules') {
+  for (const filename of Object.keys(directoryFiles)) {
+    if ('node_modules' === filename) {
       // Skip node_modules
-      // return;
+      // continue;
     }
     if ('directory' in directoryFiles[filename]) {
       // Add these files in a subdirectory of the current parent.
@@ -30300,14 +30310,14 @@ async function copyDirToLocal(parentDirHandle, directoryFiles, topLevelDirectory
       });
       try {
         const writable = await fileHandle.createWritable();
-        const stream = directoryFiles[filename].file.contents.stream();
-        await stream.pipeTo(writable);
+        await writable.write(directoryFiles[filename].file.contents);
+        await writable.close();
       } catch (error) {
+        console.log(fileData);
         console.log(error);
       }
     }
-  });
-  await Promise.all(fileOperations);
+  }
   return theMainDirHandle;
 }
 

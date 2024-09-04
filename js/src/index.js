@@ -499,6 +499,14 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 					<WebContainerTerminal webContainer={webContainer} pluginData={pluginDataState} buttons={
 						[
 							{
+								label: 'Build webpack for production',
+								runLabel: 'Build webpack',
+								killLabel: 'Stop build',
+								command: 'npm',
+								commandArgs: ['run', 'pluginade-webpack-build'],
+								commandOptions: {cwd: pluginDataState.plugin_dirname}
+							},
+							{
 								label: 'Run webpack in watch mode',
 								runLabel: 'Start webpack watch',
 								killLabel: 'Stop webpack watch',
@@ -629,16 +637,16 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 													setCurrentProcess(process);
 													console.log('Process started:', process);
 												},
-												onProcessEnd: (exitCode) => {
+												onProcessEnd: async (exitCode) => {
 													setCurrentlyActiveButton(null);
 													setCurrentProcess(null);
 													console.log('Process ended with exit code:', exitCode);
 													// When the output stops for x seconds, copy the files from the web container to the local file system.
-													terminalOutputDebounced(async () => {
+													// terminalOutputDebounced(async () => {
 														const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 														console.log( 'Filez in web container:', pluginFilesFromWebContainer );
 														copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-													})
+													// })
 												}
 											})
 										}}
