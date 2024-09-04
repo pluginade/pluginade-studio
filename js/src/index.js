@@ -571,19 +571,10 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// Watch the container for file changes, and update the local file system to match.
 				webContainer.instance.fs.watch( pluginData.plugin_dirname, async (changes) => {
 					console.log( 'Changes:', changes );
-					changes.forEach( async (change) => {
-						if ( change.type === 'add' || change.type === 'change' ) {
-							const fileContents = await webContainer.instance.fs.readFile( change.path, 'utf-8' );
-							console.log( 'File contents:', fileContents );
-							// await copyDirToLocal( pluginData.dirHandle, {[change.path]: {file: {contents: fileContents}}});
-							const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
-							console.log( 'Filez in web container:', pluginFilesFromWebContainer );
-							copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-						}
-						if ( change.type === 'delete' ) {
-							await pluginData.dirHandle.removeEntry( change.path );
-						}
-					});
+					const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+					console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
+					copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+					
 				});
 			}
 		}
