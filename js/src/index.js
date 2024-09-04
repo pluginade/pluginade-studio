@@ -208,9 +208,9 @@ function PluginadeApp() {
 
 				// Mount the plugin into the webContainer.
 				if ( webContainer.instance ) {
-					webContainer.instance.mount( {
-						[pluginData.plugin_path]: { directory: pluginData.filesObject }
-					});
+					// Make a directory in the webContainer for this plugin
+					await webcontainerInstance.fs.mkdir( pluginData.plugin_dirname );
+					webContainer.instance.mount( pluginData.filesObject, { mountPoint: pluginData.plugin_dirname } );
 				}
 
 				let hasWpModules = false;
