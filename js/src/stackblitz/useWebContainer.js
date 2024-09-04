@@ -30,8 +30,25 @@ export default () => {
 	}
 
 	async function getPluginFiles( plugin_dirname ) {
+		const pluginFilesObject = {};
 		const files = await webContainer.fs.readdir( plugin_dirname, {withFileTypes: true, buffer: 'utf-8'}  );
-		return files;
+		for( const file of files ) {
+			if ( file.isDirectory() ) {
+				pluginFilesObject[file.name] = {
+					directory: await getPluginFiles( plugin_dirname + '/' + file.name )
+				}
+			}
+			if ( file.isFile() ) {
+				const fileContents = await webContainer.fs.readFile( plugin_dirname + '/' + file.name );
+				pluginFilesObject[file.name] = {
+					file: {
+						contents: fileContents
+					}
+				}
+			}
+		}
+				
+		return pluginFilesObject;
 	}
 
 	return {

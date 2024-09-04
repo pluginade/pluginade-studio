@@ -28817,7 +28817,7 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 // 	});
 // }
 
-console.log('Pluginade Studio V0.0.3');
+console.log('Pluginade Studio V0.0.4');
 const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_20__["default"])({
   palette: {
     mode: 'light',
@@ -30099,11 +30099,27 @@ __webpack_require__.r(__webpack_exports__);
     onProcessEnd(exitCode);
   }
   async function getPluginFiles(plugin_dirname) {
+    const pluginFilesObject = {};
     const files = await webContainer.fs.readdir(plugin_dirname, {
       withFileTypes: true,
       buffer: 'utf-8'
     });
-    return files;
+    for (const file of files) {
+      if (file.isDirectory()) {
+        pluginFilesObject[file.name] = {
+          directory: await getPluginFiles(plugin_dirname + '/' + file.name)
+        };
+      }
+      if (file.isFile()) {
+        const fileContents = await webContainer.fs.readFile(plugin_dirname + '/' + file.name);
+        pluginFilesObject[file.name] = {
+          file: {
+            contents: fileContents
+          }
+        };
+      }
+    }
+    return pluginFilesObject;
   }
   return {
     instance: webContainer,

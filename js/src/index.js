@@ -58,7 +58,7 @@ import fixPluginHeader from './utils/fixPluginHeader';
 // 	});
 // }
 
-console.log( 'Pluginade Studio V0.0.3' );
+console.log( 'Pluginade Studio V0.0.4' );
 
 const LightTheme = createTheme({
 	palette: {
