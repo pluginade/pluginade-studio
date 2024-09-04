@@ -28817,7 +28817,7 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 // 	});
 // }
 
-console.log('Pluginade Studio V0.0.1');
+console.log('Pluginade Studio V0.0.2');
 const LightTheme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_20__["default"])({
   palette: {
     mode: 'light',
@@ -30100,7 +30100,8 @@ __webpack_require__.r(__webpack_exports__);
   }
   async function getPluginFiles(plugin_dirname) {
     const files = await webContainer.fs.readdir(plugin_dirname, {
-      withFileTypes: true
+      withFileTypes: true,
+      buffer: 'utf-8'
     });
     return files;
   }
