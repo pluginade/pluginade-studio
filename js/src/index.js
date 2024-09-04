@@ -35,14 +35,15 @@ import CodeEditor from './Code';
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-import getRemoteDirArray from './utils/getRemoteDirArray.js';
-console.log( await getRemoteDirArray('sample-plugin') );
+// import getRemoteDirArray from './utils/getRemoteDirArray.js';
+// console.log( await getRemoteDirArray('sample-plugin') );
 import boilerPlugin from './utils/boilerPlugin';
+import useWebContainer from './stackblitz/useWebContainer';
+import Terminal from './Terminal';
+
 import copyDirToLocal from './utils/copyDirToLocal';
 import parsePluginHeader from './utils/parsePluginHeader';
 import fixPluginHeader from './utils/fixPluginHeader';
-
-import WebContainer from './stackblitz/index.js';
 
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
@@ -135,6 +136,7 @@ function PluginadeApp() {
 	const [pluginDirHandles, setPluginDirHandles] = useState(thePluginDirHandles);
 	const [plugins, setPlugins] = useState({});
 	const [currentPluginTab, setCurrentPluginTabState] = useState( null );
+	const webContainer = useWebContainer();
 
 	useEffect( () => {
 		actuallyOpenPlugins.forEach( async (plugin) => {
@@ -202,6 +204,15 @@ function PluginadeApp() {
 				pluginData.plugin_dirname = dirHandle.name;
 				isWpPlugin = true;
 
+				pluginData.filesObject = await getFilesObject( dirHandle );
+
+				// Mount the plugin into the webContainer.
+				if ( webContainer.instance ) {
+					webContainer.instance.mount( {
+						[pluginData.plugin_path]: { directory: pluginData.filesObject }
+					});
+				}
+
 				let hasWpModules = false;
 				for await (const possibleWpModulesEntry of dirHandle.values()) {
 					if ( possibleWpModulesEntry.name === 'wp-modules' ) {
@@ -221,6 +232,8 @@ function PluginadeApp() {
 				}
 
 				pluginData.dirHandle = dirHandle;
+
+				console.log( pluginData );
 
 				await set(pluginData.plugin_dirname, dirHandle);
 
@@ -313,16 +326,17 @@ function PluginadeApp() {
 				<Box className="pluginade-studio-body" sx={{
 					display: 'grid',
 					gridTemplateColumns: '1fr',
-					backgroundColor: 'background20.default'
+					backgroundColor: 'background20.default',
+					overflow: 'hidden',
 				}}>
 					<CssBaseline />
-					<Box sx={{backgroundColor: 'background.default', width: '100%', borderRadius: '.4em'}}>
-						<Box sx={{display: (showCreatePlugin ? 'none' : 'grid'), height: '100%', overflow: 'hidden'}}>
+					{/* <Box sx={{backgroundColor: 'background.default', width: '100%', borderRadius: '.4em'}}> */}
+						<Box sx={{display: (showCreatePlugin ? 'none' : 'grid'), overflow: 'hidden'}}>
 							{
 								Object.keys( plugins ).map((plugin, index) => {
 									const currentPluginSlug = plugin;
 
-									return <Plugin key={index} plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} hidden={currentPluginSlug !== currentPluginTab } />
+									return <Plugin key={index} plugins={plugins} setPlugins={setPlugins} currentPluginSlug={currentPluginSlug} hidden={currentPluginSlug !== currentPluginTab } webContainer={webContainer} />
 								})
 							}
 							{/* <TerminalWindow /> */}
@@ -333,13 +347,36 @@ function PluginadeApp() {
 						<Box>
 						<div id="output"></div>
 						</Box>
-					</Box>
+					{/* </Box> */}
 				</Box>
 			</Box>
 		</ThemeProvider>
 	);
 }
 root.render(<PluginadeApp />);
+
+function getFilesObject( dirHandle ) {
+	const filesObject = {};
+	return new Promise( async (resolve, reject) => {
+		for await (const entry of dirHandle.values()) {
+			if ( entry.kind === 'file' ) {
+				const file = await entry.getFile();
+				const fileContents = await file.text();
+				filesObject[entry.name] = {
+					file: {
+						contents: fileContents
+					}
+				};
+			} else if ( entry.kind === 'directory' ) {
+				const subDirFiles = await getFilesObject( entry );
+				filesObject[entry.name] = {
+					directory: subDirFiles
+				};
+			}
+		}
+		resolve( filesObject );
+	});
+}
 
 function CreatePlugin({openPlugin, setShowCreatePlugin}) {
 	const [creationState, setCreationState] = useState('initial');
@@ -431,7 +468,7 @@ function CreatePlugin({openPlugin, setShowCreatePlugin}) {
 	</Box>
 }
 
-function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
+function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) {
 	const pluginDataState = plugins[currentPluginSlug];
 	const [currentTab, setCurrentTab] = useState('modules');
 
@@ -463,16 +500,9 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 				</Tabs>
 			</Box>
 			<Divider />
-			<Box className="plugin-content" sx={{display: 'block', width: '100%', height: '100%', overflow: 'hidden'}}>
-				<Box id={`plugin-tabpanel-webpack`} sx={{display: 'webpack' === currentTab ? 'flex' : 'none', gap: 2, padding: 2, width:'100%'}}>
-					<Box sx={{display: 'grid', gap: 2, width: '100%'}}>
-						<Box>
-							<Typography component="p">{__( 'To enable webpack and watch for file changes, run the following in a terminal window:')}</Typography>
-						</Box>
-						<CopyCode language="shell" code={`
-						sh pluginade.sh dev;
-						`} />
-					</Box>
+			<Box className="plugin-content" sx={{display: 'grid', overflow: 'hidden'}}>
+				<Box id={`plugin-tabpanel-webpack`} sx={{display: 'webpack' === currentTab ? 'flex' : 'none', gap: 2, padding: 2, overflow: 'hidden'}}>
+					<Webpack webContainer={webContainer} />
 				</Box>
 				<Box id={`plugin-tabpanel-phpunit`} sx={{display: 'phpunit' === currentTab ? 'flex' : 'none', gap: 2, padding: 2}}>
 					<Box sx={{display: 'grid', gap: 2}}>
@@ -482,7 +512,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 						<CopyCode language="bash" code={`sh pluginade.sh test:phpunit;`} />
 					</Box>
 				</Box>
-				<Box id={`plugin-tabpanel-scans`} sx={{display: 'scans' === currentTab ? 'grid' : 'none', gap: 2, padding: 2}}>
+				<Box id={`plugin-tabpanel-lint`} sx={{display: 'lint' === currentTab ? 'grid' : 'none', gap: 2, padding: 2}}>
 					<Box sx={{display: 'grid', gap: 2}}>
 						<Box>
 							<Typography component="p">{__( 'To scan your code using WPCS, run following in a terminal window:')}</Typography>
@@ -499,8 +529,28 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden}) {
 					{/* <Playground /> */}
 				</Box>
 				<Box id={`plugin-tabpanel-code`} sx={{display: 'code' === currentTab ? 'block' : 'none', height: '100%', overflow: 'hidden'}}>
-					<WebContainer />
+					<Terminal />
 				</Box>
+			</Box>
+		</Box>
+	);
+}
+
+function Webpack({webContainer}) {
+	const [terminalOutput, setTerminalOutput] = useState('Starting Webpack...');
+
+	return (
+		<Box sx={{display: 'grid', gap: 2, width: '100%', height: '100%', overflow: 'hidden'}}>
+			<Box>
+				<Typography component="h2">Webpack</Typography>
+				<Button
+				onClick={() => {
+					setTerminalOutput(Date.now() + ': running npm install... \r\n');
+					webContainer.runCommand( 'npm', ['install'], (data) => {
+						setTerminalOutput(data);
+					})
+				}}>Run npm install</Button>
+				<Terminal terminalOutput={terminalOutput} />
 			</Box>
 		</Box>
 	);

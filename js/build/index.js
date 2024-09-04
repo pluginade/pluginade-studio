@@ -28635,6 +28635,58 @@ const PwaInstallButton = () => {
 
 /***/ }),
 
+/***/ "./js/src/Terminal.js":
+/*!****************************!*\
+  !*** ./js/src/Terminal.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _xterm_xterm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @xterm/xterm */ "./node_modules/@xterm/xterm/lib/xterm.js");
+/* harmony import */ var _xterm_xterm__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_xterm_xterm__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _xterm_xterm_css_xterm_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @xterm/xterm/css/xterm.css */ "./node_modules/@xterm/xterm/css/xterm.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+// Import the styles
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (({
+  terminalOutput
+}) => {
+  const terminalRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const [xTerm, setXTerm] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    async function doSetUp() {
+      const term = new _xterm_xterm__WEBPACK_IMPORTED_MODULE_1__.Terminal();
+      term.open(terminalRef.current);
+      setXTerm(term);
+    }
+    doSetUp();
+  }, []);
+
+  // When the terminalOutput changes, write it to the terminal
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (xTerm) {
+      xTerm.write(terminalOutput);
+    }
+  }, [terminalOutput]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      ref: terminalRef
+    })
+  });
+});
+
+/***/ }),
+
 /***/ "./js/src/index.js":
 /*!*************************!*\
   !*** ./js/src/index.js ***!
@@ -28677,12 +28729,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _menuEdit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./menuEdit */ "./js/src/menuEdit.js");
 /* harmony import */ var _Code__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Code */ "./js/src/Code.js");
 /* harmony import */ var _mui_icons_material_GitHub__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @mui/icons-material/GitHub */ "./node_modules/@mui/icons-material/GitHub.js");
-/* harmony import */ var _utils_getRemoteDirArray_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utils/getRemoteDirArray.js */ "./js/src/utils/getRemoteDirArray.js");
-/* harmony import */ var _utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./utils/boilerPlugin */ "./js/src/utils/boilerPlugin.js");
-/* harmony import */ var _utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./utils/copyDirToLocal */ "./js/src/utils/copyDirToLocal.js");
-/* harmony import */ var _utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./utils/parsePluginHeader */ "./js/src/utils/parsePluginHeader.js");
-/* harmony import */ var _utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./utils/fixPluginHeader */ "./js/src/utils/fixPluginHeader.js");
-/* harmony import */ var _stackblitz_index_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./stackblitz/index.js */ "./js/src/stackblitz/index.js");
+/* harmony import */ var _utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utils/boilerPlugin */ "./js/src/utils/boilerPlugin.js");
+/* harmony import */ var _stackblitz_useWebContainer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./stackblitz/useWebContainer */ "./js/src/stackblitz/useWebContainer.js");
+/* harmony import */ var _Terminal__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Terminal */ "./js/src/Terminal.js");
+/* harmony import */ var _utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./utils/copyDirToLocal */ "./js/src/utils/copyDirToLocal.js");
+/* harmony import */ var _utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./utils/parsePluginHeader */ "./js/src/utils/parsePluginHeader.js");
+/* harmony import */ var _utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./utils/fixPluginHeader */ "./js/src/utils/fixPluginHeader.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__]);
 https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
@@ -28719,7 +28771,9 @@ https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__ 
 
 
 
-console.log(await (0,_utils_getRemoteDirArray_js__WEBPACK_IMPORTED_MODULE_13__["default"])('sample-plugin'));
+// import getRemoteDirArray from './utils/getRemoteDirArray.js';
+// console.log( await getRemoteDirArray('sample-plugin') );
+
 
 
 
@@ -28808,6 +28862,7 @@ function PluginadeApp() {
   const [pluginDirHandles, setPluginDirHandles] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(thePluginDirHandles);
   const [plugins, setPlugins] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   const [currentPluginTab, setCurrentPluginTabState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const webContainer = (0,_stackblitz_useWebContainer__WEBPACK_IMPORTED_MODULE_14__["default"])();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     actuallyOpenPlugins.forEach(async plugin => {
       const directoryHandleOrUndefined = await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.get)(plugin);
@@ -28860,7 +28915,7 @@ function PluginadeApp() {
       if (fileExtension === 'php') {
         const file = await entry.getFile();
         const fileContents = await file.text();
-        const pluginData = (0,_utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_16__["default"])(fileContents);
+        const pluginData = (0,_utils_parsePluginHeader__WEBPACK_IMPORTED_MODULE_17__["default"])(fileContents);
 
         // This PHP file did not have a plugin header.
         if (Object.keys(pluginData).length === 0) {
@@ -28869,6 +28924,16 @@ function PluginadeApp() {
         pluginData.plugin_path = dirHandle.name;
         pluginData.plugin_dirname = dirHandle.name;
         isWpPlugin = true;
+        pluginData.filesObject = await getFilesObject(dirHandle);
+
+        // Mount the plugin into the webContainer.
+        if (webContainer.instance) {
+          webContainer.instance.mount({
+            [pluginData.plugin_path]: {
+              directory: pluginData.filesObject
+            }
+          });
+        }
         let hasWpModules = false;
         for await (const possibleWpModulesEntry of dirHandle.values()) {
           if (possibleWpModulesEntry.name === 'wp-modules') {
@@ -28887,6 +28952,7 @@ function PluginadeApp() {
           pluginData.plugin_modules = {};
         }
         pluginData.dirHandle = dirHandle;
+        console.log(pluginData);
         await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.set)(pluginData.plugin_dirname, dirHandle);
         setPlugins(nonStalePlugins => {
           return {
@@ -29016,57 +29082,73 @@ function PluginadeApp() {
         sx: {
           display: 'grid',
           gridTemplateColumns: '1fr',
-          backgroundColor: 'background20.default'
+          backgroundColor: 'background20.default',
+          overflow: 'hidden'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_23__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_23__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
           sx: {
-            backgroundColor: 'background.default',
-            width: '100%',
-            borderRadius: '.4em'
+            display: showCreatePlugin ? 'none' : 'grid',
+            overflow: 'hidden'
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-            sx: {
-              display: showCreatePlugin ? 'none' : 'grid',
-              height: '100%',
-              overflow: 'hidden'
-            },
-            children: Object.keys(plugins).map((plugin, index) => {
-              const currentPluginSlug = plugin;
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(Plugin, {
-                plugins: plugins,
-                setPlugins: setPlugins,
-                currentPluginSlug: currentPluginSlug,
-                hidden: currentPluginSlug !== currentPluginTab
-              }, index);
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-            className: "create-plugin",
-            sx: {
-              display: showCreatePlugin ? 'grid' : 'none',
-              height: '100%',
-              width: '100%',
-              overflow: 'auto',
-              alignItems: 'center',
-              justifyItems: 'center'
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(CreatePlugin, {
-              setShowCreatePlugin: setShowCreatePlugin,
-              uponSuccess: newPluginSlug => setCurrentPluginTab(newPluginSlug),
+          children: Object.keys(plugins).map((plugin, index) => {
+            const currentPluginSlug = plugin;
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(Plugin, {
               plugins: plugins,
               setPlugins: setPlugins,
-              openPlugin: openPlugin
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("div", {
-              id: "output"
-            })
-          })]
+              currentPluginSlug: currentPluginSlug,
+              hidden: currentPluginSlug !== currentPluginTab,
+              webContainer: webContainer
+            }, index);
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+          className: "create-plugin",
+          sx: {
+            display: showCreatePlugin ? 'grid' : 'none',
+            height: '100%',
+            width: '100%',
+            overflow: 'auto',
+            alignItems: 'center',
+            justifyItems: 'center'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(CreatePlugin, {
+            setShowCreatePlugin: setShowCreatePlugin,
+            uponSuccess: newPluginSlug => setCurrentPluginTab(newPluginSlug),
+            plugins: plugins,
+            setPlugins: setPlugins,
+            openPlugin: openPlugin
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)("div", {
+            id: "output"
+          })
         })]
       })]
     })]
   });
 }
 root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(PluginadeApp, {}));
+function getFilesObject(dirHandle) {
+  const filesObject = {};
+  return new Promise(async (resolve, reject) => {
+    for await (const entry of dirHandle.values()) {
+      if (entry.kind === 'file') {
+        const file = await entry.getFile();
+        const fileContents = await file.text();
+        filesObject[entry.name] = {
+          file: {
+            contents: fileContents
+          }
+        };
+      } else if (entry.kind === 'directory') {
+        const subDirFiles = await getFilesObject(entry);
+        filesObject[entry.name] = {
+          directory: subDirFiles
+        };
+      }
+    }
+    resolve(filesObject);
+  });
+}
 function CreatePlugin({
   openPlugin,
   setShowCreatePlugin
@@ -29094,9 +29176,9 @@ function CreatePlugin({
         try {
           // Prompt user to select a directory
           const parentDirHandle = await window.showDirectoryPicker();
-          const files = await (0,_utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_14__["default"])();
-          const pluginDirHandle = await (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_15__["default"])(parentDirHandle, pluginDataState.plugin_dirname, files);
-          const stringFixerResult = await (0,_utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_17__["default"])(pluginDirHandle, pluginDataState);
+          const files = await (0,_utils_boilerPlugin__WEBPACK_IMPORTED_MODULE_13__["default"])();
+          const pluginDirHandle = await (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(parentDirHandle, pluginDataState.plugin_dirname, files);
+          const stringFixerResult = await (0,_utils_fixPluginHeader__WEBPACK_IMPORTED_MODULE_18__["default"])(pluginDirHandle, pluginDataState);
           console.log(stringFixerResult);
           setLoading(false);
           if (pluginDirHandle === 'dir-already-exists') {
@@ -29155,7 +29237,8 @@ function Plugin({
   plugins,
   setPlugins,
   currentPluginSlug,
-  hidden
+  hidden,
+  webContainer
 }) {
   const pluginDataState = plugins[currentPluginSlug];
   const [currentTab, setCurrentTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('modules');
@@ -29204,9 +29287,7 @@ function Plugin({
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Divider__WEBPACK_IMPORTED_MODULE_26__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
       className: "plugin-content",
       sx: {
-        display: 'block',
-        width: '100%',
-        height: '100%',
+        display: 'grid',
         overflow: 'hidden'
       },
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
@@ -29215,25 +29296,10 @@ function Plugin({
           display: 'webpack' === currentTab ? 'flex' : 'none',
           gap: 2,
           padding: 2,
-          width: '100%'
+          overflow: 'hidden'
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-          sx: {
-            display: 'grid',
-            gap: 2,
-            width: '100%'
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
-              component: "p",
-              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('To enable webpack and watch for file changes, run the following in a terminal window:')
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(CopyCode, {
-            language: "shell",
-            code: `
-						sh pluginade.sh dev;
-						`
-          })]
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(Webpack, {
+          webContainer: webContainer
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
         id: `plugin-tabpanel-phpunit`,
@@ -29258,9 +29324,9 @@ function Plugin({
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-        id: `plugin-tabpanel-scans`,
+        id: `plugin-tabpanel-lint`,
         sx: {
-          display: 'scans' === currentTab ? 'grid' : 'none',
+          display: 'lint' === currentTab ? 'grid' : 'none',
           gap: 2,
           padding: 2
         },
@@ -29307,9 +29373,39 @@ function Plugin({
           height: '100%',
           overflow: 'hidden'
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_stackblitz_index_js__WEBPACK_IMPORTED_MODULE_18__["default"], {})
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {})
       })]
     })]
+  });
+}
+function Webpack({
+  webContainer
+}) {
+  const [terminalOutput, setTerminalOutput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('Starting Webpack...');
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    sx: {
+      display: 'grid',
+      gap: 2,
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden'
+    },
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
+        component: "h2",
+        children: "Webpack"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+        onClick: () => {
+          setTerminalOutput(Date.now() + ': running npm install... \r\n');
+          webContainer.runCommand('npm', ['install'], data => {
+            setTerminalOutput(data);
+          });
+        },
+        children: "Run npm install"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {
+        terminalOutput: terminalOutput
+      })]
+    })
   });
 }
 function Playground() {
@@ -29846,10 +29942,10 @@ function IconMenu({
 
 /***/ }),
 
-/***/ "./js/src/stackblitz/index.js":
-/*!************************************!*\
-  !*** ./js/src/stackblitz/index.js ***!
-  \************************************/
+/***/ "./js/src/stackblitz/useWebContainer.js":
+/*!**********************************************!*\
+  !*** ./js/src/stackblitz/useWebContainer.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29860,101 +29956,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _webcontainer_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @webcontainer/api */ "./node_modules/@webcontainer/api/dist/index.js");
-/* harmony import */ var _xterm_xterm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @xterm/xterm */ "./node_modules/@xterm/xterm/lib/xterm.js");
-/* harmony import */ var _xterm_xterm__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_xterm_xterm__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _xterm_xterm_css_xterm_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @xterm/xterm/css/xterm.css */ "./node_modules/@xterm/xterm/css/xterm.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-
-
-// Import the styles
-
-
-const files = {
-  // This is a file - provide its path as a key:
-  'package.json': {
-    // Because it's a file, add the "file" key
-    file: {
-      // Now add its contents
-      contents: `
-		{
-			"name": "pluginade-scripts",
-			"warning": "WARNING: This file is generated by Pluginade Scripts. Do not edit it directly. If you wish to stop Pluginade Scripts from updating this file, change the name field to something other than pluginade-scripts",
-			"version": "1.0.0",
-			"repository": {
-				"type": "git",
-				"url": "https://github.com/pluginade/pluginade-scripts"
-			},
-			"devDependencies": {
-				"playwright": "1.45.1",
-				"@playwright/test": "1.45.1",
-				"@wordpress/e2e-test-utils-playwright": "^1.0.0",
-				"@wordpress/env": "^10.0.0",
-				"@wordpress/eslint-plugin": "^17.6.0",
-				"@wordpress/jest-preset-default": "^11.20.0",
-				"@wordpress/prettier-config": "^3.6.0",
-				"@wordpress/scripts": "27.0.0",
-				"prettier": "npm:wp-prettier@^3.0.3"
-			}
-		}
-		`
-    }
-  }
-};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (() => {
-  const terminalRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const [xTerm, setXTerm] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [webContainer, setWebContainer] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const [output, setOutput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     async function doSetUp() {
-      const term = new _xterm_xterm__WEBPACK_IMPORTED_MODULE_2__.Terminal();
-      term.open(terminalRef.current);
-      setXTerm(term);
       const webcontainerInstance = await _webcontainer_api__WEBPACK_IMPORTED_MODULE_1__.WebContainer.boot();
       setWebContainer(webcontainerInstance);
     }
     doSetUp();
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-      onClick: () => {
-        xTerm.write('Running npm install \r\n');
-        runCommandInWebContainer(webContainer, 'npm', ['install'], data => {
-          setOutput(data);
-          xTerm.write(data);
-        });
-      },
-      children: "Run npm install"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      ref: terminalRef
-    })]
-  });
-});
-async function startWebContainer(files) {
-  // Call only once
-  const webcontainerInstance = await _webcontainer_api__WEBPACK_IMPORTED_MODULE_1__.WebContainer.boot();
-  await webcontainerInstance.mount(files);
-  const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
-  console.log(packageJSON);
-  return webcontainerInstance;
-  const exitCode = await installDependencies(webcontainerInstance);
-  console.log('Response from installDependencies:', exitCode);
-  if (exitCode !== 0) {
-    throw new Error('Installation failed');
+  async function runCommandInWebContainer(command, args = [], onOutput) {
+    const installProcess = await webContainer.spawn(command, args);
+    installProcess.output.pipeTo(new WritableStream({
+      write(data) {
+        onOutput(data);
+      }
+    }));
   }
-  ;
-}
-async function runCommandInWebContainer(webcontainerInstance, command, args = [], onOutput) {
-  console.log(webcontainerInstance);
-  const installProcess = await webcontainerInstance.spawn(command, args);
-  installProcess.output.pipeTo(new WritableStream({
-    write(data) {
-      onOutput(data);
-    }
-  }));
-}
+  return {
+    instance: webContainer,
+    runCommand: runCommandInWebContainer
+  };
+});
 
 /***/ }),
 
@@ -29970,93 +29995,109 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ boilerPlugin)
 /* harmony export */ });
 async function boilerPlugin() {
-  return [{
-    "name": ".distignore",
-    "type": 'file',
-    "content": "wpps-scripts\n.pluginade\n.distignore\n.git\n.gitignore\nwporg\nnode_modules\ncss/src\njs/src\ntests\npackage.json\npackage-lock.json\n.nvmrc\nwebpack.config.js\ntsconfig.json\n.circleci\n.github\ncomposer.json\ncomposer.lock\npostcss.config.js\n.DS_Store\n.vscode\nzips\n"
-  }, {
-    "name": ".github",
-    "type": 'dir',
-    "contents": [{
-      "name": "workflows",
-      "contents": [{
-        "name": "test-and-build.yml",
-        "content": "name: Test and Build\n\non: [push]\n\njobs:\n  lint-php:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting PHP\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:php\n\n  lint-js:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting JS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:js\n\n  lint-css:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting CSS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:css\n\n  test-js:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Testing JS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh test:js\n\n  phpunit:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: PHPUnit Integration Tests\n        working-directory: plugins/sample-plugin\n        run: |\n          sh pluginade.sh build\n          sh pluginade.sh test:phpunit\n\n  zip:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Creating the zip file\n        working-directory: plugins/sample-plugin\n        run: |\n          sh pluginade.sh build\n          sh pluginade.sh zip\n\n      - name: Upload artifacts\n        uses: actions/upload-artifact@v2\n        with:\n          name: pluginade-artifacts\n          path: /home/runner/work/your-repo-name/your-repo-name/plugins/sample-plugin\n"
-      }]
-    }]
-  }, {
-    "name": ".gitignore",
-    "type": 'file',
-    "content": "node_modules\n.DS_Store\nbuild\n/vendor\n*.zip\n/.pluginade\n"
-  }, {
-    "name": "pluginade.sh",
-    "type": 'file',
-    "content": "#!/bin/bash\n\n# This file lives in the root of a plugin directory to enable pluginade commands.\n\n# Set this to the version of pluginade-scripts you want to use.\n# For a list of available versions, see https://github.com/pluginade/pluginade-scripts/tags\npluginadeversion=\"0.0.3-beta-8\";\n\n# Change the following variables to your plugin's namespace and textdomain:\ntextdomain=\"sample-plugin\";\nnamespace=\"SamplePlugin\";\n\n# Dont make any more edits below this line.\n\n# Check if an argument is provided\nif [ -z \"$1\" ]; then\n\t# If no argument is provided, show help text.\n\techo \"Usage: sh pluginade.sh <The pluginade command you want to run>\"\n\techo \"See all available commands at:\"\n\techo \"https://github.com/pluginade/pluginade-scripts/blob/$pluginadeversion/available-commands.md\"\n\texit 1\nfi\n\n#  Set the plugin directory to be the current directory.\nplugindir=$PWD;\n\n#  Install pluginade-scripts if they are not already installed.\ninstall_pluginade() {\n\tif [ ! -d ./pluginade ]; then\n\t\techo \"Installing pluginade into ${plugindir}/.pluginade\";\n\t\tgit clone https://github.com/pluginade/pluginade-scripts ./.pluginade\n\t\tcd .pluginade && git fetch --tags && git reset --hard && git checkout $pluginadeversion && git pull origin $pluginadeversion\n\tfi\n}\n\nif [ $1 = 'install' ]; then\n\tinstall_pluginade;\n\texit 0;\nfi\n\n# Prior to running any command, ensure pluginade is ready.\ninstall_pluginade;\n\n# Go to the pluginade directory inside the plugin.\necho \"Going to ${plugindir}/.pluginade\";\ncd \"$plugindir\"/.pluginade;\n\n# Pass this command to pluginade-run.sh\nsh pluginade-run.sh -p \"${plugindir}\" -c $1 -t $textdomain -n $namespace;\nexit $?;\n"
-  }, {
-    "name": "sample-plugin.php",
-    "type": 'file',
-    "content": "<?php\n/**\n * Plugin Name: Sample Plugin\n * Plugin URI: pluginade.com\n * Description: A sample plugin which demonstrates how to build a plugin with Pluginade.\n * Version: 0.0.0\n * Author: Pluginade\n * Text Domain: sample-plugin\n * Domain Path: languages\n * License: GPLv2\n * License URI: http://www.gnu.org/licenses/gpl-2.0.txt\n * Requires at least: 6.0\n * Requires PHP: 7.4\n * Network:\n * Update URI:\n * Namespace: SamplePlugin\n *\n * @package pluginade-sample\n */\n\nnamespace SamplePlugin;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n\n/**\n * Automatically include wp modules, which are in the \"wp-modules\" directory.\n *\n * @return void\n */\nfunction include_custom_modules() {\n\t$wp_modules = glob( plugin_dir_path( __FILE__ ) . 'wp-modules*/*' );\n\n\tforeach ( $wp_modules as $wp_module ) {\n\t\t$module_name = basename( $wp_module );\n\t\t$filename    = $module_name . '.php';\n\t\t$filepath    = $wp_module . '/' . $filename;\n\n\t\tif ( is_readable( $filepath ) ) {\n\t\t\t// If the module data exists, load it.\n\t\t\trequire $filepath;\n\t\t} else {\n\t\t\t// Translators: The name of the module, and the filename that needs to exist inside that module.\n\t\t\techo esc_html( sprintf( __( 'The module called \"%1$s\" has a problem. It needs a file called \"%2$s\" to exist in its root directory.', 'sample-plugin' ), $module_name, $filename ) );\n\t\t\texit;\n\t\t}\n\t}\n}\nadd_action( 'plugins_loaded', __NAMESPACE__ . '\\include_custom_modules' );\n"
-  }, {
-    "name": "wp-modules",
-    "type": 'dir',
-    "contents": [{
-      "name": "sample-module-1",
-      "type": 'dir',
-      "contents": [{
-        "name": "js",
-        "type": 'dir',
-        "contents": [{
-          "name": "src",
-          "type": 'dir',
-          "contents": [{
-            "name": "index.js",
-            "type": 'file',
-            "content": "console.log( 'sample module 1' );\n"
-          }]
-        }]
-      }, {
-        "name": "package-lock.json",
-        "type": 'file',
-        "content": "{\n  \"name\": \"sample-module-1\",\n  \"version\": \"1.0.0\",\n  \"lockfileVersion\": 1\n}\n"
-      }, {
-        "name": "package.json",
-        "type": 'file',
-        "content": "{\n\t\"name\": \"sample-module-1\",\n\t\"version\": \"1.0.0\",\n\t\"description\": \"\",\n\t\"main\": \"index.js\",\n\t\"scripts\": {\n\t\t\"build\": \"wp-scripts build js/src/index.js --output-path=js/build/\",\n\t\t\"dev\": \"wp-scripts start js/src/index.js --output-path=js/build/\"\n\t},\n\t\"devDependencies\": {\n\t\t\"@wordpress/scripts\": \"^26.11.0\"\n\t},\n\t\"dependencies\": {\n\t\t\"react\": \"^18.1.0\"\n\t},\n\t\"keywords\": [],\n\t\"author\": \"\",\n\t\"license\": \"ISC\"\n}\n"
-      }, {
-        "name": "sample-module-1.php",
-        "type": 'file',
-        "content": "<?php\n/**\n * Module Name: Sample Module 1\n * Description: A sample module for pluginade.\n * Namespace: SampleModule1\n *\n * @package sample-plugin\n */\n\ndeclare(strict_types=1);\n\nnamespace SamplePlugin\\SampleModule1;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n"
-      }]
-    }, {
-      "name": "sample-module-2",
-      "type": 'dir',
-      "contents": [{
-        "name": "js",
-        "type": 'dir',
-        "contents": [{
-          "name": "src",
-          "type": 'dir',
-          "contents": [{
-            "name": "index.js",
-            "type": 'file',
-            "content": "console.log( 'sample module 2' );\n"
-          }]
-        }]
-      }, {
-        "name": "package-lock.json",
-        "type": 'file',
-        "content": "{\n  \"name\": \"sample-module-2\",\n  \"version\": \"1.0.0\",\n  \"lockfileVersion\": 1\n}\n"
-      }, {
-        "name": "package.json",
-        "type": 'file',
-        "content": "{\n  \"name\": \"sample-module-2\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n\t\"scripts\": {\n\t\t\"build\": \"wp-scripts build js/src/index.js --output-path=js/build/\",\n\t\t\"dev\": \"wp-scripts start js/src/index.js --output-path=js/build/\"\n\t},\n\t\"devDependencies\": {\n\t\t\"@wordpress/scripts\": \"^26.11.0\"\n\t},\n  \"dependencies\": {\n    \"react\": \"^18.1.0\",\n    \"@mui/material\": \"^5.14.5\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\"\n}\n"
-      }, {
-        "name": "sample-module-2.php",
-        "type": 'file',
-        "content": "<?php\n/**\n * Module Name: Sample Module 2\n * Description: A sample module for pluginade.\n * Namespace: SampleModule2\n *\n * @package sample-plugin\n */\n\ndeclare(strict_types=1);\n\nnamespace SamplePlugin\\SampleModule2;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n"
-      }]
-    }]
-  }];
+  return {
+    ".distignore": {
+      "file": {
+        "contents": "wpps-scripts\n.pluginade\n.distignore\n.git\n.gitignore\nwporg\nnode_modules\ncss/src\njs/src\ntests\npackage.json\npackage-lock.json\n.nvmrc\nwebpack.config.js\ntsconfig.json\n.circleci\n.github\ncomposer.json\ncomposer.lock\npostcss.config.js\n.DS_Store\n.vscode\nzips\n"
+      }
+    },
+    ".github": {
+      "directory": {
+        "workflows": {
+          "directory": {
+            "test-and-build.yml": {
+              "file": {
+                "contents": "name: Test and Build\n\non: [push]\n\njobs:\n  lint-php:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting PHP\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:php\n\n  lint-js:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting JS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:js\n\n  lint-css:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Linting CSS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh lint:css\n\n  test-js:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Testing JS\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh test:js\n\n  phpunit:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: PHPUnit Integration Tests\n        working-directory: plugins/sample-plugin\n        run: |\n          sh pluginade.sh build\n          sh pluginade.sh test:phpunit\n\n  zip:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v2\n        with:\n          path: plugins/sample-plugin\n\n      - name: Installing Pluginade\n        working-directory: plugins/sample-plugin\n        run: sh pluginade.sh install\n\n      - name: Creating the zip file\n        working-directory: plugins/sample-plugin\n        run: |\n          sh pluginade.sh build\n          sh pluginade.sh zip\n\n      - name: Upload artifacts\n        uses: actions/upload-artifact@v2\n        with:\n          name: pluginade-artifacts\n          path: /home/runner/work/your-repo-name/your-repo-name/plugins/sample-plugin\n"
+              }
+            }
+          }
+        }
+      }
+    },
+    ".gitignore": {
+      "file": {
+        "contents": "node_modules\n.DS_Store\nbuild\n/vendor\n*.zip\n/.pluginade\n"
+      }
+    },
+    "pluginade.sh": {
+      "file": {
+        "contents": "#!/bin/bash\n\n# This file lives in the root of a plugin directory to enable pluginade commands.\n\n# Set this to the version of pluginade-scripts you want to use.\n# For a list of available versions, see https://github.com/pluginade/pluginade-scripts/tags\npluginadeversion=\"0.0.3-beta-8\";\n\n# Change the following variables to your plugin's namespace and textdomain:\ntextdomain=\"sample-plugin\";\nnamespace=\"SamplePlugin\";\n\n# Dont make any more edits below this line.\n\n# Check if an argument is provided\nif [ -z \"$1\" ]; then\n\t# If no argument is provided, show help text.\n\techo \"Usage: sh pluginade.sh <The pluginade command you want to run>\"\n\techo \"See all available commands at:\"\n\techo \"https://github.com/pluginade/pluginade-scripts/blob/$pluginadeversion/available-commands.md\"\n\texit 1\nfi\n\n#  Set the plugin directory to be the current directory.\nplugindir=$PWD;\n\n#  Install pluginade-scripts if they are not already installed.\ninstall_pluginade() {\n\tif [ ! -d ./pluginade ]; then\n\t\techo \"Installing pluginade into ${plugindir}/.pluginade\";\n\t\tgit clone https://github.com/pluginade/pluginade-scripts ./.pluginade\n\t\tcd .pluginade && git fetch --tags && git reset --hard && git checkout $pluginadeversion && git pull origin $pluginadeversion\n\tfi\n}\n\nif [ $1 = 'install' ]; then\n\tinstall_pluginade;\n\texit 0;\nfi\n\n# Prior to running any command, ensure pluginade is ready.\ninstall_pluginade;\n\n# Go to the pluginade directory inside the plugin.\necho \"Going to ${plugindir}/.pluginade\";\ncd \"$plugindir\"/.pluginade;\n\n# Pass this command to pluginade-run.sh\nsh pluginade-run.sh -p \"${plugindir}\" -c $1 -t $textdomain -n $namespace;\nexit $?;\n"
+      }
+    },
+    "sample-plugin.php": {
+      "file": {
+        "contents": "<?php\n/**\n * Plugin Name: Sample Plugin\n * Plugin URI: pluginade.com\n * Description: A sample plugin which demonstrates how to build a plugin with Pluginade.\n * Version: 0.0.0\n * Author: Pluginade\n * Text Domain: sample-plugin\n * Domain Path: languages\n * License: GPLv2\n * License URI: http://www.gnu.org/licenses/gpl-2.0.txt\n * Requires at least: 6.0\n * Requires PHP: 7.4\n * Network:\n * Update URI:\n * Namespace: SamplePlugin\n *\n * @package pluginade-sample\n */\n\nnamespace SamplePlugin;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n\n/**\n * Automatically include wp modules, which are in the \"wp-modules\" directory.\n *\n * @return void\n */\nfunction include_custom_modules() {\n\t$wp_modules = glob( plugin_dir_path( __FILE__ ) . 'wp-modules*/*' );\n\n\tforeach ( $wp_modules as $wp_module ) {\n\t\t$module_name = basename( $wp_module );\n\t\t$filename    = $module_name . '.php';\n\t\t$filepath    = $wp_module . '/' . $filename;\n\n\t\tif ( is_readable( $filepath ) ) {\n\t\t\t// If the module data exists, load it.\n\t\t\trequire $filepath;\n\t\t} else {\n\t\t\t// Translators: The name of the module, and the filename that needs to exist inside that module.\n\t\t\techo esc_html( sprintf( __( 'The module called \"%1$s\" has a problem. It needs a file called \"%2$s\" to exist in its root directory.', 'sample-plugin' ), $module_name, $filename ) );\n\t\t\texit;\n\t\t}\n\t}\n}\nadd_action( 'plugins_loaded', __NAMESPACE__ . '\\include_custom_modules' );\n"
+      }
+    },
+    "wp-modules": {
+      "directory": {
+        "sample-module-1": {
+          "directory": {
+            "js": {
+              "directory": {
+                "src": {
+                  "directory": {
+                    "index.js": {
+                      "file": {
+                        "contents": "console.log( 'sample module 1' );\n"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "package-lock.json": {
+              "file": {
+                "contents": "{\n  \"name\": \"sample-module-1\",\n  \"version\": \"1.0.0\",\n  \"lockfileVersion\": 1\n}\n"
+              }
+            },
+            "package.json": {
+              "file": {
+                "contents": "{\n\t\"name\": \"sample-module-1\",\n\t\"version\": \"1.0.0\",\n\t\"description\": \"\",\n\t\"main\": \"index.js\",\n\t\"scripts\": {\n\t\t\"build\": \"wp-scripts build js/src/index.js --output-path=js/build/\",\n\t\t\"dev\": \"wp-scripts start js/src/index.js --output-path=js/build/\"\n\t},\n\t\"devDependencies\": {\n\t\t\"@wordpress/scripts\": \"^26.11.0\"\n\t},\n\t\"dependencies\": {\n\t\t\"react\": \"^18.1.0\"\n\t},\n\t\"keywords\": [],\n\t\"author\": \"\",\n\t\"license\": \"ISC\"\n}\n"
+              }
+            },
+            "sample-module-1.php": {
+              "file": {
+                "contents": "<?php\n/**\n * Module Name: Sample Module 1\n * Description: A sample module for pluginade.\n * Namespace: SampleModule1\n *\n * @package sample-plugin\n */\n\ndeclare(strict_types=1);\n\nnamespace SamplePlugin\\SampleModule1;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n"
+              }
+            }
+          }
+        },
+        "sample-module-2": {
+          "directory": {
+            "js": {
+              "directory": {
+                "src": {
+                  "directory": {
+                    "index.js": {
+                      "file": {
+                        "contents": "console.log( 'sample module 2' );\n"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "package-lock.json": {
+              "file": {
+                "contents": "{\n  \"name\": \"sample-module-2\",\n  \"version\": \"1.0.0\",\n  \"lockfileVersion\": 1\n}\n"
+              }
+            },
+            "package.json": {
+              "file": {
+                "contents": "{\n  \"name\": \"sample-module-2\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n\t\"scripts\": {\n\t\t\"build\": \"wp-scripts build js/src/index.js --output-path=js/build/\",\n\t\t\"dev\": \"wp-scripts start js/src/index.js --output-path=js/build/\"\n\t},\n\t\"devDependencies\": {\n\t\t\"@wordpress/scripts\": \"^26.11.0\"\n\t},\n  \"dependencies\": {\n    \"react\": \"^18.1.0\",\n    \"@mui/material\": \"^5.14.5\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\"\n}\n"
+              }
+            },
+            "sample-module-2.php": {
+              "file": {
+                "contents": "<?php\n/**\n * Module Name: Sample Module 2\n * Description: A sample module for pluginade.\n * Namespace: SampleModule2\n *\n * @package sample-plugin\n */\n\ndeclare(strict_types=1);\n\nnamespace SamplePlugin\\SampleModule2;\n\n// Exit if accessed directly.\nif ( ! defined( 'ABSPATH' ) ) {\n\texit;\n}\n"
+              }
+            }
+          }
+        }
+      }
+    }
+  };
 }
 
 /***/ }),
@@ -30168,49 +30209,6 @@ async function fixPluginHeader(pluginDirHandle, pluginData) {
     }
   }
   return true;
-}
-
-/***/ }),
-
-/***/ "./js/src/utils/getRemoteDirArray.js":
-/*!*******************************************!*\
-  !*** ./js/src/utils/getRemoteDirArray.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getRemoteDirArray)
-/* harmony export */ });
-async function getRemoteDirArray(repoSlug, directoryPath = '') {
-  const response = await fetch('https://pluginade.com/?repo=' + repoSlug + '&path=' + directoryPath);
-  const files = await response.json();
-  const repoFiles = {};
-  for (const file of files) {
-    if (file.type === 'file') {
-      const fileContent = await fetch(file.download_url);
-      const blob = await fileContent.text();
-
-      // Follow the format used by stackblitz.
-      repoFiles[file.name] = {
-        file: {
-          contents: blob
-        }
-      };
-    } else if (file.type === 'dir') {
-      const subDirFiles = await getRemoteDirArray(repoSlug, file.path);
-      repoFiles[file.name] = {
-        directory: subDirFiles
-      };
-      // repoFiles.push({
-      //     name: file.name,
-      //     type: 'dir',
-      //     contents: subDirFiles,
-      // });
-    }
-  }
-  return repoFiles;
 }
 
 /***/ }),
