@@ -58,6 +58,8 @@ import fixPluginHeader from './utils/fixPluginHeader';
 // 	});
 // }
 
+console.log( 'Pluginade Studio V0.0.1' );
+
 const LightTheme = createTheme({
 	palette: {
 		mode: 'light',
