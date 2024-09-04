@@ -28516,6 +28516,17 @@ function sprintf(format, ...args) {
 
 /***/ }),
 
+/***/ "./node_modules/@xterm/addon-fit/lib/addon-fit.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@xterm/addon-fit/lib/addon-fit.js ***!
+  \********************************************************/
+/***/ ((module) => {
+
+!function(e,t){ true?module.exports=t():0}(self,(()=>(()=>{"use strict";var e={};return(()=>{var t=e;Object.defineProperty(t,"__esModule",{value:!0}),t.FitAddon=void 0,t.FitAddon=class{activate(e){this._terminal=e}dispose(){}fit(){const e=this.proposeDimensions();if(!e||!this._terminal||isNaN(e.cols)||isNaN(e.rows))return;const t=this._terminal._core;this._terminal.rows===e.rows&&this._terminal.cols===e.cols||(t._renderService.clear(),this._terminal.resize(e.cols,e.rows))}proposeDimensions(){if(!this._terminal)return;if(!this._terminal.element||!this._terminal.element.parentElement)return;const e=this._terminal._core,t=e._renderService.dimensions;if(0===t.css.cell.width||0===t.css.cell.height)return;const r=0===this._terminal.options.scrollback?0:e.viewport.scrollBarWidth,i=window.getComputedStyle(this._terminal.element.parentElement),o=parseInt(i.getPropertyValue("height")),s=Math.max(0,parseInt(i.getPropertyValue("width"))),n=window.getComputedStyle(this._terminal.element),l=o-(parseInt(n.getPropertyValue("padding-top"))+parseInt(n.getPropertyValue("padding-bottom"))),a=s-(parseInt(n.getPropertyValue("padding-right"))+parseInt(n.getPropertyValue("padding-left")))-r;return{cols:Math.max(2,Math.floor(a/t.css.cell.width)),rows:Math.max(1,Math.floor(l/t.css.cell.height))}}}})(),e})()));
+//# sourceMappingURL=addon-fit.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@xterm/xterm/lib/xterm.js":
 /*!************************************************!*\
   !*** ./node_modules/@xterm/xterm/lib/xterm.js ***!
@@ -28650,8 +28661,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _xterm_xterm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @xterm/xterm */ "./node_modules/@xterm/xterm/lib/xterm.js");
 /* harmony import */ var _xterm_xterm__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_xterm_xterm__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _xterm_xterm_css_xterm_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @xterm/xterm/css/xterm.css */ "./node_modules/@xterm/xterm/css/xterm.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _xterm_addon_fit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @xterm/addon-fit */ "./node_modules/@xterm/addon-fit/lib/addon-fit.js");
+/* harmony import */ var _xterm_addon_fit__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_xterm_addon_fit__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _xterm_xterm_css_xterm_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @xterm/xterm/css/xterm.css */ "./node_modules/@xterm/xterm/css/xterm.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -28663,9 +28677,13 @@ __webpack_require__.r(__webpack_exports__);
 }) => {
   const terminalRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   const [xTerm, setXTerm] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [fitAddon, setFitAddon] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     async function doSetUp() {
       const term = new _xterm_xterm__WEBPACK_IMPORTED_MODULE_1__.Terminal();
+      const fitAddon = new _xterm_addon_fit__WEBPACK_IMPORTED_MODULE_2__.FitAddon();
+      term.loadAddon(fitAddon);
+      setFitAddon(fitAddon);
       term.open(terminalRef.current);
       setXTerm(term);
     }
@@ -28675,13 +28693,16 @@ __webpack_require__.r(__webpack_exports__);
   // When the terminalOutput changes, write it to the terminal
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (xTerm) {
+      fitAddon.fit();
       xTerm.write(terminalOutput);
     }
   }, [terminalOutput]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      ref: terminalRef
-    })
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    style: {
+      display: 'grid',
+      overflow: 'hidden'
+    },
+    ref: terminalRef
   });
 });
 
@@ -29299,7 +29320,8 @@ function Plugin({
           overflow: 'hidden'
         },
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(Webpack, {
-          webContainer: webContainer
+          webContainer: webContainer,
+          pluginData: pluginDataState
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
         id: `plugin-tabpanel-phpunit`,
@@ -29379,33 +29401,34 @@ function Plugin({
   });
 }
 function Webpack({
-  webContainer
+  webContainer,
+  pluginData
 }) {
   const [terminalOutput, setTerminalOutput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('Starting Webpack...');
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
     sx: {
       display: 'grid',
       gap: 2,
-      width: '100%',
-      height: '100%',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      gridTemplateRows: 'min-content min-content 1fr',
+      width: '100%'
     },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
-        component: "h2",
-        children: "Webpack"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
-        onClick: () => {
-          setTerminalOutput(Date.now() + ': running npm install... \r\n');
-          webContainer.runCommand('npm', ['install'], data => {
-            setTerminalOutput(data);
-          });
-        },
-        children: "Run npm install"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {
-        terminalOutput: terminalOutput
-      })]
-    })
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_25__["default"], {
+      component: "h2",
+      children: "Webpack"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
+      onClick: () => {
+        webContainer.runCommand('cd', [pluginData.plugin_dirname], data => {
+          setTerminalOutput(data);
+        });
+        webContainer.runCommand('npm', ['install'], data => {
+          setTerminalOutput(data);
+        });
+      },
+      children: "Run npm install"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      terminalOutput: terminalOutput
+    })]
   });
 }
 function Playground() {

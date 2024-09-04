@@ -502,7 +502,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 			<Divider />
 			<Box className="plugin-content" sx={{display: 'grid', overflow: 'hidden'}}>
 				<Box id={`plugin-tabpanel-webpack`} sx={{display: 'webpack' === currentTab ? 'flex' : 'none', gap: 2, padding: 2, overflow: 'hidden'}}>
-					<Webpack webContainer={webContainer} />
+					<Webpack webContainer={webContainer} pluginData={pluginDataState}/>
 				</Box>
 				<Box id={`plugin-tabpanel-phpunit`} sx={{display: 'phpunit' === currentTab ? 'flex' : 'none', gap: 2, padding: 2}}>
 					<Box sx={{display: 'grid', gap: 2}}>
@@ -536,22 +536,24 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 	);
 }
 
-function Webpack({webContainer}) {
+function Webpack({webContainer, pluginData}) {
 	const [terminalOutput, setTerminalOutput] = useState('Starting Webpack...');
 
 	return (
-		<Box sx={{display: 'grid', gap: 2, width: '100%', height: '100%', overflow: 'hidden'}}>
-			<Box>
-				<Typography component="h2">Webpack</Typography>
-				<Button
-				onClick={() => {
-					setTerminalOutput(Date.now() + ': running npm install... \r\n');
-					webContainer.runCommand( 'npm', ['install'], (data) => {
-						setTerminalOutput(data);
-					})
-				}}>Run npm install</Button>
-				<Terminal terminalOutput={terminalOutput} />
-			</Box>
+		<Box sx={{display: 'grid', gap: 2, overflow: 'hidden', gridTemplateRows: 'min-content min-content 1fr', width: '100%'}}>
+			<Typography component="h2">Webpack</Typography>
+			<Button
+			onClick={() => {
+				webContainer.runCommand( 'cd', [pluginData.plugin_dirname], (data) => {
+					setTerminalOutput(data);
+				})
+				webContainer.runCommand( 'npm', ['install'], (data) => {
+					setTerminalOutput(data);
+				})
+			}}>Run npm install</Button>
+			
+			<Terminal terminalOutput={terminalOutput} />
+			
 		</Box>
 	);
 }
