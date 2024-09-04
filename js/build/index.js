@@ -28673,7 +28673,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (({
-  terminalOutput
+  terminalOutput,
+  setTerminalOutput
 }) => {
   const terminalRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   const [xTerm, setXTerm] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
@@ -29433,7 +29434,8 @@ function Webpack({
       },
       children: "Run npm install"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_Terminal__WEBPACK_IMPORTED_MODULE_15__["default"], {
-      terminalOutput: terminalOutput
+      terminalOutput: terminalOutput,
+      setTerminalOutput: setTerminalOutput
     })]
   });
 }

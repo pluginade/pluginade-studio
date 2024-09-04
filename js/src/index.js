@@ -552,7 +552,7 @@ function Webpack({webContainer, pluginData}) {
 				})
 			}}>Run npm install</Button>
 			
-			<Terminal terminalOutput={terminalOutput} />
+			<Terminal terminalOutput={terminalOutput} setTerminalOutput={setTerminalOutput} />
 			
 		</Box>
 	);

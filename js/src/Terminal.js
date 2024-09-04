@@ -5,7 +5,7 @@ import { FitAddon } from '@xterm/addon-fit';
 // Import the styles
 import '@xterm/xterm/css/xterm.css';
 
-export default ({terminalOutput}) => {
+export default ({terminalOutput, setTerminalOutput}) => {
 	const terminalRef = useRef(null);
 	const [xTerm, setXTerm] = useState(null);
 	const [fitAddon, setFitAddon] = useState(null);
