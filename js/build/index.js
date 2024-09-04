@@ -29322,7 +29322,9 @@ function Plugin({
             killLabel: 'Stop webpack watch',
             command: 'npm',
             commandArgs: ['run', 'pluginade-webpack-dev'],
-            commandOptions: {}
+            commandOptions: {
+              cwd: pluginData.plugin_dirname
+            }
           }]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
@@ -29363,14 +29365,18 @@ function Plugin({
             killLabel: 'Stop linting the javascript',
             command: 'npm',
             commandArgs: ['run', 'pluginade-lint-js'],
-            commandOptions: {}
+            commandOptions: {
+              cwd: pluginData.plugin_dirname
+            }
           }, {
             label: 'Fix linting issues in the javascript in the plugin',
             runLabel: 'Fix linting issues',
             killLabel: 'Stop fixing linting issues',
             command: 'npm',
             commandArgs: ['run', 'pluginade-lint-js'],
-            commandOptions: {}
+            commandOptions: {
+              cwd: pluginData.plugin_dirname
+            }
           }]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_19__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
