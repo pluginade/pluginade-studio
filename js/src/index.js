@@ -575,7 +575,10 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 						if ( change.type === 'add' || change.type === 'change' ) {
 							const fileContents = await webContainer.instance.fs.readFile( change.path, 'utf-8' );
 							console.log( 'File contents:', fileContents );
-							await copyDirToLocal( pluginData.dirHandle, {[change.path]: {file: {contents: fileContents}}});
+							// await copyDirToLocal( pluginData.dirHandle, {[change.path]: {file: {contents: fileContents}}});
+							const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+							console.log( 'Filez in web container:', pluginFilesFromWebContainer );
+							copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
 						}
 						if ( change.type === 'delete' ) {
 							await pluginData.dirHandle.removeEntry( change.path );

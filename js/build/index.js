@@ -29441,13 +29441,10 @@ function WebContainerTerminal({
             if (change.type === 'add' || change.type === 'change') {
               const fileContents = await webContainer.instance.fs.readFile(change.path, 'utf-8');
               console.log('File contents:', fileContents);
-              await (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(pluginData.dirHandle, {
-                [change.path]: {
-                  file: {
-                    contents: fileContents
-                  }
-                }
-              });
+              // await copyDirToLocal( pluginData.dirHandle, {[change.path]: {file: {contents: fileContents}}});
+              const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+              console.log('Filez in web container:', pluginFilesFromWebContainer);
+              (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(pluginData.dirHandle, pluginFilesFromWebContainer);
             }
             if (change.type === 'delete') {
               await pluginData.dirHandle.removeEntry(change.path);
