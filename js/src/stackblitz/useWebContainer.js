@@ -12,8 +12,8 @@ export default () => {
 		doSetUp();
 	}, []);
 
-	async function runCommandInWebContainer( command, args = [], options = {}, onOutput, onProcessStart, onProcessEnd ) {
-		const webContainerProcess = await webContainer.spawn(command, args, options);
+	async function runCommandInWebContainer( {command, commandArgs = [], commandOptions = {}, onOutput, onProcessStart, onProcessEnd } ) {
+		const webContainerProcess = await webContainer.spawn(command, commandArgs, commandOptions);
 
 		if (onProcessStart) {
 			onProcessStart(webContainerProcess);
