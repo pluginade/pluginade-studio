@@ -29444,7 +29444,7 @@ function WebContainerTerminal({
         console.log('mounted?', content);
 
         // Watch the container for file changes, and update the local file system to match.
-        webContainer.instance.fs.watch(pluginData.plugin_dirname, {
+        webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, {
           recursive: true
         }, (event, filename) => {
           console.log(`file: ${filename} action: ${event}`);
