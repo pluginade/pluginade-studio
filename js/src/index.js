@@ -577,13 +577,15 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				console.log( 'mounted?', content );
 
 				// Watch the container for file changes, and update the local file system to match.
-				webContainer.instance.fs.watch( pluginData.plugin_dirname, async (change, filename) => {
-					console.log( 'Changes:', change, filename );
+				webContainer.instance.fs.watch( pluginData.plugin_dirname, { recursive: true }, (event, filename) => {
+					console.log(`file: ${filename} action: ${event}`);
+				});
+					
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
 					
-				});
+				
 			}
 		}
 		mountPlugin();
