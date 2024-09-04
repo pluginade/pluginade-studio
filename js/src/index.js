@@ -617,7 +617,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 												// When the output stops for x seconds, copy the files from the web container to the local file system.
 												terminalOutputDebounced(async () => {
 													const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
-													console.log( 'File in web container:', pluginFilesFromWebContainer );
+													console.log( 'Filez in web container:', pluginFilesFromWebContainer );
 													copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
 												})
 											},
