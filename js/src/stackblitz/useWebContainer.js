@@ -29,17 +29,17 @@ export default () => {
 		onProcessEnd(exitCode);
 	}
 
-	async function getPluginFiles( plugin_dirname ) {
+	async function getDirectoryFiles( dirname ) {
 		const pluginFilesObject = {};
-		const files = await webContainer.fs.readdir( plugin_dirname, {withFileTypes: true, buffer: 'utf-8'}  );
+		const files = await webContainer.fs.readdir( dirname, {withFileTypes: true, buffer: 'utf-8'}  );
 		for( const file of files ) {
 			if ( file.isDirectory() ) {
 				pluginFilesObject[file.name] = {
-					directory: await getPluginFiles( plugin_dirname + '/' + file.name )
+					directory: await getDirectoryFiles( dirname + '/' + file.name )
 				}
 			}
 			if ( file.isFile() ) {
-				const fileContents = await webContainer.fs.readFile( plugin_dirname + '/' + file.name );
+				const fileContents = await webContainer.fs.readFile( dirname + '/' + file.name );
 				pluginFilesObject[file.name] = {
 					file: {
 						contents: fileContents
@@ -54,6 +54,6 @@ export default () => {
 	return {
 		instance: webContainer,
 		runCommand: runCommandInWebContainer,
-		getPluginFiles,
+		getDirectoryFiles,
 	}
 }

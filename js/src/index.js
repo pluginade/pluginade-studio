@@ -567,6 +567,21 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				await webContainer.instance.mount( pluginData.filesObject, { mountPoint: pluginData.plugin_dirname } );
 				const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
 				console.log( 'mounted?', content );
+
+				// Watch the container for file changes, and update the local file system to match.
+				webContainer.instance.watch( pluginData.plugin_dirname, async (changes) => {
+					console.log( 'Changes:', changes );
+					changes.forEach( async (change) => {
+						if ( change.type === 'add' || change.type === 'change' ) {
+							const fileContents = await webContainer.instance.fs.readFile( change.path, 'utf-8' );
+							console.log( 'File contents:', fileContents );
+							await copyDirToLocal( pluginData.dirHandle, {[change.path]: {file: {contents: fileContents}}});
+						}
+						if ( change.type === 'delete' ) {
+							await pluginData.dirHandle.removeEntry( change.path );
+						}
+					});
+				});
 			}
 		}
 		mountPlugin();
@@ -616,11 +631,11 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 													setTerminalOutput(data);
 													
 													// When the output stops for x seconds, copy the files from the web container to the local file system.
-													terminalOutputDebounced(async () => {
-														const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
-														console.log( 'Filez in web container:', pluginFilesFromWebContainer );
-														copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-													})
+													// terminalOutputDebounced(async () => {
+													// 	const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+													// 	console.log( 'Filez in web container:', pluginFilesFromWebContainer );
+													// 	copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+													// })
 												},
 												onProcessStart: (process) => {
 													setCurrentlyActiveButton(button);

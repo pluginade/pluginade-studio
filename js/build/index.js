@@ -29433,6 +29433,27 @@ function WebContainerTerminal({
         });
         const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
         console.log('mounted?', content);
+
+        // Watch the container for file changes, and update the local file system to match.
+        webContainer.instance.watch(pluginData.plugin_dirname, async changes => {
+          console.log('Changes:', changes);
+          changes.forEach(async change => {
+            if (change.type === 'add' || change.type === 'change') {
+              const fileContents = await webContainer.instance.fs.readFile(change.path, 'utf-8');
+              console.log('File contents:', fileContents);
+              await (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(pluginData.dirHandle, {
+                [change.path]: {
+                  file: {
+                    contents: fileContents
+                  }
+                }
+              });
+            }
+            if (change.type === 'delete') {
+              await pluginData.dirHandle.removeEntry(change.path);
+            }
+          });
+        });
       }
     }
     mountPlugin();
@@ -29487,11 +29508,11 @@ function WebContainerTerminal({
                       setTerminalOutput(data);
 
                       // When the output stops for x seconds, copy the files from the web container to the local file system.
-                      terminalOutputDebounced(async () => {
-                        const pluginFilesFromWebContainer = await webContainer.getPluginFiles(pluginData.plugin_dirname);
-                        console.log('Filez in web container:', pluginFilesFromWebContainer);
-                        (0,_utils_copyDirToLocal__WEBPACK_IMPORTED_MODULE_16__["default"])(pluginData.dirHandle, pluginFilesFromWebContainer);
-                      });
+                      // terminalOutputDebounced(async () => {
+                      // 	const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+                      // 	console.log( 'Filez in web container:', pluginFilesFromWebContainer );
+                      // 	copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+                      // })
                     },
                     onProcessStart: process => {
                       setCurrentlyActiveButton(button);
@@ -30098,20 +30119,20 @@ __webpack_require__.r(__webpack_exports__);
     const exitCode = await webContainerProcess.exit;
     onProcessEnd(exitCode);
   }
-  async function getPluginFiles(plugin_dirname) {
+  async function getDirectoryFiles(dirname) {
     const pluginFilesObject = {};
-    const files = await webContainer.fs.readdir(plugin_dirname, {
+    const files = await webContainer.fs.readdir(dirname, {
       withFileTypes: true,
       buffer: 'utf-8'
     });
     for (const file of files) {
       if (file.isDirectory()) {
         pluginFilesObject[file.name] = {
-          directory: await getPluginFiles(plugin_dirname + '/' + file.name)
+          directory: await getDirectoryFiles(dirname + '/' + file.name)
         };
       }
       if (file.isFile()) {
-        const fileContents = await webContainer.fs.readFile(plugin_dirname + '/' + file.name);
+        const fileContents = await webContainer.fs.readFile(dirname + '/' + file.name);
         pluginFilesObject[file.name] = {
           file: {
             contents: fileContents
@@ -30124,7 +30145,7 @@ __webpack_require__.r(__webpack_exports__);
   return {
     instance: webContainer,
     runCommand: runCommandInWebContainer,
-    getPluginFiles
+    getDirectoryFiles
   };
 });
 
