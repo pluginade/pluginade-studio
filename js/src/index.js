@@ -211,6 +211,8 @@ function PluginadeApp() {
 					// Make a directory in the webContainer for this plugin
 					await webcontainerInstance.fs.mkdir( pluginData.plugin_dirname );
 					webContainer.instance.mount( pluginData.filesObject, { mountPoint: pluginData.plugin_dirname } );
+					const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/package.json', 'utf-8');
+					console.log( 'mounted?', content );
 				}
 
 				let hasWpModules = false;
@@ -232,8 +234,6 @@ function PluginadeApp() {
 				}
 
 				pluginData.dirHandle = dirHandle;
-
-				console.log( pluginData );
 
 				await set(pluginData.plugin_dirname, dirHandle);
 

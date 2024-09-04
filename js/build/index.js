@@ -28957,6 +28957,8 @@ function PluginadeApp() {
           webContainer.instance.mount(pluginData.filesObject, {
             mountPoint: pluginData.plugin_dirname
           });
+          const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/package.json', 'utf-8');
+          console.log('mounted?', content);
         }
         let hasWpModules = false;
         for await (const possibleWpModulesEntry of dirHandle.values()) {
@@ -28976,7 +28978,6 @@ function PluginadeApp() {
           pluginData.plugin_modules = {};
         }
         pluginData.dirHandle = dirHandle;
-        console.log(pluginData);
         await (0,https_unpkg_com_idb_keyval_5_0_2_dist_esm_index_js__WEBPACK_IMPORTED_MODULE_3__.set)(pluginData.plugin_dirname, dirHandle);
         setPlugins(nonStalePlugins => {
           return {
