@@ -529,7 +529,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 								runLabel: 'Fix linting issues',
 								killLabel: 'Stop fixing linting issues',
 								command: 'npm',
-								commandArgs: ['run', 'pluginade-lint-js'],
+								commandArgs: ['run', 'pluginade-lint-js', '--fix'],
 								commandOptions: {cwd: pluginDataState.plugin_dirname}
 							}
 						]
@@ -604,6 +604,9 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 											commandOptions: button.commandOptions,
 											onOutput: async (data) => {
 												setTerminalOutput(data);
+												const pluginFilesFromWebContainer = await webContainer.instance.getPluginFiles(pluginData.plugin_dirname);
+												console.log( 'File in web container:', pluginFilesFromWebContainer );
+												copyDirToLocal( pluginData.dirHandle, pluginData.plugin_dirname, pluginFilesFromWebContainer );
 											},
 											onProcessStart: (process) => {
 												setCurrentlyActiveButton(button);
