@@ -29460,7 +29460,7 @@ function WebContainerTerminal({
         // });
 
         watchDir(pluginData.plugin_dirname, async (event, filename) => {
-          console.log('Changes:', event, filename);
+          // console.log( 'Changes:', event, filename );
           // const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
           // console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
           // copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
@@ -29474,6 +29474,7 @@ function WebContainerTerminal({
   }, 100);
   async function watchDir(path, callback) {
     webContainer.instance.fs.watch(path, {}, async (event, filename) => {
+      console.log('Watching', path);
       callback(event, filename);
       // Get all of the directories inside this directory.
       const files = await webContainer.instance.fs.readdir(path + '/' + filename, {
