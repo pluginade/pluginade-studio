@@ -564,6 +564,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 	const [terminalOutput, setTerminalOutput] = useState('');
 	const [currentlyActiveButton, setCurrentlyActiveButton] = useState(null);
 	const [currentProcess, setCurrentProcess] = useState(null);
+	const [pluginHasMountedToContainer, setPluginHasMountedToContainer] = useState(false);
 
 	useEffect(() => {
 		async function mountPlugin() {
@@ -578,6 +579,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				await webContainer.instance.mount( pluginData.filesObject, { mountPoint: pluginData.plugin_dirname } );
 				const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
 				console.log( 'mounted?', content );
+				setPluginHasMountedToContainer(true);
 
 				// Watch the container for file changes, and update the local file system to match.
 				// webContainer.instance.fs.watch( pluginData.plugin_dirname, async (change, filename) => {
@@ -644,11 +646,19 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 		// Also watch any directories that are inside this directory.
 		const filesInDirectory = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
-		for( const file of files ) {
+		for( const file of filesInDirectory ) {
 			if ( file.isDirectory() ) {
-				await watchDir( path + '/' + filename, callback, watchedPaths );
+				await watchDir( path + '/' + file.name, callback, watchedPaths );
 			}
 		}
+	}
+
+	if ( ! pluginHasMountedToContainer ) {
+		return <Box sx={{display: 'grid', gap: 1, overflow: 'hidden', gridTemplateRows: 'min-content 1fr', width: '100%'}}>
+			<Box>
+				<Typography component="p">Booting nodeJs container in your browser...</Typography>
+			</Box>
+		</Box>
 	}
 
 	return (

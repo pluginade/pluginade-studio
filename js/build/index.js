@@ -29433,6 +29433,7 @@ function WebContainerTerminal({
   const [terminalOutput, setTerminalOutput] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
   const [currentlyActiveButton, setCurrentlyActiveButton] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   const [currentProcess, setCurrentProcess] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const [pluginHasMountedToContainer, setPluginHasMountedToContainer] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     async function mountPlugin() {
       // Mount the plugin into the webContainer.
@@ -29446,6 +29447,7 @@ function WebContainerTerminal({
         });
         const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
         console.log('mounted?', content);
+        setPluginHasMountedToContainer(true);
 
         // Watch the container for file changes, and update the local file system to match.
         // webContainer.instance.fs.watch( pluginData.plugin_dirname, async (change, filename) => {
@@ -29511,11 +29513,28 @@ function WebContainerTerminal({
       withFileTypes: true,
       buffer: 'utf-8'
     });
-    for (const file of files) {
+    for (const file of filesInDirectory) {
       if (file.isDirectory()) {
-        await watchDir(path + '/' + filename, callback, watchedPaths);
+        await watchDir(path + '/' + file.name, callback, watchedPaths);
       }
     }
+  }
+  if (!pluginHasMountedToContainer) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+      sx: {
+        display: 'grid',
+        gap: 1,
+        overflow: 'hidden',
+        gridTemplateRows: 'min-content 1fr',
+        width: '100%'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_26__["default"], {
+          component: "p",
+          children: "Booting nodeJs container in your browser..."
+        })
+      })
+    });
   }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
     sx: {
