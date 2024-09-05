@@ -594,18 +594,18 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// });
 
 				watchDir( pluginData.plugin_dirname, async (event, filePath, watchedPaths) => {
-					// console.log( 'Watched Paths:', watchedPaths );
-					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
-					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
-					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-				});
-
-				watchDir( pluginData.plugin_dirname + '/wp-modules', async (event, filePath, watchedPaths) => {
 					console.log( 'Watched Paths:', watchedPaths );
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
 				});
+
+				// watchDir( pluginData.plugin_dirname + '/wp-modules', async (event, filePath, watchedPaths) => {
+				// 	console.log( 'Watched Paths:', watchedPaths );
+				// 	// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+				// 	// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
+				// 	// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+				// });
 				
 					
 			}
@@ -633,7 +633,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 			// Fire the original callback function passed in when a file changes.
 			callback(event, path + '/' + filename, watchedPaths);
 
-			// Get all of the directories inside this directory.
+			// Get all of the directories inside this directory, just in case a new one was created.
 			const files = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
 			for( const file of files ) {
 				if ( file.isDirectory() ) {
@@ -641,6 +641,14 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				}
 			}
 		});
+
+		// Also watch any directories that are inside this directory.
+		const filesInDirectory = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
+		for( const file of files ) {
+			if ( file.isDirectory() ) {
+				await watchDir( path + '/' + filename, callback, watchedPaths );
+			}
+		}
 	}
 
 	return (
