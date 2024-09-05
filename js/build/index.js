@@ -29441,12 +29441,12 @@ function WebContainerTerminal({
         // Make a directory in the webContainer for this plugin
         try {
           await webContainer.instance.fs.mkdir(pluginData.plugin_dirname);
-        } catch (error) {}
+        } catch (error) {
+          // If the plugin directory already exists in the container, that's ok.
+        }
         await webContainer.instance.mount(pluginData.filesObject, {
           mountPoint: pluginData.plugin_dirname
         });
-        const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
-        console.log('mounted?', content);
         setPluginHasMountedToContainer(true);
 
         // Watch the container for file changes, and update the local file system to match.
@@ -29509,6 +29509,7 @@ function WebContainerTerminal({
     });
 
     // Also watch any directories that are inside this directory.
+    console.log('Reading directory:', path);
     const filesInDirectory = await webContainer.instance.fs.readdir(path, {
       withFileTypes: true,
       buffer: 'utf-8'
@@ -29530,9 +29531,7 @@ function WebContainerTerminal({
         gridTemplateRows: 'min-content 1fr',
         width: '100%'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_33__["default"], {
-        color: "secondary"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_33__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_28__["default"], {
           severity: "info",
           children: 'Booting nodeJs container in your browser...'

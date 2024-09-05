@@ -568,17 +568,18 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 	useEffect(() => {
 		async function mountPlugin() {
+
 			// Mount the plugin into the webContainer.
 			if ( webContainer.instance ) {
 				// Make a directory in the webContainer for this plugin
 				try {
 					await webContainer.instance.fs.mkdir( pluginData.plugin_dirname );	
 				} catch (error) {
-					
+					// If the plugin directory already exists in the container, that's ok.
 				}
+
 				await webContainer.instance.mount( pluginData.filesObject, { mountPoint: pluginData.plugin_dirname } );
-				const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
-				console.log( 'mounted?', content );
+
 				setPluginHasMountedToContainer(true);
 
 				// Watch the container for file changes, and update the local file system to match.
@@ -645,6 +646,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 		});
 
 		// Also watch any directories that are inside this directory.
+		console.log( 'Reading directory:', path );
 		const filesInDirectory = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
 		console.log(  'Files in directory:', filesInDirectory );
 
@@ -658,7 +660,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 	if ( ! pluginHasMountedToContainer ) {
 		return <Box sx={{display: 'grid', gap: 1, overflow: 'hidden', gridTemplateRows: 'min-content 1fr', width: '100%'}}>
-			<LinearProgress color="secondary" /> 
+			<LinearProgress /> 
 			<Box>
 				<Alert severity="info">
 					{'Booting nodeJs container in your browser...'}
