@@ -640,7 +640,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 			const files = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
 			for( const file of files ) {
 				if ( file.isDirectory() ) {
-					await watchDir( path + '/' + filename, callback, watchedPaths );
+					await watchDir( path + '/' + file.name, callback, watchedPaths );
 				}
 			}
 		});

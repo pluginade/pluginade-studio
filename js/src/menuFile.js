@@ -5,9 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Typography from '@mui/material/Typography';
-import ContentCut from '@mui/icons-material/ContentCut';
-import ContentCopy from '@mui/icons-material/ContentCopy';
-import ContentPaste from '@mui/icons-material/ContentPaste';
+import AddIcon from '@mui/icons-material/Add';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import Button from '@mui/material/Button';
 
 export default function IconMenu({onNewPlugin, onOpenPlugin}) {
@@ -46,7 +45,7 @@ const [anchorEl, setAnchorEl] = React.useState(null);
 					handleClose();
 				}}>
 					<ListItemIcon>
-						<ContentCut fontSize="small" />
+						<AddIcon fontSize="small" />
 					</ListItemIcon>
 					<ListItemText>New Plugin</ListItemText>
 					<Typography variant="body2" color="text.secondary">
@@ -58,7 +57,7 @@ const [anchorEl, setAnchorEl] = React.useState(null);
 					handleClose();
 				}}>
 					<ListItemIcon>
-						<ContentCut fontSize="small" />
+						<FolderOpenIcon fontSize="small" />
 					</ListItemIcon>
 					<ListItemText>Open Plugin</ListItemText>
 					<Typography variant="body2" color="text.secondary">

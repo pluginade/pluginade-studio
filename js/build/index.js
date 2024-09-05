@@ -4565,6 +4565,29 @@ function useSlotProps(parameters) {
 
 /***/ }),
 
+/***/ "./node_modules/@mui/icons-material/Add.js":
+/*!*************************************************!*\
+  !*** ./node_modules/@mui/icons-material/Add.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+"use client";
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@mui/icons-material/utils/createSvgIcon.js"));
+var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _default = exports["default"] = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"
+}), 'Add');
+
+/***/ }),
+
 /***/ "./node_modules/@mui/icons-material/ContentCopy.js":
 /*!*********************************************************!*\
   !*** ./node_modules/@mui/icons-material/ContentCopy.js ***!
@@ -4631,6 +4654,29 @@ var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/r
 var _default = exports["default"] = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
   d: "M19 2h-4.18C14.4.84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1m7 18H5V4h2v3h10V4h2z"
 }), 'ContentPaste');
+
+/***/ }),
+
+/***/ "./node_modules/@mui/icons-material/FolderOpen.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@mui/icons-material/FolderOpen.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+"use client";
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@mui/icons-material/utils/createSvgIcon.js"));
+var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _default = exports["default"] = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m0 12H4V8h16z"
+}), 'FolderOpen');
 
 /***/ }),
 
@@ -29503,7 +29549,7 @@ function WebContainerTerminal({
       });
       for (const file of files) {
         if (file.isDirectory()) {
-          await watchDir(path + '/' + filename, callback, watchedPaths);
+          await watchDir(path + '/' + file.name, callback, watchedPaths);
         }
       }
     });
@@ -30075,15 +30121,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mui_material_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Menu */ "./node_modules/@mui/material/Menu/Menu.js");
-/* harmony import */ var _mui_material_MenuList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/MenuList */ "./node_modules/@mui/material/MenuList/MenuList.js");
-/* harmony import */ var _mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/MenuItem */ "./node_modules/@mui/material/MenuItem/MenuItem.js");
-/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
-/* harmony import */ var _mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/ListItemIcon */ "./node_modules/@mui/material/ListItemIcon/ListItemIcon.js");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
-/* harmony import */ var _mui_icons_material_ContentCut__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/icons-material/ContentCut */ "./node_modules/@mui/icons-material/ContentCut.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-
+/* harmony import */ var _mui_material_Menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Menu */ "./node_modules/@mui/material/Menu/Menu.js");
+/* harmony import */ var _mui_material_MenuList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/MenuList */ "./node_modules/@mui/material/MenuList/MenuList.js");
+/* harmony import */ var _mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/MenuItem */ "./node_modules/@mui/material/MenuItem/MenuItem.js");
+/* harmony import */ var _mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/ListItemText */ "./node_modules/@mui/material/ListItemText/ListItemText.js");
+/* harmony import */ var _mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/ListItemIcon */ "./node_modules/@mui/material/ListItemIcon/ListItemIcon.js");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_icons_material_Add__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/icons-material/Add */ "./node_modules/@mui/icons-material/Add.js");
+/* harmony import */ var _mui_icons_material_FolderOpen__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/icons-material/FolderOpen */ "./node_modules/@mui/icons-material/FolderOpen.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -30107,46 +30154,63 @@ function IconMenu({
   const handleClose = () => {
     setAnchorEl(null);
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    id: "file-button",
-    "aria-controls": open ? 'file-menu' : undefined,
-    "aria-haspopup": "true",
-    "aria-expanded": open ? 'true' : undefined,
-    onClick: handleClick
-  }, "File"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Menu__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    id: "edit-menu",
-    anchorEl: anchorEl,
-    open: open,
-    onClose: handleClose,
-    MenuListProps: {
-      'aria-labelledby': 'file-button'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_MenuList__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    sx: {
-      width: 320,
-      maxWidth: '100%'
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    onClick: () => {
-      onNewPlugin();
-      handleClose();
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_5__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_icons_material_ContentCut__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    fontSize: "small"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_7__["default"], null, "New Plugin"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    variant: "body2",
-    color: "text.secondary"
-  }, "\u2318N")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    onClick: () => {
-      onOpenPlugin();
-      handleClose();
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_5__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_icons_material_ContentCut__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    fontSize: "small"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Open Plugin"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    variant: "body2",
-    color: "text.secondary"
-  }, "\u2318O")))));
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      id: "file-button",
+      "aria-controls": open ? 'file-menu' : undefined,
+      "aria-haspopup": "true",
+      "aria-expanded": open ? 'true' : undefined,
+      onClick: handleClick,
+      children: "File"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      id: "edit-menu",
+      anchorEl: anchorEl,
+      open: open,
+      onClose: handleClose,
+      MenuListProps: {
+        'aria-labelledby': 'file-button'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_mui_material_MenuList__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        sx: {
+          width: 320,
+          maxWidth: '100%'
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          onClick: () => {
+            onNewPlugin();
+            handleClose();
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_icons_material_Add__WEBPACK_IMPORTED_MODULE_7__["default"], {
+              fontSize: "small"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            children: "New Plugin"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            variant: "body2",
+            color: "text.secondary",
+            children: "\u2318N"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          onClick: () => {
+            onOpenPlugin();
+            handleClose();
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_icons_material_FolderOpen__WEBPACK_IMPORTED_MODULE_10__["default"], {
+              fontSize: "small"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_ListItemText__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            children: "Open Plugin"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            variant: "body2",
+            color: "text.secondary",
+            children: "\u2318O"
+          })]
+        })]
+      })
+    })]
+  });
 }
 
 /***/ }),
