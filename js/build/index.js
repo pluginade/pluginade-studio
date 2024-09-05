@@ -29510,7 +29510,7 @@ function WebContainerTerminal({
         // });
 
         watchDir(pluginData.plugin_dirname, async (event, filePath, watchedPaths) => {
-          console.log('Watched Paths:', watchedPaths);
+          console.log('Change:', filePath);
           // const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
           // console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
           // copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
@@ -29538,7 +29538,7 @@ function WebContainerTerminal({
     watchedPaths.push(path);
     webContainer.instance.fs.watch(path, {}, async (event, filename) => {
       // This is the callback that will be called when a file changes in the directory.
-      // console.log( 'Watching', path );
+
       // Fire the original callback function passed in when a file changes.
       callback(event, path + '/' + filename, watchedPaths);
 
@@ -29555,14 +29555,11 @@ function WebContainerTerminal({
     });
 
     // Also watch any directories that are inside this directory.
-    console.log('Reading directory:', path);
     const filesInDirectory = await webContainer.instance.fs.readdir(path, {
       withFileTypes: true,
       buffer: 'utf-8'
     });
-    console.log('Files in directory:', filesInDirectory);
     for (const file of filesInDirectory) {
-      console.log(file, file.isDirectory());
       if (file.isDirectory()) {
         await watchDir(path + '/' + file.name, callback, watchedPaths);
       }
