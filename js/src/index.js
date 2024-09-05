@@ -594,6 +594,13 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// });
 
 				watchDir( pluginData.plugin_dirname, async (event, filePath, watchedPaths) => {
+					// console.log( 'Watched Paths:', watchedPaths );
+					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
+					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+				});
+
+				watchDir( pluginData.plugin_dirname + '/wp-modules', async (event, filePath, watchedPaths) => {
 					console.log( 'Watched Paths:', watchedPaths );
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
