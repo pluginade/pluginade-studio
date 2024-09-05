@@ -594,7 +594,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-				}
+				});
 				
 					
 			}
