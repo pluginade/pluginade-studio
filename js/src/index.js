@@ -570,7 +570,11 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 			// Mount the plugin into the webContainer.
 			if ( webContainer.instance ) {
 				// Make a directory in the webContainer for this plugin
-				await webContainer.instance.fs.mkdir( pluginData.plugin_dirname );
+				try {
+					await webContainer.instance.fs.mkdir( pluginData.plugin_dirname );	
+				} catch (error) {
+					
+				}
 				await webContainer.instance.mount( pluginData.filesObject, { mountPoint: pluginData.plugin_dirname } );
 				const content = await webContainer.instance.fs.readFile('/' + pluginData.plugin_dirname + '/' + pluginData.plugin_dirname + '.php', 'utf-8');
 				console.log( 'mounted?', content );
@@ -589,8 +593,8 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// 	console.log(`2. file: ${filename} action: ${event}`);
 				// });
 
-				watchDir( pluginData.plugin_dirname, async (event, filename) => {
-					console.log( 'Changes:', event, filename );
+				watchDir( pluginData.plugin_dirname, async (event, filePath) => {
+					console.log( 'Changes:', event, filePath );
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
@@ -613,9 +617,9 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 		// Start watching the directory at the path.
 		webContainer.instance.fs.watch(path, {}, async (event, filename) => {
 			// This is the callback that will be called when a file changes in the directory.
-			console.log( 'Watching', path );
+			// console.log( 'Watching', path );
 			// Fire the original callback function passed in when a file changes.
-			callback(event, filename);
+			callback(event, path + '/' + filename);
 
 			// Get all of the directories inside this directory.
 			const files = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
