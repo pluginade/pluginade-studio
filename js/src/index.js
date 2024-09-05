@@ -495,7 +495,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 			<Divider />
 			<Box className="plugin-content" sx={{display: 'grid', overflow: 'hidden'}}>
 				<Box id={`plugin-tabpanel-webpack`} sx={{display: 'webpack' === currentTab ? 'flex' : 'none', gap: 2, padding: 2, overflow: 'hidden'}}>
-					{/* <WebContainerTerminal webContainer={webContainer} pluginData={pluginDataState} buttons={
+					<WebContainerTerminal webContainer={webContainer} pluginData={pluginDataState} buttons={
 						[
 							{
 								label: 'Build webpack for production',
@@ -514,7 +514,7 @@ function Plugin({plugins, setPlugins, currentPluginSlug, hidden, webContainer}) 
 								commandOptions: {cwd: pluginDataState.plugin_dirname}
 							},
 						]
-					} /> */}
+					} />
 				</Box>
 				<Box id={`plugin-tabpanel-phpunit`} sx={{display: 'phpunit' === currentTab ? 'flex' : 'none', gap: 2, padding: 2}}>
 					<Box sx={{display: 'grid', gap: 2}}>
@@ -576,18 +576,25 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				console.log( 'mounted?', content );
 
 				// Watch the container for file changes, and update the local file system to match.
-				webContainer.instance.fs.watch( pluginData.plugin_dirname, async (change, filename) => {
-					console.log( 'Changes:', change, filename );
+				// webContainer.instance.fs.watch( pluginData.plugin_dirname, async (change, filename) => {
+				// 	console.log( 'Changes:', change, filename );
+				// 	// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
+				// 	// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
+				// 	// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+				// });
+				// webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, { recursive: true }, (event, filename) => {
+				// 	console.log(`1. file: ${filename} action: ${event}`);
+				// });
+				// webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, {}, (event, filename) => {
+				// 	console.log(`2. file: ${filename} action: ${event}`);
+				// });
+
+				watchDir( pluginData.plugin_dirname, async (event, filename) => {
+					console.log( 'Changes:', event, filename );
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-				});
-				webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, { recursive: true }, (event, filename) => {
-					console.log(`1. file: ${filename} action: ${event}`);
-				});
-				webContainer.instance.fs.watch('/' + pluginData.plugin_dirname, {}, (event, filename) => {
-					console.log(`2. file: ${filename} action: ${event}`);
-				});
+				}
 				
 					
 			}
@@ -601,6 +608,19 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 		},
 		100
 	);
+
+	async function watchDir( path, callback )  {
+		webContainer.instance.fs.watch(path, {}, async (event, filename) => {
+			callback(event, filename);
+			// Get all of the directories inside this directory.
+			const files = await webContainer.instance.fs.readdir( path + '/' + filename, {withFileTypes: true, buffer: 'utf-8'} );
+			for( const file of files ) {
+				if ( file.isDirectory() ) {
+					await watchDir( path + '/' + filename, callback );
+				}
+			}
+		});
+	}
 
 	return (
 		<Box sx={{display: 'grid', gap: 1, overflow: 'hidden', gridTemplateRows: 'min-content 1fr', width: '100%'}}>
