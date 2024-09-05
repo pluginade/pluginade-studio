@@ -646,7 +646,10 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 		// Also watch any directories that are inside this directory.
 		const filesInDirectory = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
+		console.log(  'Files in directory:', filesInDirectory );
+
 		for( const file of filesInDirectory ) {
+			console.log( file , file.isDirectory() );
 			if ( file.isDirectory() ) {
 				await watchDir( path + '/' + file.name, callback, watchedPaths );
 			}
@@ -655,8 +658,11 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 	if ( ! pluginHasMountedToContainer ) {
 		return <Box sx={{display: 'grid', gap: 1, overflow: 'hidden', gridTemplateRows: 'min-content 1fr', width: '100%'}}>
+			<LinearProgress color="secondary" /> 
 			<Box>
-				<Typography component="p">Booting nodeJs container in your browser...</Typography>
+				<Alert severity="info">
+					{'Booting nodeJs container in your browser...'}
+				</Alert>
 			</Box>
 		</Box>
 	}

@@ -29513,14 +29513,16 @@ function WebContainerTerminal({
       withFileTypes: true,
       buffer: 'utf-8'
     });
+    console.log('Files in directory:', filesInDirectory);
     for (const file of filesInDirectory) {
+      console.log(file, file.isDirectory());
       if (file.isDirectory()) {
         await watchDir(path + '/' + file.name, callback, watchedPaths);
       }
     }
   }
   if (!pluginHasMountedToContainer) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
       sx: {
         display: 'grid',
         gap: 1,
@@ -29528,12 +29530,14 @@ function WebContainerTerminal({
         gridTemplateRows: 'min-content 1fr',
         width: '100%'
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_26__["default"], {
-          component: "p",
-          children: "Booting nodeJs container in your browser..."
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_LinearProgress__WEBPACK_IMPORTED_MODULE_33__["default"], {
+        color: "secondary"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsx)(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_28__["default"], {
+          severity: "info",
+          children: 'Booting nodeJs container in your browser...'
         })
-      })
+      })]
     });
   }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_20__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_25__["default"], {
