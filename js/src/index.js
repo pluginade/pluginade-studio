@@ -566,12 +566,12 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 	const [currentProcess, setCurrentProcess] = useState(null);
 	const [pluginHasMountedToContainer, setPluginHasMountedToContainer] = useState(false);
 	const [watchedDirectoriesInContainer, setWatchedDirectoriesInContainer] = useState([]);
-	const [localDirectoryHandles, setLocalDirectoryHandles] = useState([]);
+	const [localDirectoryHandles, setLocalDirectoryHandles] = useState({});
 
 	useEffect(() => {
 		console.log( 'watchedDirectoriesInContainer changed', watchedDirectoriesInContainer );
 		async function getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData, localDirectoryHandles ) {
-			console.log( 'initial localDirectoryHandles', localDirectoryHandles );
+			console.log( 'getDirHandlesForWatchedDirectories. initial localDirectoryHandles', localDirectoryHandles );
 			for( const watchedDirPath of watchedDirectoriesInContainer ) {
 				// Break the path into an array of directories.
 				const watchedDirArray = watchedDirPath.split('/');
@@ -652,7 +652,8 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// });
 
 				watchDir( pluginData.plugin_dirname, async (event, filePath, watchedDirectoriesInContainer) => {
-					console.log( 'Change:', filePath );
+					// console.log( 'Change:', filePath );
+					console.log( 'File Changed');
 					setWatchedDirectoriesInContainer(watchedDirectoriesInContainer);
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
