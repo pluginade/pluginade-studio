@@ -565,6 +565,50 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 	const [currentlyActiveButton, setCurrentlyActiveButton] = useState(null);
 	const [currentProcess, setCurrentProcess] = useState(null);
 	const [pluginHasMountedToContainer, setPluginHasMountedToContainer] = useState(false);
+	const [watchedDirectoriesInContainer, setWatchedDirectoriesInContainer] = useState([]);
+	const [localDirectoryHandles, setLocalDirectoryHandles] = useState([]);
+
+	useEffect(() => {
+		async function getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData, localDirectoryHandles ) {
+			for( const watchedDirPath of watchedDirectoriesInContainer ) {
+				// Break the path into an array of directories.
+				const watchedDirArray = watchedDirPath.split('/');
+
+				// Start in the plugin root.
+				let currentDirHandle = pluginData.dirHandle;
+				let currentPath = pluginData.plugin_dirname;
+
+				localDirectoryHandles[currentPath] = currentDirHandle;
+
+				// Get a dirhandle for each directory in the path.
+				for( const dirName of watchedDirArray ) {
+					// If we already have the dirHandle for this path, skip it.
+					if ( localDirectoryHandles?.currentPath ) {
+						continue;
+					}
+
+					let dirHandle = null;
+					try {
+						dirHandle = await currentDirHandle.getDirectoryHandle(dirName);
+					} catch (error) {
+						// If not, create the directory
+						dirHandle = await currentDirHandle.getDirectoryHandle(dirName, { create: true });
+					}
+
+					// Set the dir handle to be this one, since the next iteration of the loop will be for it's children.
+					currentDirHandle = dirHandle;
+
+					// Store the dirHandle so we can use it when we need to sync things from the container to local.
+					localDirectoryHandles[currentPath] = currentDirHandle;
+
+					currentPath = currentPath ? currentPath + '/' + dirName : dirName;
+				}
+			}
+
+			return localDirectoryHandles;
+		}
+		getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData.dirHandle, {...localDirectoryHandles} );
+	}, [watchedDirectoriesInContainer]);
 
 	useEffect(() => {
 		async function mountPlugin() {
@@ -596,15 +640,16 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// 	console.log(`2. file: ${filename} action: ${event}`);
 				// });
 
-				watchDir( pluginData.plugin_dirname, async (event, filePath, watchedPaths) => {
+				watchDir( pluginData.plugin_dirname, async (event, filePath, watchedDirectoriesInContainer) => {
 					console.log( 'Change:', filePath );
+					setWatchedDirectoriesInContainer(watchedDirectoriesInContainer);
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
 				});
 
-				// watchDir( pluginData.plugin_dirname + '/wp-modules', async (event, filePath, watchedPaths) => {
-				// 	console.log( 'Watched Paths:', watchedPaths );
+				// watchDir( pluginData.plugin_dirname + '/wp-modules', async (event, filePath, watchedDirectoriesInContainer) => {
+				// 	console.log( 'Watched Paths:', watchedDirectoriesInContainer );
 				// 	// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 				// 	// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 				// 	// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
@@ -623,24 +668,24 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 		100
 	);
 
-	async function watchDir( path, callback, watchedPaths = [] ) {
+	async function watchDir( path, callback, watchedDirectoriesInContainer = [] ) {
 		// Don't watch paths that are already being watched.
-		if ( watchedPaths.includes( path ) ) {
+		if ( watchedDirectoriesInContainer.includes( path ) ) {
 			return;
 		}
 		// Start watching the directory at the path.
-		watchedPaths.push( path );
+		watchedDirectoriesInContainer.push( path );
 		webContainer.instance.fs.watch(path, {}, async (event, filename) => {
 			// This is the callback that will be called when a file changes in the directory.
 
 			// Fire the original callback function passed in when a file changes.
-			callback(event, path + '/' + filename, watchedPaths);
+			callback(event, path + '/' + filename, watchedDirectoriesInContainer);
 
 			// Get all of the directories inside this directory, just in case a new one was created.
 			const files = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
 			for( const file of files ) {
 				if ( file.isDirectory() ) {
-					await watchDir( path + '/' + file.name, callback, watchedPaths );
+					await watchDir( path + '/' + file.name, callback, watchedDirectoriesInContainer );
 				}
 			}
 		});
@@ -650,7 +695,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 		for( const file of filesInDirectory ) {
 			if ( file.isDirectory() ) {
-				await watchDir( path + '/' + file.name, callback, watchedPaths );
+				await watchDir( path + '/' + file.name, callback, watchedDirectoriesInContainer );
 			}
 		}
 	}
