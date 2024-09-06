@@ -29487,9 +29487,9 @@ function WebContainerTerminal({
     async function getDirHandlesForWatchedDirectories(watchedDirectoriesInContainer, pluginData, localDirectoryHandles) {
       console.log('2. getDirHandlesForWatchedDirectories. initial localDirectoryHandles', localDirectoryHandles);
       console.log('3. watchedDirectoriesInContainer', watchedDirectoriesInContainer);
-      for (const watchedDirPath in watchedDirectoriesInContainer) {
+      for (const index in watchedDirectoriesInContainer) {
         // Break the path into an array of directories.
-        const watchedDirArray = watchedDirPath.split('/');
+        const watchedDirArray = watchedDirectoriesInContainer[index].split('/');
         console.log('4. watchedDirArray', watchedDirArray);
 
         // Start in the plugin root.
