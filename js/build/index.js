@@ -29483,6 +29483,7 @@ function WebContainerTerminal({
   const [watchedDirectoriesInContainer, setWatchedDirectoriesInContainer] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const [localDirectoryHandles, setLocalDirectoryHandles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    console.log('watchedDirectoriesInContainer changed', watchedDirectoriesInContainer);
     async function getDirHandlesForWatchedDirectories(watchedDirectoriesInContainer, pluginData, localDirectoryHandles) {
       console.log('initial localDirectoryHandles', localDirectoryHandles);
       for (const watchedDirPath of watchedDirectoriesInContainer) {
@@ -29516,6 +29517,7 @@ function WebContainerTerminal({
 
           // Store the dirHandle so we can use it when we need to sync things from the container to local.
           localDirectoryHandles[currentPath] = currentDirHandle;
+          console.log('added to localDirectoryHandles', currentPath);
           currentPath = currentPath ? currentPath + '/' + dirName : dirName;
         }
       }

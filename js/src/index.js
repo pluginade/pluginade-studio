@@ -569,6 +569,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 	const [localDirectoryHandles, setLocalDirectoryHandles] = useState([]);
 
 	useEffect(() => {
+		console.log( 'watchedDirectoriesInContainer changed', watchedDirectoriesInContainer );
 		async function getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData, localDirectoryHandles ) {
 			console.log( 'initial localDirectoryHandles', localDirectoryHandles );
 			for( const watchedDirPath of watchedDirectoriesInContainer ) {
@@ -602,6 +603,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 					// Store the dirHandle so we can use it when we need to sync things from the container to local.
 					localDirectoryHandles[currentPath] = currentDirHandle;
+					console.log( 'added to localDirectoryHandles', currentPath);
 
 					currentPath = currentPath ? currentPath + '/' + dirName : dirName;
 				}
