@@ -570,6 +570,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 	useEffect(() => {
 		async function getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData, localDirectoryHandles ) {
+			console.log( 'initial localDirectoryHandles', localDirectoryHandles );
 			for( const watchedDirPath of watchedDirectoriesInContainer ) {
 				// Break the path into an array of directories.
 				const watchedDirArray = watchedDirPath.split('/');
@@ -584,6 +585,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				for( const dirName of watchedDirArray ) {
 					// If we already have the dirHandle for this path, skip it.
 					if ( localDirectoryHandles?.currentPath ) {
+						console.log( 'SKIPPING ', localDirectoryHandles?.currentPath )
 						continue;
 					}
 
