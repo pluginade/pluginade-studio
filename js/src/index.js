@@ -605,6 +605,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				}
 			}
 
+			setLocalDirectoryHandles( localDirectoryHandles );
 			return localDirectoryHandles;
 		}
 		getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData.dirHandle, {...localDirectoryHandles} );

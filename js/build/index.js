@@ -29517,6 +29517,7 @@ function WebContainerTerminal({
           currentPath = currentPath ? currentPath + '/' + dirName : dirName;
         }
       }
+      setLocalDirectoryHandles(localDirectoryHandles);
       return localDirectoryHandles;
     }
     getDirHandlesForWatchedDirectories(watchedDirectoriesInContainer, pluginData.dirHandle, {
