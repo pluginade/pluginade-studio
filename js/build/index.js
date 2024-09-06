@@ -29524,6 +29524,9 @@ function WebContainerTerminal({
     });
   }, [watchedDirectoriesInContainer]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    console.log(localDirectoryHandles);
+  }, [localDirectoryHandles]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     async function mountPlugin() {
       // Mount the plugin into the webContainer.
       if (webContainer.instance) {

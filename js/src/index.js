@@ -610,6 +610,10 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 		getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData.dirHandle, {...localDirectoryHandles} );
 	}, [watchedDirectoriesInContainer]);
 
+	useEffect( ()=> {
+		console.log( localDirectoryHandles );
+	}, [localDirectoryHandles])
+
 	useEffect(() => {
 		async function mountPlugin() {
 
