@@ -29489,6 +29489,7 @@ function WebContainerTerminal({
       for (const watchedDirPath of watchedDirectoriesInContainer) {
         // Break the path into an array of directories.
         const watchedDirArray = watchedDirPath.split('/');
+        console.log('watchedDirArray', watchedDirArray);
 
         // Start in the plugin root.
         let currentDirHandle = pluginData.dirHandle;

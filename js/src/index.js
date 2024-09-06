@@ -576,6 +576,8 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// Break the path into an array of directories.
 				const watchedDirArray = watchedDirPath.split('/');
 
+				console.log( 'watchedDirArray', watchedDirArray );
+
 				// Start in the plugin root.
 				let currentDirHandle = pluginData.dirHandle;
 				let currentPath = pluginData.plugin_dirname;
