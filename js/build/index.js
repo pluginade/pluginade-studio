@@ -29499,7 +29499,7 @@ function WebContainerTerminal({
         localDirectoryHandles[currentPath] = currentDirHandle;
 
         // Get a dirhandle for each directory in the path.
-        for (const dirName of watchedDirArray) {
+        for (const dirName in watchedDirArray) {
           // If we already have the dirHandle for this path, skip it.
           if (localDirectoryHandles?.currentPath) {
             console.log('SKIPPING ', localDirectoryHandles?.currentPath);
@@ -29571,13 +29571,6 @@ function WebContainerTerminal({
           // console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
           // copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
         });
-
-        // watchDir( pluginData.plugin_dirname + '/wp-modules', async (event, filePath, watchedDirectoriesInContainer) => {
-        // 	console.log( 'Watched Paths:', watchedDirectoriesInContainer );
-        // 	// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
-        // 	// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
-        // 	// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
-        // });
       }
     }
     mountPlugin();
