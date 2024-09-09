@@ -613,14 +613,14 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// }
 			}
 
-			setLocalDirectoryHandles( localDirectoryHandles );
+			// setLocalDirectoryHandles( localDirectoryHandles );
 			return localDirectoryHandles;
 		}
 		getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData.dirHandle, {...localDirectoryHandles} );
 	}, [watchedDirectoriesInContainer]);
 
 	useEffect( ()=> {
-		console.log( localDirectoryHandles );
+		console.log( ' new localDirectoryHandles', localDirectoryHandles );
 	}, [localDirectoryHandles])
 
 	useEffect(() => {
@@ -656,7 +656,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				watchDir( pluginData.plugin_dirname, async (event, filePath, watchedDirectoriesInContainer) => {
 					// console.log( 'Change:', filePath );
 					console.log( 'File Changed');
-					setWatchedDirectoriesInContainer(watchedDirectoriesInContainer);
+					setWatchedDirectoriesInContainer(() => watchedDirectoriesInContainer);
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );

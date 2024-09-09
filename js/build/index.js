@@ -29526,7 +29526,8 @@ function WebContainerTerminal({
         // 	currentPath = currentPath ? currentPath + '/' + dirName : dirName;
         // }
       }
-      setLocalDirectoryHandles(localDirectoryHandles);
+
+      // setLocalDirectoryHandles( localDirectoryHandles );
       return localDirectoryHandles;
     }
     getDirHandlesForWatchedDirectories(watchedDirectoriesInContainer, pluginData.dirHandle, {
@@ -29534,7 +29535,7 @@ function WebContainerTerminal({
     });
   }, [watchedDirectoriesInContainer]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    console.log(localDirectoryHandles);
+    console.log(' new localDirectoryHandles', localDirectoryHandles);
   }, [localDirectoryHandles]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     async function mountPlugin() {
@@ -29568,7 +29569,7 @@ function WebContainerTerminal({
         watchDir(pluginData.plugin_dirname, async (event, filePath, watchedDirectoriesInContainer) => {
           // console.log( 'Change:', filePath );
           console.log('File Changed');
-          setWatchedDirectoriesInContainer(watchedDirectoriesInContainer);
+          setWatchedDirectoriesInContainer(() => watchedDirectoriesInContainer);
           // const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
           // console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
           // copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
