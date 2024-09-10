@@ -29439,7 +29439,7 @@ function WebContainerTerminal({
         }
 
         // Reset the current path.
-        currentPath = pluginData.plugin_dirname;
+        currentPath = '';
       }
 
       // console.log( 'Setting localDirectoryHandles', localDirectoryHandles );
