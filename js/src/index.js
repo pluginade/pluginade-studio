@@ -573,7 +573,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 		async function getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData, localDirectoryHandles ) {
 			// // Start in the plugin root.
 			let currentDirHandle = pluginData.dirHandle;
-			let currentPath = pluginData.plugin_dirname;
+			let currentPath = '';
 
 			// We have a dirhandle for the plugin root so get that in there.
 			localDirectoryHandles[pluginData.plugin_dirname] = pluginData.dirHandle;
@@ -590,11 +590,12 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// Get a dirhandle for each directory in the path.
 				for( const dirNameIndex in watchedDirArray ) {
 					const dirName = watchedDirArray[dirNameIndex];
+					currentPath = currentPath ? currentPath + '/' + dirName : dirName;
 					// If we already have the dirHandle for this path, skip it.
 					if ( localDirectoryHandles?.[currentPath] ) {
 						// console.log( 'SKIPPING ', localDirectoryHandles?.[currentPath] );
 						currentDirHandle = localDirectoryHandles?.[currentPath];
-						currentPath = currentPath ? currentPath + '/' + dirName : dirName;
+						
 						continue;
 					}
 
@@ -613,7 +614,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 					localDirectoryHandles[currentPath] = currentDirHandle;
 					// console.log( '5. added to localDirectoryHandles', currentPath);
 
-					currentPath = currentPath ? currentPath + '/' + dirName : dirName;
+					
 				}
 
 				// Reset the current path.
