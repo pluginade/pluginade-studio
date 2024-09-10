@@ -29483,7 +29483,7 @@ function WebContainerTerminal({
   const [watchedDirectoriesInContainer, setWatchedDirectoriesInContainer] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const [localDirectoryHandles, setLocalDirectoryHandles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    console.log('1 changed', watchedDirectoriesInContainer);
+    console.log('1 changed', watchedDirectoriesInContainer, pluginData);
     async function getDirHandlesForWatchedDirectories(watchedDirectoriesInContainer, pluginData, localDirectoryHandles) {
       console.log('2. getDirHandlesForWatchedDirectories. initial localDirectoryHandles', localDirectoryHandles);
       console.log('3. watchedDirectoriesInContainer', watchedDirectoriesInContainer);
