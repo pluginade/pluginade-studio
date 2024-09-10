@@ -620,10 +620,11 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				currentPath = pluginData.plugin_dirname;
 			}
 
+			console.log( 'Setting localDirectoryHandles', localDirectoryHandles );
 			setLocalDirectoryHandles( localDirectoryHandles );
 			return localDirectoryHandles;
 		}
-		getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData, localDirectoryHandles );
+		getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData, {...localDirectoryHandles} );
 	}, [watchedDirectoriesInContainer]);
 
 	useEffect( ()=> {
