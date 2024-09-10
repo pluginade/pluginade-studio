@@ -571,15 +571,14 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 	useEffect(() => {
 		console.log( '1 changed', watchedDirectoriesInContainer, pluginData );
 		async function getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData, localDirectoryHandles ) {
-			console.log( '2. getDirHandlesForWatchedDirectories. initial localDirectoryHandles', localDirectoryHandles );
-			console.log( '3. watchedDirectoriesInContainer', watchedDirectoriesInContainer );
-
 			// // Start in the plugin root.
 			let currentDirHandle = pluginData.dirHandle;
 			let currentPath = pluginData.plugin_dirname;
 
 			// We have a dirhandle for the plugin root so get that in there.
-			localDirectoryHandles[currentPath] = currentDirHandle;
+			localDirectoryHandles[pluginData.plugin_dirname] = pluginData.dirHandle;
+
+			console.log( '2.', localDirectoryHandles, pluginData)
 
 			for( const index in watchedDirectoriesInContainer ) {
 				console.log( '3.5', watchedDirectoriesInContainer, watchedDirectoriesInContainer[index] );
@@ -621,7 +620,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 			setLocalDirectoryHandles( localDirectoryHandles );
 			return localDirectoryHandles;
 		}
-		getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData.dirHandle, {...localDirectoryHandles} );
+		getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData.dirHandle, localDirectoryHandles );
 	}, [watchedDirectoriesInContainer]);
 
 	useEffect( ()=> {
