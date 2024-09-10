@@ -670,6 +670,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
 
 					// Now we must attempt to copy the file that was just changed into the local directory which corresponds to the file's location in the container.
+					
 				});
 			}
 		}
