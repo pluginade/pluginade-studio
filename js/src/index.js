@@ -591,7 +591,9 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				for( const dirName in watchedDirArray ) {
 					// If we already have the dirHandle for this path, skip it.
 					if ( localDirectoryHandles?.[currentPath] ) {
-						console.log( 'SKIPPING ', localDirectoryHandles?.[currentPath] )
+						console.log( 'SKIPPING ', localDirectoryHandles?.[currentPath] );
+						currentDirHandle = localDirectoryHandles?.[currentPath];
+						currentPath = currentPath ? currentPath + '/' + dirName : dirName;
 						continue;
 					}
 

@@ -29503,6 +29503,8 @@ function WebContainerTerminal({
           // If we already have the dirHandle for this path, skip it.
           if (localDirectoryHandles?.[currentPath]) {
             console.log('SKIPPING ', localDirectoryHandles?.[currentPath]);
+            currentDirHandle = localDirectoryHandles?.[currentPath];
+            currentPath = currentPath ? currentPath + '/' + dirName : dirName;
             continue;
           }
           let dirHandle = null;
