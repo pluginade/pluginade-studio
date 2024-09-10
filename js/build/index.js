@@ -29530,7 +29530,7 @@ function WebContainerTerminal({
       setLocalDirectoryHandles(localDirectoryHandles);
       return localDirectoryHandles;
     }
-    getDirHandlesForWatchedDirectories(watchedDirectoriesInContainer, pluginData.dirHandle, localDirectoryHandles);
+    getDirHandlesForWatchedDirectories(watchedDirectoriesInContainer, pluginData, localDirectoryHandles);
   }, [watchedDirectoriesInContainer]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     console.log(' new localDirectoryHandles', localDirectoryHandles);
