@@ -29483,7 +29483,7 @@ function WebContainerTerminal({
   const [watchedDirectoriesInContainer, setWatchedDirectoriesInContainer] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const [localDirectoryHandles, setLocalDirectoryHandles] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    console.log('1 changed', watchedDirectoriesInContainer, pluginData);
+    // console.log( '1 changed', watchedDirectoriesInContainer, pluginData );
     async function getDirHandlesForWatchedDirectories(watchedDirectoriesInContainer, pluginData, localDirectoryHandles) {
       // // Start in the plugin root.
       let currentDirHandle = pluginData.dirHandle;
@@ -29491,19 +29491,22 @@ function WebContainerTerminal({
 
       // We have a dirhandle for the plugin root so get that in there.
       localDirectoryHandles[pluginData.plugin_dirname] = pluginData.dirHandle;
-      console.log('2.', localDirectoryHandles, pluginData);
+
+      // console.log( '2.', localDirectoryHandles, pluginData)
+
       for (const index in watchedDirectoriesInContainer) {
-        console.log('3.5', watchedDirectoriesInContainer, watchedDirectoriesInContainer[index]);
+        // console.log( '3.5', watchedDirectoriesInContainer, watchedDirectoriesInContainer[index] );
         // // Break the path into an array of directories.
         const watchedDirArray = watchedDirectoriesInContainer[index].split('/');
-        console.log('4. watchedDirArray', watchedDirArray);
+
+        // console.log( '4. watchedDirArray', watchedDirArray );
 
         // Get a dirhandle for each directory in the path.
         for (const dirNameIndex in watchedDirArray) {
           const dirName = watchedDirArray[dirNameIndex];
           // If we already have the dirHandle for this path, skip it.
           if (localDirectoryHandles?.[currentPath]) {
-            console.log('SKIPPING ', localDirectoryHandles?.[currentPath]);
+            // console.log( 'SKIPPING ', localDirectoryHandles?.[currentPath] );
             currentDirHandle = localDirectoryHandles?.[currentPath];
             currentPath = currentPath ? currentPath + '/' + dirName : dirName;
             continue;
@@ -29523,14 +29526,16 @@ function WebContainerTerminal({
 
           // Store the dirHandle so we can use it when we need to sync things from the container to local.
           localDirectoryHandles[currentPath] = currentDirHandle;
-          console.log('5. added to localDirectoryHandles', currentPath);
+          // console.log( '5. added to localDirectoryHandles', currentPath);
+
           currentPath = currentPath ? currentPath + '/' + dirName : dirName;
         }
 
         // Reset the current path.
         currentPath = pluginData.plugin_dirname;
       }
-      console.log('Setting localDirectoryHandles', localDirectoryHandles);
+
+      // console.log( 'Setting localDirectoryHandles', localDirectoryHandles );
       setLocalDirectoryHandles(localDirectoryHandles);
       return localDirectoryHandles;
     }
@@ -29577,6 +29582,8 @@ function WebContainerTerminal({
           // const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
           // console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
           // copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
+
+          // Now we must attempt to copy the file that was just changed into the local directory which corresponds to the file's location in the container.
         });
       }
     }
