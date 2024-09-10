@@ -590,6 +590,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// Get a dirhandle for each directory in the path.
 				for( const dirNameIndex in watchedDirArray ) {
 					const dirName = watchedDirArray[dirNameIndex];
+					console.log( 'currentPath/', currentPath );
 					currentPath = currentPath ? currentPath + '/' + dirName : dirName;
 					// If we already have the dirHandle for this path, skip it.
 					if ( localDirectoryHandles?.[currentPath] ) {
