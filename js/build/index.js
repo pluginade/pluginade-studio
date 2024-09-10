@@ -29487,43 +29487,47 @@ function WebContainerTerminal({
     async function getDirHandlesForWatchedDirectories(watchedDirectoriesInContainer, pluginData, localDirectoryHandles) {
       console.log('2. getDirHandlesForWatchedDirectories. initial localDirectoryHandles', localDirectoryHandles);
       console.log('3. watchedDirectoriesInContainer', watchedDirectoriesInContainer);
+
+      // // Start in the plugin root.
+      let currentDirHandle = pluginData.dirHandle;
+      let currentPath = pluginData.plugin_dirname;
+
+      // We have a dirhandle for the plugin root so get that in there.
+      localDirectoryHandles[currentPath] = currentDirHandle;
       for (const index in watchedDirectoriesInContainer) {
         console.log('3.5', watchedDirectoriesInContainer, watchedDirectoriesInContainer[index]);
         // // Break the path into an array of directories.
         const watchedDirArray = watchedDirectoriesInContainer[index].split('/');
         console.log('4. watchedDirArray', watchedDirArray);
 
-        // // Start in the plugin root.
-        // let currentDirHandle = pluginData.dirHandle;
-        // let currentPath = pluginData.plugin_dirname;
+        // Get a dirhandle for each directory in the path.
+        for (const dirName in watchedDirArray) {
+          // If we already have the dirHandle for this path, skip it.
+          if (localDirectoryHandles?.[currentPath]) {
+            console.log('SKIPPING ', localDirectoryHandles?.[currentPath]);
+            continue;
+          }
+          let dirHandle = null;
+          try {
+            dirHandle = await currentDirHandle.getDirectoryHandle(dirName);
+          } catch (error) {
+            // If not, create the directory
+            dirHandle = await currentDirHandle.getDirectoryHandle(dirName, {
+              create: true
+            });
+          }
 
-        // localDirectoryHandles[currentPath] = currentDirHandle;
+          // Set the dir handle to be this one, since the next iteration of the loop will be for it's children.
+          currentDirHandle = dirHandle;
 
-        // // Get a dirhandle for each directory in the path.
-        // for( const dirName in watchedDirArray ) {
-        // 	// If we already have the dirHandle for this path, skip it.
-        // 	if ( localDirectoryHandles?.currentPath ) {
-        // 		console.log( 'SKIPPING ', localDirectoryHandles?.currentPath )
-        // 		continue;
-        // 	}
+          // Store the dirHandle so we can use it when we need to sync things from the container to local.
+          localDirectoryHandles[currentPath] = currentDirHandle;
+          console.log('5. added to localDirectoryHandles', currentPath);
+          currentPath = currentPath ? currentPath + '/' + dirName : dirName;
+        }
 
-        // 	let dirHandle = null;
-        // 	try {
-        // 		dirHandle = await currentDirHandle.getDirectoryHandle(dirName);
-        // 	} catch (error) {
-        // 		// If not, create the directory
-        // 		dirHandle = await currentDirHandle.getDirectoryHandle(dirName, { create: true });
-        // 	}
-
-        // 	// Set the dir handle to be this one, since the next iteration of the loop will be for it's children.
-        // 	currentDirHandle = dirHandle;
-
-        // 	// Store the dirHandle so we can use it when we need to sync things from the container to local.
-        // 	localDirectoryHandles[currentPath] = currentDirHandle;
-        // 	console.log( '5. added to localDirectoryHandles', currentPath);
-
-        // 	currentPath = currentPath ? currentPath + '/' + dirName : dirName;
-        // }
+        // Reset the current path.
+        currentPath = pluginData.plugin_dirname;
       }
       setLocalDirectoryHandles(localDirectoryHandles);
       return localDirectoryHandles;
