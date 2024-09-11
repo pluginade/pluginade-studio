@@ -668,10 +668,10 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 					// console.log( 'Change:', filePath );
 					console.log( 'File Changed', filePath, watchedDirectoriesInContainer);
 					setWatchedDirectoriesInContainer((nonStaleWatchedDirectoriesInContainer) => {
-						return {
+						return [
 							...nonStaleWatchedDirectoriesInContainer,
 							newWatchedDirectoriesInContainer
-						}
+						]
 					});
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
