@@ -29565,7 +29565,7 @@ function WebContainerTerminal({
             return [...new Set(jhg)];
           });
         }, async (dirPath, file) => {
-          console.log('lets copy a file', dirPath, file.name, localDirectoryHandles[dirPath]);
+          console.log('lets copy a file', dirPath, file.name, localDirectoryHandles);
         });
       }
     }
