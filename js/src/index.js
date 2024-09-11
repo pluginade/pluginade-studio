@@ -665,7 +665,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 				watchDir( pluginData.plugin_dirname, async (event, filePath, watchedDirectoriesInContainer) => {
 					// console.log( 'Change:', filePath );
-					console.log( 'File Changed');
+					console.log( 'File Changed', filePath);
 					setWatchedDirectoriesInContainer(() => watchedDirectoriesInContainer);
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
@@ -694,17 +694,12 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 		// Start watching the directory at the path.
 		watchedDirectoriesInContainer.push( path );
 		webContainer.instance.fs.watch(path, {}, async (event, filename) => {
-			// This is the callback that will be called when a file changes in the directory.
-
-			// Fire the original callback function passed in when a file changes.
-			callback(event, path + '/' + filename, watchedDirectoriesInContainer);
-
 			// Get all of the directories inside this directory, just in case a new one was created.
 			const files = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
 			for( const file of files ) {
 				if ( file.isDirectory() ) {
 					if ( file.name !== 'node_modules' ) {
-						console.log( 'filefilefile', file );
+						console.log( 'filefilefile', file, callback );
 						await watchDir( path + '/' + file.name, callback, watchedDirectoriesInContainer );
 					}
 				}
@@ -719,6 +714,11 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				await watchDir( path + '/' + file.name, callback, watchedDirectoriesInContainer );
 			}
 		}
+
+		// This is the callback that will be called when a file changes in the directory.
+
+		// Fire the original callback function passed in when a file changes.
+		callback(null, path, watchedDirectoriesInContainer);
 	}
 
 	if ( ! pluginHasMountedToContainer ) {
