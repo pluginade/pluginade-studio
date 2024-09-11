@@ -702,6 +702,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 			// Get all of the directories inside this directory, just in case a new one was created.
 			const files = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
 			for( const file of files ) {
+				console.log( 'filefilefile', file );
 				if ( file.isDirectory() ) {
 					await watchDir( path + '/' + file.name, callback, watchedDirectoriesInContainer );
 				}
