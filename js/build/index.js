@@ -29406,17 +29406,15 @@ function WebContainerTerminal({
         // console.log( '3.5', watchedDirectoriesInContainer, watchedDirectoriesInContainer[index] );
         // // Break the path into an array of directories.
         const watchedDirArray = watchedDirectoriesInContainer[index].split('/');
-
-        // console.log( '4. watchedDirArray', watchedDirArray );
+        console.log('4. watchedDirArray', watchedDirArray);
 
         // Get a dirhandle for each directory in the path.
         for (const dirNameIndex in watchedDirArray) {
           const dirName = watchedDirArray[dirNameIndex];
-          console.log('currentPath/', currentPath);
           currentPath = currentPath ? currentPath + '/' + dirName : dirName;
           // If we already have the dirHandle for this path, skip it.
           if (localDirectoryHandles?.[currentPath]) {
-            // console.log( 'SKIPPING ', localDirectoryHandles?.[currentPath] );
+            console.log('SKIPPING ', localDirectoryHandles?.[currentPath]);
             currentDirHandle = localDirectoryHandles?.[currentPath];
             continue;
           }
@@ -29435,7 +29433,7 @@ function WebContainerTerminal({
 
           // Store the dirHandle so we can use it when we need to sync things from the container to local.
           localDirectoryHandles[currentPath] = currentDirHandle;
-          // console.log( '5. added to localDirectoryHandles', currentPath);
+          console.log('5. added to localDirectoryHandles', currentPath);
         }
 
         // Reset the current path.
