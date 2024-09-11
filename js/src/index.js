@@ -582,6 +582,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 			for( const index in watchedDirectoriesInContainer ) {
 				// console.log( '3.5', watchedDirectoriesInContainer, watchedDirectoriesInContainer[index] );
+				console.log( '3', watchedDirectoriesInContainer, index, watchedDirectoriesInContainer[index] );
 				// // Break the path into an array of directories.
 				const watchedDirArray = watchedDirectoriesInContainer[index].split('/');
 
