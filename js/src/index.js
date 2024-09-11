@@ -663,10 +663,15 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				// 	console.log(`2. file: ${filename} action: ${event}`);
 				// });
 
-				watchDir( pluginData.plugin_dirname, async (event, filePath, watchedDirectoriesInContainer) => {
+				watchDir( pluginData.plugin_dirname, async (event, filePath, newWatchedDirectoriesInContainer) => {
 					// console.log( 'Change:', filePath );
 					console.log( 'File Changed', filePath, watchedDirectoriesInContainer);
-					setWatchedDirectoriesInContainer(() => watchedDirectoriesInContainer);
+					setWatchedDirectoriesInContainer((nonStaleWatchedDirectoriesInContainer) => {
+						return {
+							...nonStaleWatchedDirectoriesInContainer,
+							newWatchedDirectoriesInContainer
+						}
+					});
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
 					// copyDirToLocal( pluginData.dirHandle, pluginFilesFromWebContainer );
