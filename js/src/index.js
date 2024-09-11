@@ -569,7 +569,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 	const [localDirectoryHandles, setLocalDirectoryHandles] = useState({});
 
 	useEffect(() => {
-		// console.log( '1 changed', watchedDirectoriesInContainer, pluginData );
+		console.log( '1111 watchedDirectoriesInContainer', watchedDirectoriesInContainer, pluginData );
 		async function getDirHandlesForWatchedDirectories( watchedDirectoriesInContainer, pluginData, localDirectoryHandles ) {
 			// // Start in the plugin root.
 			let currentDirHandle = pluginData.dirHandle;
