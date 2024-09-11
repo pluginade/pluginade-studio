@@ -29559,12 +29559,12 @@ function WebContainerTerminal({
         setPluginHasMountedToContainer(true);
 
         // Watch the container for file changes, and update the local file system to match.
-        watchDir(pluginData.plugin_dirname, async (event, filePath, newWatchedDirectoriesInContainer) => {
+        watchDir(localDirectoryHandles, pluginData.plugin_dirname, async (event, filePath, newWatchedDirectoriesInContainer) => {
           setWatchedDirectoriesInContainer(nonStaleWatchedDirectoriesInContainer => {
             const jhg = nonStaleWatchedDirectoriesInContainer.concat(newWatchedDirectoriesInContainer);
             return [...new Set(jhg)];
           });
-        }, async (dirPath, file) => {
+        }, async (dirPath, file, localDirectoryHandles) => {
           console.log('lets copy a file', dirPath, file.name, localDirectoryHandles);
         });
       }
@@ -29574,7 +29574,7 @@ function WebContainerTerminal({
   const terminalOutputDebounced = (0,use_debounce__WEBPACK_IMPORTED_MODULE_34__.useDebouncedCallback)(callbackFunction => {
     callbackFunction();
   }, 100);
-  async function watchDir(path, callback, copyFileToLocalDir, watchedDirectoriesInContainer = []) {
+  async function watchDir(localDirectoryHandles, path, callback, copyFileToLocalDir, watchedDirectoriesInContainer = []) {
     // Don't watch paths that are already being watched.
     if (watchedDirectoriesInContainer.includes(path)) {
       return;
@@ -29591,10 +29591,10 @@ function WebContainerTerminal({
       for (const file of files) {
         if (file.isDirectory()) {
           if (file.name !== 'node_modules') {
-            await watchDir(path + '/' + file.name, callback, copyFileToLocalDir, watchedDirectoriesInContainer);
+            await watchDir(localDirectoryHandles, path + '/' + file.name, callback, copyFileToLocalDir, watchedDirectoriesInContainer);
           }
         } else {
-          copyFileToLocalDir(path, file);
+          copyFileToLocalDir(path, file, localDirectoryHandles);
         }
       }
     });
@@ -29606,9 +29606,9 @@ function WebContainerTerminal({
     });
     for (const file of filesInDirectory) {
       if (file.isDirectory()) {
-        await watchDir(path + '/' + file.name, callback, copyFileToLocalDir, watchedDirectoriesInContainer);
+        await watchDir(localDirectoryHandles, path + '/' + file.name, callback, copyFileToLocalDir, watchedDirectoriesInContainer);
       } else {
-        copyFileToLocalDir(path, file);
+        copyFileToLocalDir(path, file, localDirectoryHandles);
       }
     }
 
