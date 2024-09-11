@@ -29576,8 +29576,9 @@ function WebContainerTerminal({
           // console.log( 'Change:', filePath );
           console.log('File Changed', filePath, watchedDirectoriesInContainer);
           setWatchedDirectoriesInContainer(nonStaleWatchedDirectoriesInContainer => {
-            nonStaleWatchedDirectoriesInContainer.concat(newWatchedDirectoriesInContainer);
-            return [...new Set(nonStaleWatchedDirectoriesInContainer)];
+            const jhg = nonStaleWatchedDirectoriesInContainer.concat(newWatchedDirectoriesInContainer);
+            console.log('jhg', jhg);
+            return [...new Set(jhg)];
           });
           // const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
           // console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
