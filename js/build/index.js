@@ -29608,8 +29608,10 @@ function WebContainerTerminal({
       });
       for (const file of files) {
         if (file.isDirectory()) {
-          console.log('filefilefile', file);
-          await watchDir(path + '/' + file.name, callback, watchedDirectoriesInContainer);
+          if (file.name !== 'node_modules') {
+            console.log('filefilefile', file);
+            await watchDir(path + '/' + file.name, callback, watchedDirectoriesInContainer);
+          }
         }
       }
     });
@@ -30601,7 +30603,7 @@ __webpack_require__.r(__webpack_exports__);
   \***************************/
 /***/ (() => {
 
-console.log('Pluginade Studio V0.0.6');
+console.log('Pluginade Studio V0.0.7');
 
 /***/ }),
 

@@ -1,1 +1,1 @@
-console.log( 'Pluginade Studio V0.0.6' );
+console.log( 'Pluginade Studio V0.0.7' );

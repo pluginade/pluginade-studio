@@ -703,8 +703,10 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 			const files = await webContainer.instance.fs.readdir( path, {withFileTypes: true, buffer: 'utf-8'} );
 			for( const file of files ) {
 				if ( file.isDirectory() ) {
-					console.log( 'filefilefile', file );
-					await watchDir( path + '/' + file.name, callback, watchedDirectoriesInContainer );
+					if ( file.name !== 'node_modules' ) {
+						console.log( 'filefilefile', file );
+						await watchDir( path + '/' + file.name, callback, watchedDirectoriesInContainer );
+					}
 				}
 			}
 		});
