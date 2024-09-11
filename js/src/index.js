@@ -665,7 +665,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 				watchDir( pluginData.plugin_dirname, async (event, filePath, watchedDirectoriesInContainer) => {
 					// console.log( 'Change:', filePath );
-					console.log( 'File Changed', filePath);
+					console.log( 'File Changed', filePath, watchedDirectoriesInContainer);
 					setWatchedDirectoriesInContainer(() => watchedDirectoriesInContainer);
 					// const pluginFilesFromWebContainer = await webContainer.getDirectoryFiles(pluginData.plugin_dirname);
 					// console.log( 'Filez changed in web container:', pluginFilesFromWebContainer );
@@ -699,7 +699,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 			for( const file of files ) {
 				if ( file.isDirectory() ) {
 					if ( file.name !== 'node_modules' ) {
-						console.log( 'filefilefile', file, callback );
+						// console.log( 'filefilefile', file, callback );
 						await watchDir( path + '/' + file.name, callback, watchedDirectoriesInContainer );
 					}
 				}
