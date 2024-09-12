@@ -43,6 +43,7 @@ import useWebContainer from './stackblitz/useWebContainer.jsx';
 import Terminal from './Terminal.jsx';
 
 import copyDirToLocal from './utils/copyDirToLocal.jsx';
+import copyFileToLocal from './utils/copyFileToLocal.jsx';
 import parsePluginHeader from './utils/parsePluginHeader.jsx';
 import fixPluginHeader from './utils/fixPluginHeader.jsx';
 
@@ -572,6 +573,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 	const [pluginHasMountedToContainer, setPluginHasMountedToContainer] = useState(false);
 	const [watchedDirectoriesInContainer, setWatchedDirectoriesInContainer] = useState([]);
 	const [localDirectoryHandles, setLocalDirectoryHandles] = useState({});
+	const [fileToCopy, setFileToCopy] = useState(false);
 
 	useEffect(() => {
 		console.log( '1111 watchedDirectoriesInContainer', watchedDirectoriesInContainer, pluginData );
@@ -637,6 +639,8 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 	useEffect( ()=> {
 		console.log( ' new localDirectoryHandles', localDirectoryHandles );
+
+		// copyFileToLocal( localDirectoryHandles[pluginData.plugin_dirname], 'test.txt', 'hello' );
 	}, [localDirectoryHandles])
 
 	useEffect(() => {
@@ -656,19 +660,37 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 				setPluginHasMountedToContainer(true);
 
 				// Watch the container for file changes, and update the local file system to match.
-				watchDir( localDirectoryHandles, pluginData.plugin_dirname, async (event, filePath, newWatchedDirectoriesInContainer) => {
+				watchDir( pluginData.plugin_dirname, async (event, filePath, newWatchedDirectoriesInContainer) => {
 					setWatchedDirectoriesInContainer((nonStaleWatchedDirectoriesInContainer) => {
 						const jhg = nonStaleWatchedDirectoriesInContainer.concat( newWatchedDirectoriesInContainer );
 						return [...new Set( jhg )];
 					});
 				},
-				async (dirPath, file, localDirectoryHandles) => {
-					console.log( 'lets copy a file', dirPath, file.name, localDirectoryHandles);
+				async (dirPath, file) => {
+					setFileToCopy( {
+						dirPath,
+						file
+					});
 				});
 			}
 		}
 		mountPlugin();
 	}, [webContainer.instance]);
+
+	useEffect( () => {
+		if ( ! fileToCopy ) {
+			console.log( fileToCopy );
+			return;
+		}
+		async function doTheFileCopyToLocal() {
+			// We use fileToCopy state to handle the actual copy because localDirectoryHandles gets stale if used inside watchDir callbacks.
+			console.log( 'File To Copy', fileToCopy, localDirectoryHandles );
+			const fileContents = await webContainer.instance.fs.readFile(fileToCopy.dirPath + '/' + fileToCopy.file.name);
+			copyFileToLocal( localDirectoryHandles[fileToCopy.dirPath], fileToCopy.file.name, fileContents );
+		}
+
+		doTheFileCopyToLocal();
+	}, [fileToCopy] );
 
 	const terminalOutputDebounced = useDebouncedCallback(
 		(callbackFunction) => {
@@ -677,7 +699,7 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 		100
 	);
 
-	async function watchDir( localDirectoryHandles, path, callback, copyFileToLocalDir, watchedDirectoriesInContainer = [] ) {
+	async function watchDir( path, callback, copyFileToLocalDir, watchedDirectoriesInContainer = [] ) {
 		// Don't watch paths that are already being watched.
 		if ( watchedDirectoriesInContainer.includes( path ) ) {
 			return;
@@ -691,10 +713,10 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 			for( const file of files ) {
 				if ( file.isDirectory() ) {
 					if ( file.name !== 'node_modules' ) {
-						await watchDir( localDirectoryHandles, path + '/' + file.name, callback, copyFileToLocalDir, watchedDirectoriesInContainer );
+						await watchDir( path + '/' + file.name, callback, copyFileToLocalDir, watchedDirectoriesInContainer );
 					}
 				} else {
-					copyFileToLocalDir( path, file, localDirectoryHandles );
+					copyFileToLocalDir( path, file );
 				}
 			}
 		});
@@ -704,9 +726,9 @@ function WebContainerTerminal({webContainer, pluginData, buttons}) {
 
 		for( const file of filesInDirectory ) {
 			if ( file.isDirectory() ) {
-				await watchDir( localDirectoryHandles, path + '/' + file.name, callback, copyFileToLocalDir, watchedDirectoriesInContainer );
+				await watchDir( path + '/' + file.name, callback, copyFileToLocalDir, watchedDirectoriesInContainer );
 			} else {
-				copyFileToLocalDir( path, file, localDirectoryHandles );
+				copyFileToLocalDir( path, file );
 			}
 		}
 
