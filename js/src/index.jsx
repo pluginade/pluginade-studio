@@ -118,36 +118,41 @@ function a11yProps(index) {
 	};
 }
 
-const thePluginDirHandles = {};
-const pluginadePluginsLocalStorage = window.localStorage.getItem('pluginadePlugins') ? JSON.parse(window.localStorage.getItem('pluginadePlugins')) : [];
-const actuallyOpenPlugins = pluginadePluginsLocalStorage;
-const entriesInIndexDb = entries();
-entriesInIndexDb.forEach( async (entry) => {
-	if ( pluginadePluginsLocalStorage.includes( entry[0] ) ) {
-		thePluginDirHandles[entry[0]] = entry[1];
-	} else {
-		// Remove the entry from actuallyOpenPlugins
-		// let actuallyOpenPlugins = actuallyOpenPlugins.filter( item => item != entry[1]);
-	}
-} );
-
 function PluginadeApp() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 	const [showCreatePlugin, setShowCreatePlugin] = useState(false);
-	const [pluginDirHandles, setPluginDirHandles] = useState(thePluginDirHandles);
+	const [pluginDirHandles, setPluginDirHandles] = useState({});
 	const [plugins, setPlugins] = useState({});
 	const [currentPluginTab, setCurrentPluginTabState] = useState( null );
 	const webContainer = useWebContainer();
 
 	useEffect( () => {
-		actuallyOpenPlugins.forEach( async (plugin) => {
-			const directoryHandleOrUndefined = await get(plugin);
-			if ( directoryHandleOrUndefined ) {
-				openPlugin( directoryHandleOrUndefined );
-			} else {
-				openPlugin( null );
-			}
-		} );
+		async function startItUp() {
+			const thePluginDirHandles = {};
+			const pluginadePluginsLocalStorage = window.localStorage.getItem('pluginadePlugins') ? JSON.parse(window.localStorage.getItem('pluginadePlugins')) : [];
+			const actuallyOpenPlugins = pluginadePluginsLocalStorage;
+			const entriesInIndexDb = await entries();
+			entriesInIndexDb.forEach( async (entry) => {
+				if ( pluginadePluginsLocalStorage.includes( entry[0] ) ) {
+					thePluginDirHandles[entry[0]] = entry[1];
+				} else {
+					// Remove the entry from actuallyOpenPlugins
+					// let actuallyOpenPlugins = actuallyOpenPlugins.filter( item => item != entry[1]);
+				}
+			} );
+
+			setPluginDirHandles(thePluginDirHandles);
+
+			actuallyOpenPlugins.forEach( async (plugin) => {
+				const directoryHandleOrUndefined = await get(plugin);
+				if ( directoryHandleOrUndefined ) {
+					openPlugin( directoryHandleOrUndefined );
+				} else {
+					openPlugin( null );
+				}
+			} );
+		}
+		startItUp();
 	}, []);
 
 	useEffect(() => {
@@ -252,6 +257,7 @@ function PluginadeApp() {
 				<Box sx={{backgroundColor: 'background20.default', display: 'flex'}}>
 					<Typography sx={{padding: 2, fontSize: '1em'}} component="h1">Pluginade Studio</Typography>
 					<Divider orientation="vertical" />
+					<PwaInstallButton />
 				</Box>
 				<Divider />
 				<Box>
