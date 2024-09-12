@@ -1,0 +1,1 @@
+console.log( 'Pluginade Studio V0.0.7' );
